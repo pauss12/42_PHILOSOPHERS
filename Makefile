@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
+#    Updated: 2025/03/24 20:04:00 by pmendez-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 
 GREEN = \033[0;32m
 RED = \033[0;31m
@@ -13,6 +25,7 @@ CFLAGS = -Wall -Wextra -Werror  -g3 -fsanitize=address,leak,undefined
 
 FILES = src/philo.c \
 		src/check_args_start.c \
+		src/treat_memory.c \
 
 OBJS = $(FILES:.c=.o)
 

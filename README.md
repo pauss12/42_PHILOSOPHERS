@@ -41,5 +41,3 @@ en ese momento.
 ## Sobre el Proyecto "PHILOSOPHERS" de 42
 
 Este proyecto, **PHILOSOPHERS**, probablemente implementa un problema clásico de concurrencia. [Aquí puedes añadir una breve descripción de lo que hace tu proyecto específico, por ejemplo: "En este proyecto, simulamos el problema de los filósofos comiendo, donde varios filósofos compiten por recursos compartidos (tenedores) para comer."].
-
-[Puedes añadir más detalles sobre la estructura del proyecto, las tecnologías utilizadas, o cualquier otra información relevante aquí.]
