@@ -26,17 +26,17 @@ La principal distinción radica en su **creación y gestión**:
 Se refiere a todas las diferentes etapas por las que pasa un hilo mientras este vivo; determina lo que puede hacer el hilo 
 en ese momento.
 
-	Nuevo (New): Cuando se crea un hilo pero aún no se ha iniciado. En este estado, el hilo aún no ha asignado recursos ni ha comenzado su ejecución.
+* Nuevo (New): Cuando se crea un hilo pero aún no se ha iniciado. En este estado, el hilo aún no ha asignado recursos ni ha comenzado su ejecución.
 
-	Ejecutable (Runnable): El hilo está listo para ser ejecutado y está esperando que el planificador del sistema operativo le asigne tiempo de CPU. Puede haber varios hilos en estado ejecutable esperando su turno para ejecutarse.
+* Ejecutable (Runnable): El hilo está listo para ser ejecutado y está esperando que el planificador del sistema operativo le asigne tiempo de CPU. Puede haber varios hilos en estado ejecutable esperando su turno para ejecutarse.
 
-	En ejecución (Running): El hilo está actualmente en ejecución, utilizando la CPU para realizar sus tareas. Solo un hilo puede estar en estado de ejecución en un solo núcleo de CPU en un momento dado.
+* En ejecución (Running): El hilo está actualmente en ejecución, utilizando la CPU para realizar sus tareas. Solo un hilo puede estar en estado de ejecución en un solo núcleo de CPU en un momento dado.
 
-	Bloqueado (Blocked) o Esperando (Waiting): El hilo está temporalmente inactivo y no puede continuar su ejecución hasta que se cumpla alguna condición o se libere algún recurso. Esto puede ocurrir por varias razones, como esperar la finalización de otra tarea, adquirir un bloqueo o esperar una señal.
+* Bloqueado (Blocked) o Esperando (Waiting): El hilo está temporalmente inactivo y no puede continuar su ejecución hasta que se cumpla alguna condición o se libere algún recurso. Esto puede ocurrir por varias razones, como esperar la finalización de otra tarea, adquirir un bloqueo o esperar una señal.
 
-	En espera con tiempo (Timed Waiting): Similar al estado de espera, pero el hilo está esperando durante un período de tiempo limitado. Después de que expira el tiempo, el hilo vuelve al estado ejecutable.
+* En espera con tiempo (Timed Waiting): Similar al estado de espera, pero el hilo está esperando durante un período de tiempo limitado. Después de que expira el tiempo, el hilo vuelve al estado ejecutable.
 
-	Terminado (Terminated): El hilo ha completado su ejecución y ya no está activo. Ha finalizado su tarea y ha liberado los recursos que tenía asignados.
+* Terminado (Terminated): El hilo ha completado su ejecución y ya no está activo. Ha finalizado su tarea y ha liberado los recursos que tenía asignados.
 
 ## Sobre el Proyecto "PHILOSOPHERS" de 42
 
