@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/03/24 20:04:00 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/05/12 13:42:10 by paula            ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 
 GREEN = \033[0;32m
@@ -20,18 +20,20 @@ CLEAN_SHELL = \033[2K\r
 
 
 NAME = philo
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror  -g3 -fsanitize=address,leak,undefined
 
 FILES = src/philo.c \
 		src/check_args_start.c \
 		src/treat_memory.c \
+		src/routine.c \
+		src/utils.c \
 
 OBJS = $(FILES:.c=.o)
 
 all: show_progress $(NAME)
 
-$(NAME): $(OBJS) include/philo.h
+$(NAME): $(OBJS) src/philo.h
 	@make -s -C libft
 	@$(CC) $(FILES) -L libft -lft -o $(NAME)
 	@echo "$(CLEAN_SHELL) $(GREEN)\n 🚀 Compilation finished! $(NC)👍"
@@ -58,4 +60,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re upload norm
+.PHONY: all clean fclean re
