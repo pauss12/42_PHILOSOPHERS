@@ -1,16 +1,17 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/03/24 20:03:50 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/05/12 13:32:56 by paula            ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
-#include "../include/philo.h"
+#include "philo.h"
+
 
 int main(int argc, char **argv)
 {
@@ -18,7 +19,8 @@ int main(int argc, char **argv)
 
     if (check_args(argc, argv) == 1)
 		return (1);
-	initialize_struct(&data, argv);
+	initialize_struct(&data);
+	initialize_philos(&data, argv);
     return (0);
 }
 
