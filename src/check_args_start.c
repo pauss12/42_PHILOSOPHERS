@@ -1,16 +1,16 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   check_args_start.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/03/24 20:03:43 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:45:36 by paula            ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
-#include "../include/philo.h"
+#include "philo.h"
 
 static void show_error_good_usage()
 {
@@ -19,7 +19,8 @@ static void show_error_good_usage()
     printf(ORANGE "[number_of_philosophers]" RESET " ==> Number of forks \n" );
     printf(ORANGE "[time_to_die]" RESET " ==> Time to eat since his last meal or simulation init \n");
     printf(ORANGE "[time_to_eat]" RESET " ==> Time he has to eat, in which forks are occupied \n");
-    printf(ORANGE "[time_to_sleep]" RESET " ==> Time he has to sleep \n\n");
+    printf(ORANGE "[time_to_sleep]" RESET " ==> Time he has to sleep \n");
+	printf(ORANGE "[number_of_times_each_philosopher_must_eat] optional" RESET " ==> Number of times each philosopher must eat \n\n");
 }
 
 int check_args(int argc, char **argv)
@@ -31,7 +32,7 @@ int check_args(int argc, char **argv)
     if (argc != 5 && argc != 6)
     {
         show_error_good_usage();
-        exit(1);
+        return (1);
     }
     while (i < argc)
     {
