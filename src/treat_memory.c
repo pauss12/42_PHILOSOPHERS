@@ -6,59 +6,78 @@
 /*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/05/12 13:43:15 by paula            ###   ########.fr       */
+/*   Updated: 2025/05/12 20:04:23 by paula            ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "philo.h"
 
-void	initialize_philos(t_data *data, char *argv[])
-{
-	int i;
+// void	initialize_philos(t_data *data, char *argv[])
+// {
+// 	int i;
 
-	i = 0;
-	data->philo = ft_calloc(data->num_philos, sizeof(t_philo));
-	if (!data->philo)
-	{
-		printf(RED "ERROR \n" RESET "Malloc failed\n");
-		exit(1);
-	}
-	data->num_philos = ft_atoi(argv[1]);
-	while (i < data->num_philos)
-	{
-		data->philo[i].id_philo = i + 1;
-		data->philo[i].times_eaten = 0;
-		data->philo[i].is_dead = 0;
-		data->philo[i].time_to_die = ft_atoi(argv[2]);
-		data->philo[i].time_to_eat = ft_atoi(argv[3]);
-		data->philo[i].time_to_sleep = ft_atoi(argv[4]);
-		if (argv[5])
-			data->philo[i].times_each_philosopher_must_eat = ft_atoi(argv[5]);
-		else
-			data->philo[i].times_each_philosopher_must_eat = -1;
-		i++;
-	}
-}
+// 	i = 0;
+// 	data->philo = ft_calloc(data->num_philos, sizeof(t_philo));
+// 	if (!data->philo)
+// 	{
+// 		printf(RED "ERROR \n" RESET "Malloc failed\n");
+// 		exit(1);
+// 	}
+// 	data->num_philos = ft_atoi(argv[1]);
+// 	while (i < data->num_philos)
+// 	{
+// 		data->philo[i].id_philo = i + 1;
+// 		data->philo[i].times_eaten = 0;
+// 		data->philo[i].is_dead = 0;
+// 		data->philo[i].time_to_die = ft_atoi(argv[2]);
+// 		data->philo[i].time_to_eat = ft_atoi(argv[3]);
+// 		data->philo[i].time_to_sleep = ft_atoi(argv[4]);
+// 		if (argv[5])
+// 			data->philo[i].times_each_philosopher_must_eat = ft_atoi(argv[5]);
+// 		else
+// 			data->philo[i].times_each_philosopher_must_eat = -1;
+// 		i++;
+// 	}
+// }
+
+// void *fork_assigner(t_data *data);
 
 //TODO: Inicializar los mutex de los tenedores
-void	initialize_struct(t_data *data)
+// void	initialize_struct(t_data *data)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	data = ft_calloc(1, sizeof(t_data));
+// 	if (!data)
+// 	{
+// 		printf(RED "ERROR \n" RESET "Malloc failed\n");
+// 		exit(1);
+// 	}
+// 	data->loop_finished = 0;
+// 	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
+// 	while (i < data->num_philos)
+// 	{
+// 		pthread_mutex_init(&data->forks[i], NULL);
+// 		i++;
+// 	}
+// }
+
+void	free_struct(t_data *data)
 {
 	int i;
 
 	i = 0;
-	data = ft_calloc(1, sizeof(t_data));
-	if (!data)
+	if (data->philo)
 	{
-		printf(RED "ERROR \n" RESET "Malloc failed\n");
-		exit(1);
+		while (i < data->num_philos)
+		{
+			pthread_mutex_destroy(&data->forks[i]);
+			i++;
+		}
+		free(data->philo);
 	}
-	data->loop_finished = 0;
-	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
-	while (i < data->num_philos)
-	{
-		pthread_mutex_init(&data->forks[i], NULL);
-		i++;
-	}
-	
+	if (data->forks)
+		free(data->forks);
+	free(data);
 }
-

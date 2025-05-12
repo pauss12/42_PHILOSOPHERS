@@ -6,7 +6,7 @@
 /*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/05/12 13:32:56 by paula            ###   ########.fr       */
+/*   Updated: 2025/05/12 19:20:00 by paula            ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,8 +19,9 @@ int main(int argc, char **argv)
 
     if (check_args(argc, argv) == 1)
 		return (1);
-	initialize_struct(&data);
-	initialize_philos(&data, argv);
+	// initialize_struct(&data);
+	// initialize_philos(&data, argv);
+	create_threads(&data);
     return (0);
 }
 

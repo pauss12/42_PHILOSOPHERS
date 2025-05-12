@@ -6,7 +6,7 @@
 #    By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/05/12 13:42:10 by paula            ###   ########.fr        #
+#    Updated: 2025/05/12 20:38:44 by paula            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -28,6 +28,7 @@ FILES = src/philo.c \
 		src/treat_memory.c \
 		src/routine.c \
 		src/utils.c \
+		src/create_threads.c
 
 OBJS = $(FILES:.c=.o)
 

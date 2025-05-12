@@ -6,29 +6,31 @@
 /*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:34:57 by paula             #+#    #+#             */
-/*   Updated: 2025/05/12 14:13:12 by paula            ###   ########.fr       */
+/*   Updated: 2025/05/12 21:03:52 by paula            ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "philo.h"
 
-void	print_message(t_data *data, int id_philo, char *message)
+void	print_error(char *error_message)
 {
-	pthread_mutex_lock(&data->forks[id_philo]);
-	printf("%sPhilosopher %d %s%s\n", ORANGE, id_philo, message, RESET);
-	pthread_mutex_unlock(&data->forks[id_philo]);
+	char	*str;
+
+	if (cmd == NULL)
+		return ;
+	str = ft_strjoin_variadica(3, RED "Error\n" RESET, ": ", error_message);
+	if (str == NULL)
+	{
+		ft_printf(RED "Error\n" END "Memory allocation failed");
+		return ;
+	}
+	ft_putendl_fd(str, 2);
+	free(str);
 }
 
-int has_died(t_data *data)
+void	print_message(t_data *data, int id_philo, char *message)
 {
-	int i;
-
-	i = 0;
-	while (i < data->num_philos)
-	{
-		if (data->philo[i].is_dead == 1)
-			return (1);
-		i++;
-	}
-	return (0);
+	pthread_mutex_lock(data->print);
+	
+	pthread_mutex_unlock(data->print);
 }

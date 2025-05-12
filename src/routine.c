@@ -6,18 +6,38 @@
 /*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by paula             #+#    #+#             */
-/*   Updated: 2025/05/12 14:11:23 by paula            ###   ########.fr       */
+/*   Updated: 2025/05/12 21:12:59 by paula            ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "philo.h"
 
-void *sleeping(t_data *data)
+int	sleeping(t_data *data)
 {
 	long start_time;
 
 	start_time = get_time();
+	while (get_time() - start_time < data->philo->time_to_sleep)
+	{
+		if (data->philo->is_dead == 1)
+			return (NULL);
+		usleep(100);
+	}
 
-	//Mientras no haya muerto, duerme y no haya pasdo el tiempo de dormir
-	while (!has_died())
+}
+
+void routine(t_data *data)
+{
+	//Esta muerto¿?
+	if (data->is_dead == 1)
+		return ;
+
+	//Comer
+	is_eating(data);
+
+	//Dormir
+	sleeping(data);
+
+	//Pensar
+	thinking(data);
 }
