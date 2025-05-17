@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 19:34:12 by gsoteldo          #+#    #+#              #
-#    Updated: 2024/10/30 13:32:12 by gabo             ###   ########.fr        #
+#    Updated: 2025/05/17 18:31:11 by paula            ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 SRC = 	./atoi_itoa_functions/ft_atoi.c \
 		./atoi_itoa_functions/ft_atol.c \
@@ -34,6 +34,7 @@ SRC = 	./atoi_itoa_functions/ft_atoi.c \
 		./str_functions/ft_strchr.c \
 		./str_functions/ft_strdup.c \
 		./str_functions/ft_strjoin.c \
+		./str_functions/ft_strjoin_variadica.c \
 		./str_functions/ft_strlcat.c \
 		./str_functions/ft_strlcpy.c \
 		./str_functions/ft_strlen.c \
