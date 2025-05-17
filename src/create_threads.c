@@ -6,7 +6,7 @@
 /*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by paula             #+#    #+#             */
-/*   Updated: 2025/05/17 22:44:46 by paula            ###   ########.fr       */
+/*   Updated: 2025/05/17 22:45:07 by paula            ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,7 +31,16 @@ static void wait_for_threads(t_data *data)
 	ft_printf("All threads joined successfully.\n");
 }
 
-
+static void check_status(t_data *data)
+{
+	while (1)
+	{
+		if (data->is_dead == 1)
+		{
+			break ;
+		}
+	}
+}
 
 void create_threads(t_data *data)
 {
