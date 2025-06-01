@@ -27,7 +27,6 @@ void	initialize_philos(t_data *data, char *argv[])
 	{
 		data->philo[i].id_philo = i + 1;
 		data->philo[i].times_eaten = 0;
-		data->philo[i].is_dead = 0;
 		data->philo[i].time_to_die = ft_atoi(argv[2]);
 		data->philo[i].time_to_eat = ft_atoi(argv[3]);
 		data->philo[i].time_to_sleep = ft_atoi(argv[4]);

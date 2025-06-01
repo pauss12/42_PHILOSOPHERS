@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/05/17 22:02:14 by paula            ###   ########.fr       */
+/*   Updated: 2025/06/01 18:54:23 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
@@ -51,7 +51,7 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	init;
-	// pthread_mutex_t	*dead;
+	pthread_mutex_t	dead;
 	//pthread_mutex_t	eat;
 	int				is_dead;
 
@@ -66,7 +66,9 @@ int		check_args(int argc, char **argv);
 // ############################# UTILS.C #######################################
 // #############################################################################
 void	print_error(char *error_message);
-void	print_message(t_philo *philo, char *message);
+void	print_message_philo(t_philo *philo, char *message);
+int		ft_sleep(int total_sleep, t_data *data);
+size_t	get_time(void);
 
 // #############################################################################
 // ############################# TREAT_MEMORY ##################################
