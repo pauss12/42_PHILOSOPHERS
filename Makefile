@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+         #
+#    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/05/12 20:38:44 by paula            ###   ########.fr        #
+#    Updated: 2025/06/02 19:56:10 by pmendez-         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 
 GREEN = \033[0;32m
@@ -21,7 +21,8 @@ CLEAN_SHELL = \033[2K\r
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror  -g3 -fsanitize=address,leak,undefined
+CFLAGS = -Wall -Wextra -Werror  -g3 -fsanitize=thread
+
 
 FILES = src/philo.c \
 		src/check_args_start.c \
