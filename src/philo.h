@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/02 19:34:22 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:33:48 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,21 @@
 # define ORANGE "\001\033[38;5;208m\002"
 # define RESET "\033[0m"
 
+typedef struct s_data t_data;
+typedef struct s_philo t_philo;
+
 typedef struct s_philo
 {
 	int				id_philo;
+	size_t			start_time;
 	int				times_eaten;
 	int				time_to_die;
 	int				time_to_eat;
-	int				time_to_sleep;
+	int				time_to_sleep; 
 	int				times_each_philosopher_must_eat;
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
-	struct t_data	*data;
+	t_data	*data;
 	pthread_t		thread;
 
 }	t_philo;
@@ -81,6 +85,7 @@ void	free_struct(t_data *data);
 // ############################# RUTINAS #######################################
 // #############################################################################
 void	*routine(void *arg);
+int		eating(t_philo *philo);
 
 // ##############################################################################
 // ############################# CREATE_THREADS ################################

@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   treat_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/05/17 22:02:41 by paula            ###   ########.fr       */
+/*   Updated: 2025/06/02 19:49:18 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -27,6 +27,7 @@ void	initialize_philos(t_data *data, char *argv[])
 	{
 		data->philo[i].id_philo = i + 1;
 		data->philo[i].times_eaten = 0;
+		data->philo[i].start_time = get_time();
 		data->philo[i].time_to_die = ft_atoi(argv[2]);
 		data->philo[i].time_to_eat = ft_atoi(argv[3]);
 		data->philo[i].time_to_sleep = ft_atoi(argv[4]);
@@ -45,7 +46,6 @@ void	initialize_struct(t_data *data, char *argv[])
 
 	i = 0;
 	data->is_dead = 0;
-	data->valor = 1;
 	data->num_philos = ft_atoi(argv[1]);
 	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
 	while (i < data->num_philos)
