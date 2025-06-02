@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/01 18:54:23 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:34:22 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int				num_philos;
-	int				valor;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
@@ -69,6 +68,7 @@ void	print_error(char *error_message);
 void	print_message_philo(t_philo *philo, char *message);
 int		ft_sleep(int total_sleep, t_data *data);
 size_t	get_time(void);
+int		check_if_philo_dead(t_data *data);
 
 // #############################################################################
 // ############################# TREAT_MEMORY ##################################
@@ -80,7 +80,6 @@ void	free_struct(t_data *data);
 // #############################################################################
 // ############################# RUTINAS #######################################
 // #############################################################################
-//void	*sleeping(t_data *data);
 void	*routine(void *arg);
 
 // ##############################################################################
