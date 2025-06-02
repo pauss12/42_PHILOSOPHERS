@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by paula             #+#    #+#             */
-/*   Updated: 2025/06/01 18:31:04 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:33:57 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,92 +25,36 @@
 // 	}
 // }
 
-// void *routine(void *arg)
-// {
-// 	t_data		*data;
-// 	t_philo		*philo;
-
-// 	philo = (t_philo *)arg;
-// 	data = (t_data *)philo->data;
-
-// 	//EL hilo se queda bloqueado aqui
-// 	pthread_mutex_lock(&data->init);
-// 	pthread_mutex_unlock(&data->init);
+//TODO: Si devuelve 1, ha fallado
+int eating(t_data *data)
+{
+	// Checkear si philo ha activado is_dead a 1.
+	if (check_if_philo_dead(data) == 1)
+		return (1);
 	
-// 	if (philo->id_philo == 1)
-// 	{
-// 		print_message_philo(philo, "A -");
-// 	}
-// 	else if (philo->id_philo == 2)
-// 	{
-// 		usleep(1000);
-// 		print_message_philo(philo, "B -");
-// 	}
-// 	else if (philo->id_philo == 3)
-// 	{
-// 		usleep(2000);
-// 		print_message_philo(philo, "C -");
-// 	}
+	//Coger tenedores
 
-// 	return (NULL);
-// }
+	// Comprobar la ultima vez que ha comido
 
-// void *routine(void *arg)
-// {
-// 	t_data		*data;
-// 	t_philo		*philo;
-// 	int			i;
+	// Imprimir mensaje de comida
 
-// 	philo = (t_philo *)arg;
-// 	data = (t_data *)philo->data;
+	// Hacer el tiempo de comer -----
 
-// 	i = 0;
-	
-// 	//El hilo se queda bloqueado aqui
-// 	pthread_mutex_lock(&data->init);
-// 	pthread_mutex_unlock(&data->init);
+	// Liberar tenedores
 
-	
-// 	while (1)
-// 	{
-// 		if (philo->id_philo == 1)
-// 		{
-// 			if (i == philo->times_each_philosopher_must_eat)
-// 			{
-// 				data->is_dead = 1;
-// 				print_message_philo(philo, "PHILO A HA MUERTO");
-// 				break ;
-// 			}
-// 			print_message_philo(philo, "A -");
-// 		}
-// 		else if (philo->id_philo == 2)
-// 		{
-// 			usleep(1000);
-// 			print_message_philo(philo, "B -");
-// 		}
-// 		else if (philo->id_philo == 3)
-// 		{
-// 			usleep(2000);
-// 			print_message_philo(philo, "C -");
-// 		}
-// 		if (data->is_dead == 1)
-// 			break ;
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
+	// Comprobar si ha comido el numero de veces que se le ha indicado
+	if (data->philo->times_eaten >= data->philo->times_each_philosopher_must_eat)
+		return (1);
+}
 
 void *routine(void *arg)
 {
 	t_data		*data;
 	t_philo		*philo;
-	int			i;
 
 	philo = (t_philo *)arg;
 	data = (t_data *)philo->data;
 
-	i = 0;
-	
 	//El hilo se queda bloqueado aqui
 	pthread_mutex_lock(&data->init);
 	pthread_mutex_unlock(&data->init);
@@ -118,36 +62,21 @@ void *routine(void *arg)
 	
 	while (1)
 	{
-		if (philo->id_philo == 1)
-		{
-			if (i == philo->times_each_philosopher_must_eat)
-			{
-				data->is_dead = 1;
-				print_message_philo(philo, "PHILO A HA MUERTO");
-				break ;
-			}
-			print_message_philo(philo, "A -");
-		}
-		else if (philo->id_philo == 2)
-		{
-			if (ft_sleep(1000, data) == 1)
-				break ;
-			print_message_philo(philo, "B -");
-		}
-		else if (philo->id_philo == 3)
-		{
-			if (ft_sleep(2000, data) == 1)
-				break ;
-			print_message_philo(philo, "C -");
-		}
+		if (eating(data) == 1)
+			return (NULL);
+
+		// Dormir
+		
+
+		// Pensar
+
 		if (data->is_dead == 1)
 			break ;
-		i++;
 	}
 	return (NULL);
 }
 
-//TODO: Hacer bucle infinito para imprimir los mensajes igual, pero en un tiempo especifico (valor de argv[2]). 
+//TODO: Hacer bucle infinito para imprimir los mensajes igual, pero en un tiempo especifico (valor de argv[5]). 
 //TODO: Si se pasa ese tiempo, acaba el programa.
 
 //caso prueba: ./philo 2 60 120 10 
