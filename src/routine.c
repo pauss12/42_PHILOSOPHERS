@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by paula             #+#    #+#             */
-/*   Updated: 2025/06/02 19:33:57 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:37:01 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 // }
 
 //TODO: Si devuelve 1, ha fallado
-int eating(t_data *data)
+int eating(t_philo *philo)
 {
 	// Checkear si philo ha activado is_dead a 1.
-	if (check_if_philo_dead(data) == 1)
+	if (check_if_philo_dead(philo->data) == 1)
 		return (1);
 	
 	//Coger tenedores
@@ -43,8 +43,9 @@ int eating(t_data *data)
 	// Liberar tenedores
 
 	// Comprobar si ha comido el numero de veces que se le ha indicado
-	if (data->philo->times_eaten >= data->philo->times_each_philosopher_must_eat)
+	if (philo->times_eaten >= philo->times_each_philosopher_must_eat)
 		return (1);
+	return (0);
 }
 
 void *routine(void *arg)
@@ -59,10 +60,13 @@ void *routine(void *arg)
 	pthread_mutex_lock(&data->init);
 	pthread_mutex_unlock(&data->init);
 
-	
+
 	while (1)
 	{
-		if (eating(data) == 1)
+		print_message_philo(philo, "has started routine");
+		printf("jdnnskdfnc\n");
+		
+		if (eating(philo) == 1)
 			return (NULL);
 
 		// Dormir

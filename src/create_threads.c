@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by paula             #+#    #+#             */
-/*   Updated: 2025/06/02 19:16:09 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:44:30 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void create_threads(t_data *data)
 	pthread_mutex_lock(&data->init);
 	while (i < data->num_philos)
 	{
-		data->philo[i].data = (struct t_data *)data;
+		// le estoy dando la misma direccion de memoria a todos los mutex de los data, 
+		// tengo q hacer punteros a esa direccion
+		data->philo[i].data = data;
 		if (pthread_create(&data->philo[i].thread, NULL, routine, &data->philo[i]) != 0)
 		{
 			print_error("Error creating philosopher thread");

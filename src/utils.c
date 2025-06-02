@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:34:57 by paula             #+#    #+#             */
-/*   Updated: 2025/06/02 19:20:34 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:36:35 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ void	print_error(char *error_message)
 
 void print_message_philo(t_philo *philo, char *message)
 {
-	pthread_mutex_lock(&((t_data *)(philo->data))->print);
-	ft_printf("%s%d %s%s\n", ORANGE, philo->id_philo, message, RESET);
-	pthread_mutex_unlock(&((t_data *)(philo->data))->print);
+	size_t time;
+
+	time = get_time() - philo->start_time;
+	pthread_mutex_lock(&philo->data->print);
+	printf("%lu %d %s\n", time, philo->id_philo, message);
+	pthread_mutex_unlock(&philo->data->print);
 }
 
 int	ft_sleep(int total_sleep, t_data *data)
