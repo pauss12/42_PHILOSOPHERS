@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:34:57 by paula             #+#    #+#             */
-/*   Updated: 2025/06/01 18:55:00 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:20:34 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,16 @@ size_t	get_time(void)
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+int check_if_philo_dead(t_data *data)
+{
+	pthread_mutex_lock(&data->dead);
+	if (data->is_dead == 1)
+	{
+		pthread_mutex_unlock(&data->dead);
+		return (1);
+	}
+	pthread_mutex_unlock(&data->dead);
+	return (0);
 }
