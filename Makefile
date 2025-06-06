@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
+#    By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/06/02 19:56:10 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/06/06 13:48:19 by paula            ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 
 GREEN = \033[0;32m
@@ -17,7 +17,6 @@ NC = \033[0m
 CURRENT_FILE = 0
 TOTAL_FILES = $(words $(FILES))
 CLEAN_SHELL = \033[2K\r
-
 
 NAME = philo
 CC = cc
@@ -28,16 +27,18 @@ FILES = src/philo.c \
 		src/check_args_start.c \
 		src/treat_memory.c \
 		src/routine.c \
+		src/utils_threads.c \
+		src/create_threads.c \
 		src/utils.c \
-		src/create_threads.c
+		src/utils2.c \
+		src/utils_print.c 
 
 OBJS = $(FILES:.c=.o)
 
 all: show_progress $(NAME)
 
 $(NAME): $(OBJS) src/philo.h
-	@make -s -C libft
-	@$(CC) $(FILES) -L libft -lft -o $(NAME)
+	@$(CC) $(FILES) -o $(NAME)
 	@echo "$(CLEAN_SHELL) $(GREEN)\n 🚀 Compilation finished! $(NC)👍"
 
 %.o: %.c
@@ -52,12 +53,10 @@ show_progress:
 
 clean:
 	@rm -f $(OBJS)
-	@make fclean -C libft
 	@echo "Cleaning finished! 🧹"
 
 fclean: clean
 	@rm -f $(NAME)
-	@make -s fclean -C libft
 	@echo " Deleting finished! 🗑"
 
 re: fclean all
