@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   create_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by paula             #+#    #+#             */
-/*   Updated: 2025/06/02 20:44:30 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:37:22 by paula            ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
@@ -28,7 +28,7 @@ static void wait_for_threads(t_data *data)
 		}
 		i++;
 	}
-	ft_printf("All threads joined successfully.\n");
+	printf("All threads joined successfully.\n");
 }
 
 static void check_status(t_data *data)
@@ -45,7 +45,7 @@ void create_threads(t_data *data)
 	int			i;
 
 	i = 0;
-	ft_printf("Creating threads...\n");
+	printf("Creating threads...\n");
 	pthread_mutex_lock(&data->init);
 	while (i < data->num_philos)
 	{
