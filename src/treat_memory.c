@@ -1,20 +1,20 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   treat_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/02 19:49:18 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:14:29 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
 void	initialize_philos(t_data *data, char *argv[])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->philo = ft_calloc(data->num_philos, sizeof(t_philo));
@@ -42,7 +42,7 @@ void	initialize_philos(t_data *data, char *argv[])
 //TODO: Inicializar los mutex de los tenedores
 void	initialize_struct(t_data *data, char *argv[])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->is_dead = 0;
@@ -59,7 +59,7 @@ void	initialize_struct(t_data *data, char *argv[])
 
 void	free_struct(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (data->philo)

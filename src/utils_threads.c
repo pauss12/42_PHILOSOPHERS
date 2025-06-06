@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paula <paulamendezsv@gmail.com>            +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:34:57 by paula             #+#    #+#             */
-/*   Updated: 2025/06/06 13:32:19 by paula            ###   ########.fr       */
+/*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
+/*   Updated: 2025/06/06 14:11:47 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,6 +21,7 @@ void print_message_philo(t_philo *philo, char *message)
 	printf("%lu %d %s\n", time, philo->id_philo, message);
 	pthread_mutex_unlock(&philo->data->print);
 }
+
 
 int	ft_sleep(int total_sleep, t_data *data)
 {
