@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/06 14:13:56 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:27:59 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -36,14 +36,17 @@ typedef struct s_philo
 {
 	int				id_philo;
 	size_t			start_time;
-	int				times_eaten;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep; 
 	int				times_each_philosopher_must_eat;
-	pthread_mutex_t	*fork_right;
-	pthread_mutex_t	*fork_left;
-	t_data	*data;
+	// pthread_mutex_t	*fork_right;
+	// pthread_mutex_t	*fork_left;
+	pthread_mutex_t	*print;
+	pthread_mutex_t	*init;
+	pthread_mutex_t	*dead;
+	pthread_mutex_t	*eat;
+	int				*is_dead;
 	pthread_t		thread;
 
 }	t_philo;
@@ -56,7 +59,7 @@ typedef struct s_data
 	pthread_mutex_t	print;
 	pthread_mutex_t	init;
 	pthread_mutex_t	dead;
-	//pthread_mutex_t	eat;
+	pthread_mutex_t	eat;
 	int				is_dead;
 
 }	t_data;
@@ -72,7 +75,7 @@ int		check_args(int argc, char **argv);
 void	print_message_philo(t_philo *philo, char *message);
 int		ft_sleep(int total_sleep, t_data *data);
 size_t	get_time(void);
-int		check_if_philo_dead(t_data *data);
+int		check_if_philo_dead(t_philo *philo);
 
 // #############################################################################
 // ############################# TREAT_MEMORY ##################################

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/06 14:14:09 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:33:52 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -29,7 +29,7 @@
 int eating(t_philo *philo)
 {
 	// Checkear si philo ha activado is_dead a 1.
-	if (check_if_philo_dead(philo->data) == 1)
+	if (check_if_philo_dead(philo) == 1)
 		return (1);
 	
 	//Coger tenedores
@@ -43,28 +43,30 @@ int eating(t_philo *philo)
 	// Liberar tenedores
 
 	// Comprobar si ha comido el numero de veces que se le ha indicado
-	if (philo->times_eaten >= philo->times_each_philosopher_must_eat)
-		return (1);
+	pthread_mutex_lock(philo->eat);
+	if (philo->times_each_philosopher_must_eat != -1)
+	{
+		philo->times_each_philosopher_must_eat--;
+		if (philo->times_each_philosopher_must_eat == 0)
+		{
+			pthread_mutex_unlock(philo->eat);
+			return (1);
+		}
+	}
+	pthread_mutex_unlock(philo->eat);
 	return (0);
 }
 
 void *routine(void *arg)
 {
-	t_data		*data;
 	t_philo		*philo;
 
 	philo = (t_philo *)arg;
-	data = (t_data *)philo->data;
-
-	//El hilo se queda bloqueado aqui
-	pthread_mutex_lock(&data->init);
-	pthread_mutex_unlock(&data->init);
-
-
-	while (1)
+	pthread_mutex_lock(philo->init);
+	pthread_mutex_unlock(philo->init);
+	while (check_if_philo_dead(philo) == 0)
 	{
 		print_message_philo(philo, "has started routine");
-		printf("jdnnskdfnc\n");
 		
 		if (eating(philo) == 1)
 			return (NULL);
@@ -73,15 +75,8 @@ void *routine(void *arg)
 		
 
 		// Pensar
-
-		if (data->is_dead == 1)
-			break ;
 	}
 	return (NULL);
 }
 
-//TODO: Hacer bucle infinito para imprimir los mensajes igual, pero en un tiempo especifico (valor de argv[5]). 
-//TODO: Si se pasa ese tiempo, acaba el programa.
-
 //caso prueba: ./philo 2 60 120 10 
-// 

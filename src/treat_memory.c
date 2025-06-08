@@ -6,11 +6,26 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/06 14:14:29 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:27:46 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "philo.h"
+
+static void	assign_mutex_to_philos(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->num_philos)
+	{
+		data->philo[i].print = &data->print;
+		data->philo[i].init = &data->init;
+		data->philo[i].dead = &data->dead;
+		data->philo[i].eat = &data->eat;
+		i++;
+	}
+}
 
 void	initialize_philos(t_data *data, char *argv[])
 {
@@ -26,7 +41,7 @@ void	initialize_philos(t_data *data, char *argv[])
 	while (i < data->num_philos)
 	{
 		data->philo[i].id_philo = i + 1;
-		data->philo[i].times_eaten = 0;
+		data->philo[i].is_dead = &data->is_dead;
 		data->philo[i].start_time = get_time();
 		data->philo[i].time_to_die = ft_atoi(argv[2]);
 		data->philo[i].time_to_eat = ft_atoi(argv[3]);
@@ -37,6 +52,7 @@ void	initialize_philos(t_data *data, char *argv[])
 			data->philo[i].times_each_philosopher_must_eat = -1;
 		i++;
 	}
+	assign_mutex_to_philos(data);
 }
 
 //TODO: Inicializar los mutex de los tenedores
@@ -55,6 +71,8 @@ void	initialize_struct(t_data *data, char *argv[])
 	}
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->init, NULL);
+	pthread_mutex_init(&data->dead, NULL);
+	pthread_mutex_init(&data->eat, NULL);
 }
 
 void	free_struct(t_data *data)

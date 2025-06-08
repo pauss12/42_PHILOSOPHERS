@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/06 14:13:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:34:57 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -24,7 +24,6 @@ static void wait_for_threads(t_data *data)
 			pthread_mutex_lock(&data->print);
 			print_error("Error joining philosopher thread");
 			pthread_mutex_unlock(&data->print);
-			//free_struct(data);
 		}
 		i++;
 	}
@@ -35,8 +34,13 @@ static void check_status(t_data *data)
 {
 	while (1)
 	{
+		pthread_mutex_lock(&data->dead);
 		if (data->is_dead == 1)
-			break ;
+		{
+			pthread_mutex_unlock(&data->dead);
+			return ;
+		}
+		pthread_mutex_unlock(&data->dead);
 	}
 }
 
@@ -49,21 +53,13 @@ void create_threads(t_data *data)
 	pthread_mutex_lock(&data->init);
 	while (i < data->num_philos)
 	{
-		// le estoy dando la misma direccion de memoria a todos los mutex de los data, 
-		// tengo q hacer punteros a esa direccion
-		data->philo[i].data = data;
 		if (pthread_create(&data->philo[i].thread, NULL, routine, &data->philo[i]) != 0)
-		{
 			print_error("Error creating philosopher thread");
-		}
 		i++;
 	}
 	printf("Threads created successfully.\n");
 	pthread_mutex_unlock(&data->init);
 
-	//Comprueba si alguien ha muerto
 	check_status(data);
-
-	// Wait for all threads to finish
 	wait_for_threads(data);
 }
