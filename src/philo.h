@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/08 18:27:59 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:02:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
@@ -35,10 +35,12 @@ typedef struct s_philo t_philo;
 typedef struct s_philo
 {
 	int				id_philo;
+	int				nb_philos;
 	size_t			start_time;
 	int				time_to_die;
 	int				time_to_eat;
-	int				time_to_sleep; 
+	int				time_to_sleep;
+	int			    *meals;
 	int				times_each_philosopher_must_eat;
 	// pthread_mutex_t	*fork_right;
 	// pthread_mutex_t	*fork_left;
@@ -54,6 +56,7 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int				num_philos;
+	int				meals;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;

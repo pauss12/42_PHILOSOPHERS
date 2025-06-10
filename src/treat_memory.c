@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   treat_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/08 18:27:46 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:45:26 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -41,7 +41,9 @@ void	initialize_philos(t_data *data, char *argv[])
 	while (i < data->num_philos)
 	{
 		data->philo[i].id_philo = i + 1;
+		data->philo[i].meals = &data->meals;
 		data->philo[i].is_dead = &data->is_dead;
+		data->philo[i].nb_philos = data->num_philos;
 		data->philo[i].start_time = get_time();
 		data->philo[i].time_to_die = ft_atoi(argv[2]);
 		data->philo[i].time_to_eat = ft_atoi(argv[3]);
