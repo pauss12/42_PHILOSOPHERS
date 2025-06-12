@@ -55,7 +55,6 @@ void *routine(void *arg)
 	pthread_mutex_lock(&data->init);
 	pthread_mutex_unlock(&data->init);
 
-	
 	while (1)
 	{
 		if (philo->id_philo == 1)
