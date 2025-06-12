@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/10 21:08:06 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:12:59 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int eaten(t_philo *philo)
 		if (philo->times_each_philosopher_must_eat == 0)
 		{
 			*philo->meals += 1;
-			//usleep(1000);
 			pthread_mutex_unlock(philo->eat);
 			return (1);
 		}
@@ -46,19 +45,8 @@ static int eaten(t_philo *philo)
 //TODO: Si devuelve 1, ha fallado
 int eating(t_philo *philo)
 {
-	// Checkear si philo ha activado is_dead a 1.
 	// if (check_if_philo_dead(philo) == 1)
 	// 	return (1);
-	
-	//Coger tenedores
-
-	// Comprobar la ultima vez que ha comido
-
-	// Imprimir mensaje de comida
-
-	// Hacer el tiempo de comer -----
-
-	// Liberar tenedores
 
 	// Comprobar si ha comido el numero de veces que se le ha indicado
 	if (eaten(philo) == 1)
@@ -66,13 +54,6 @@ int eating(t_philo *philo)
 	
 	return (0);
 }
-// static void	print_addresses(t_philo *philo)
-// {
-// 	printf("pointer of EAT in philo %p\n\n", philo->eat);
-// 	printf("pointer of DEAD in philo %p\n\n", philo->dead);
-// 	printf("pointer of INIT in philo %p\n\n", philo->init);
-// 	printf("pointer of PRINT in data %p\n\n", philo->print);
-// }
 
 void *routine(void *arg)
 {
@@ -81,7 +62,6 @@ void *routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->init);
 	pthread_mutex_unlock(philo->init);
-	//while (1)
 	while (check_if_philo_dead(philo) == 0)
 	{
 		print_message_philo(philo, "has started routine");
@@ -100,3 +80,11 @@ void *routine(void *arg)
 }
 
 //caso prueba: ./philo 2 60 120 10 
+
+// static void	print_addresses(t_philo *philo)
+// {
+// 	printf("pointer of EAT in philo %p\n\n", philo->eat);
+// 	printf("pointer of DEAD in philo %p\n\n", philo->dead);
+// 	printf("pointer of INIT in philo %p\n\n", philo->init);
+// 	printf("pointer of PRINT in data %p\n\n", philo->print);
+// }

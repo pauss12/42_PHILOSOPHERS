@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/10 21:07:21 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:42:06 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,31 +61,11 @@ static void check_status(t_data *data)
 	while (1)
 	{	
 		if (check_philos_eaten(data))
-			return ;
+			break ;
 		if (check_philo_dead(data))
-			return ;
-	
-		usleep(1000); // Sleep for a short time to avoid busy waiting
-		//printf("Checking status...\n");
+			break ;
 	}
 }
-
-// static void	print_memory_add(t_data *data)
-// {
-// 	printf("pointer of mutex eat: %p\n", (void *)&data->eat);
-// 	printf("pointer of EAT in philo %p\n\n", (void *)data->philo->eat);
-	
-
-// 	printf("pointer of mutex dead: %p\n", (void *)&data->dead);
-// 	printf("pointer of DEAD in philo %p\n\n", (void *)data->philo->dead);
-
-// 	printf("pointer of mutex init: %p\n", (void *)&data->init);
-// 	printf("pointer of INIT in philo %p\n\n", (void *)data->philo->init);
-
-
-// 	printf("pointer of mutex print: %p\n", (void *)&data->print);
-// 	printf("pointer of PRINT in data %p\n\n", (void *)data->philo->print);
-// }
 
 void create_threads(t_data *data)
 {
@@ -94,7 +74,6 @@ void create_threads(t_data *data)
 	i = 0;
 	printf("Creating threads...\n");
 	pthread_mutex_lock(&data->init);
-	// print_memory_add(data);
 	while (i < data->num_philos)
 	{
 		if (pthread_create(&data->philo[i].thread, NULL, routine, &data->philo[i]) != 0)

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/10 20:45:26 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:36:33 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,17 @@ void	initialize_philos(t_data *data, char *argv[])
 //TODO: Inicializar los mutex de los tenedores
 void	initialize_struct(t_data *data, char *argv[])
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	data->is_dead = 0;
 	data->num_philos = ft_atoi(argv[1]);
-	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
-	while (i < data->num_philos)
-	{
-		pthread_mutex_init(&data->forks[i], NULL);
-		i++;
-	}
+	// data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
+	// while (i < data->num_philos)
+	// {
+	// 	pthread_mutex_init(&data->forks[i], NULL);
+	// 	i++;
+	// }
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->init, NULL);
 	pthread_mutex_init(&data->dead, NULL);
@@ -82,15 +82,34 @@ void	free_struct(t_data *data)
 	int	i;
 
 	i = 0;
+	// if (data->philo)
+	// {
+	// 	while (i < data->num_philos)
+	// 	{
+	// 		pthread_mutex_destroy(&data->forks[i]);
+	// 		i++;
+	// 	}
+	// 	free(data->philo);
+	// }
+	// if (data->forks)
+	// 	free(data->forks);
 	if (data->philo)
 	{
 		while (i < data->num_philos)
 		{
-			pthread_mutex_destroy(&data->forks[i]);
+			pthread_mutex_destroy(data->philo[i].print);
+			pthread_mutex_destroy(data->philo[i].init);
+			pthread_mutex_destroy(data->philo[i].dead);
+			pthread_mutex_destroy(data->philo[i].eat);
 			i++;
 		}
 		free(data->philo);
 	}
-	if (data->forks)
-		free(data->forks);
+	if (data->num_philos > 0)
+	{
+		pthread_mutex_destroy(&data->print);
+		pthread_mutex_destroy(&data->init);
+		pthread_mutex_destroy(&data->dead);
+		pthread_mutex_destroy(&data->eat);
+	}
 }

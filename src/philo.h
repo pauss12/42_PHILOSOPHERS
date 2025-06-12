@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/10 20:02:07 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:17:15 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define ORANGE "\001\033[38;5;208m\002"
 # define RESET "\033[0m"
 
-typedef struct s_data t_data;
-typedef struct s_philo t_philo;
+// pthread_mutex_t	*fork_right;
+// pthread_mutex_t	*fork_left;
 
 typedef struct s_philo
 {
@@ -42,8 +42,6 @@ typedef struct s_philo
 	int				time_to_sleep;
 	int			    *meals;
 	int				times_each_philosopher_must_eat;
-	// pthread_mutex_t	*fork_right;
-	// pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*init;
 	pthread_mutex_t	*dead;
@@ -58,7 +56,6 @@ typedef struct s_data
 	int				num_philos;
 	int				meals;
 	t_philo			*philo;
-	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	init;
 	pthread_mutex_t	dead;
@@ -67,6 +64,7 @@ typedef struct s_data
 
 }	t_data;
 
+//pthread_mutex_t	*forks;
 // #############################################################################
 // ############################# CHECK_ARGS_START ##############################
 // #############################################################################
