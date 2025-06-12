@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args_start.c                                 :+:      :+:    :+:   */
+/*   checkArgsStart.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/06 14:12:33 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:31:00 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -35,6 +35,11 @@ int	check_args(int argc, char **argv)
 		show_error_good_usage();
 		return (1);
 	}
+	if (argv[1] > 200)
+	{
+		print_error("Number of philosophers must be less than 200");
+		return (1);
+	}
 	while (i < argc)
 	{
 		j = 0;
@@ -42,8 +47,7 @@ int	check_args(int argc, char **argv)
 		{
 			if (argv[i][j] < '0' || argv[i][j] > '9')
 			{
-				printf(RED "ERROR \n" RESET);
-				printf("Argument [%s] is not a number\n", argv[i]);
+				print_error("Arguments must be digits");
 				return (1);
 			}
 			j++;
