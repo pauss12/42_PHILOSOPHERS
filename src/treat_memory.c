@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 20:36:33 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 21:07:19 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ static void	assign_mutex_to_philos(t_data *data)
 		data->philo[i].init = &data->init;
 		data->philo[i].dead = &data->dead;
 		data->philo[i].eat = &data->eat;
+
+		// Assigning forks
+		data->philo[i].fork_left = &data->forks[i];
+		if (i == data->num_philos - 1)
+			data->philo[i].fork_right = &data->forks[0];
+		else
+			data->philo[i].fork_right = &data->forks[i + 1];
 		i++;
 	}
 }
@@ -57,20 +64,19 @@ void	initialize_philos(t_data *data, char *argv[])
 	assign_mutex_to_philos(data);
 }
 
-//TODO: Inicializar los mutex de los tenedores
 void	initialize_struct(t_data *data, char *argv[])
 {
-	// int	i;
+	int	i;
 
-	// i = 0;
+	i = 0;
 	data->is_dead = 0;
 	data->num_philos = ft_atoi(argv[1]);
-	// data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
-	// while (i < data->num_philos)
-	// {
-	// 	pthread_mutex_init(&data->forks[i], NULL);
-	// 	i++;
-	// }
+	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
+	while (i < data->num_philos)
+	{
+		pthread_mutex_init(&data->forks[i], NULL);
+		i++;
+	}
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->init, NULL);
 	pthread_mutex_init(&data->dead, NULL);
@@ -82,21 +88,11 @@ void	free_struct(t_data *data)
 	int	i;
 
 	i = 0;
-	// if (data->philo)
-	// {
-	// 	while (i < data->num_philos)
-	// 	{
-	// 		pthread_mutex_destroy(&data->forks[i]);
-	// 		i++;
-	// 	}
-	// 	free(data->philo);
-	// }
-	// if (data->forks)
-	// 	free(data->forks);
 	if (data->philo)
 	{
 		while (i < data->num_philos)
 		{
+			pthread_mutex_destroy(&data->forks[i]);
 			pthread_mutex_destroy(data->philo[i].print);
 			pthread_mutex_destroy(data->philo[i].init);
 			pthread_mutex_destroy(data->philo[i].dead);
@@ -105,6 +101,8 @@ void	free_struct(t_data *data)
 		}
 		free(data->philo);
 	}
+	if (data->forks)
+		free(data->forks);
 	if (data->num_philos > 0)
 	{
 		pthread_mutex_destroy(&data->print);
