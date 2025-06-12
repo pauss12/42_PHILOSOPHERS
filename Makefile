@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/06/10 20:50:05 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/06/12 21:32:17 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ FILES = src/philo.c \
 		src/create_threads.c \
 		src/utils.c \
 		src/utils2.c \
-		src/utils_print.c 
+		src/utils_print.c \
+		src/forkTreatment.c
 
 OBJS = $(FILES:.c=.o)
 
