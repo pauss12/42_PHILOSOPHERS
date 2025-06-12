@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 20:17:15 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 21:32:53 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,19 @@
 # define RED "\033[0;31m"
 # define ORANGE "\001\033[38;5;208m\002"
 # define RESET "\033[0m"
+# define BLUE "\033[0;34m"
+# define MAGENTA "\033[0;35m"
+# define CYAN "\033[0;36m"
+# define BOLD "\033[1m"
 
-// pthread_mutex_t	*fork_right;
-// pthread_mutex_t	*fork_left;
+#define TAKEN_RIGHT_FORK    MAGENTA "has taken right fork 🍴" RESET
+#define TAKEN_LEFT_FORK     ORANGE "has taken left fork 🍴" RESET
+#define IS_EATING           GREEN " is eating 🍝" RESET
+#define IS_SLEEPING         CYAN " is sleeping 😴" RESET
+#define IS_THINKING         BLUE "is thinking 🤔 " RESET
+#define HAS_DIED            RED BOLD "is dead 💀" RESET
+
+# define RELEASE_FORKS "has released forks 🍴🍴"
 
 typedef struct s_philo
 {
@@ -46,6 +56,8 @@ typedef struct s_philo
 	pthread_mutex_t	*init;
 	pthread_mutex_t	*dead;
 	pthread_mutex_t	*eat;
+	pthread_mutex_t	*fork_right;
+	pthread_mutex_t	*fork_left;
 	int				*is_dead;
 	pthread_t		thread;
 
@@ -54,17 +66,17 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int				num_philos;
+	int				is_dead;
 	int				meals;
 	t_philo			*philo;
 	pthread_mutex_t	print;
 	pthread_mutex_t	init;
 	pthread_mutex_t	dead;
 	pthread_mutex_t	eat;
-	int				is_dead;
+	pthread_mutex_t	*forks;
 
 }	t_data;
 
-//pthread_mutex_t	*forks;
 // #############################################################################
 // ############################# CHECK_ARGS_START ##############################
 // #############################################################################
@@ -90,6 +102,8 @@ void	free_struct(t_data *data);
 // #############################################################################
 void	*routine(void *arg);
 int		eating(t_philo *philo);
+int 	thinking(t_philo *philo);
+int		sleeping(t_philo *philo);
 
 // ##############################################################################
 // ############################# CREATE_THREADS ################################
@@ -114,8 +128,12 @@ int		ft_strlen(char *str);
 // ##############################################################################
 void	print_error(char *error_message);
 void	ft_putendl_fd(char *s, int fd);
+void	print_and_free(t_data *data);
 
-// void	*eating(t_data *data);
-// void	*thinking(t_data *data);
+// ##############################################################################
+// ############################# FORK TREATMENT #################################
+// ##############################################################################
+void	takeForks(t_philo *philo);
+void	releaseForks(t_philo *philo);
 
 #endif
