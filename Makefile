@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/06/12 21:32:17 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/06/12 22:27:42 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,14 @@ CFLAGS = -Wall -Wextra -Werror  -g3 -fsanitize=thread
 
 
 FILES = src/philo.c \
-		src/check_args_start.c \
-		src/treat_memory.c \
+		src/checkArgsStart.c \
+		src/treatMemory.c \
 		src/routine.c \
-		src/utils_threads.c \
-		src/create_threads.c \
+		src/utilsThreads.c \
+		src/createThreads.c \
 		src/utils.c \
 		src/utils2.c \
-		src/utils_print.c \
+		src/utilsPrint.c \
 		src/forkTreatment.c
 
 OBJS = $(FILES:.c=.o)

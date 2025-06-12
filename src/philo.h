@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 21:32:53 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:26:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@
 #define IS_THINKING         BLUE "is thinking 🤔 " RESET
 #define HAS_DIED            RED BOLD "is dead 💀" RESET
 
-# define RELEASE_FORKS "has released forks 🍴🍴"
+# define RELEASE_FORKS "has released forks"
 
 typedef struct s_philo
 {
 	int				id_philo;
 	int				nb_philos;
-	size_t			start_time;
+	long			start_time;
+	long			last_meal;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
