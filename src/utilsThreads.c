@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_threads.c                                    :+:      :+:    :+:   */
+/*   utilsThreads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/06 20:04:06 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:46:04 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -18,7 +18,23 @@ void print_message_philo(t_philo *philo, char *message)
 
 	time = get_time() - philo->start_time;
 	pthread_mutex_lock(philo->print);
-	printf("%lu %d %s\n", time, philo->id_philo, message);
+	//printf("%lu: PHILO %d %s\n", time, philo->id_philo, message);
+
+	if (ft_strcmp(message, HAS_DIED) == 0)
+		printf(RED BOLD "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+	else if (ft_strcmp(message, IS_EATING) == 0)
+		printf(GREEN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+	else if (ft_strcmp(message, IS_SLEEPING) == 0)
+		printf(CYAN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+	else if (ft_strcmp(message, IS_THINKING) == 0)
+		printf(BLUE "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+	else if (ft_strcmp(message, TAKEN_RIGHT_FORK) == 0)
+		printf(MAGENTA "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+	else if (ft_strcmp(message, TAKEN_LEFT_FORK) == 0)
+		printf(ORANGE "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+	else
+		printf("%lu: PHILO %d %s\n", time, philo->id_philo, message);
+
 	pthread_mutex_unlock(philo->print);
 }
 

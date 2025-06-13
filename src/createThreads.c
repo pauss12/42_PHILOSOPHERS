@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_threads.c                                   :+:      :+:    :+:   */
+/*   createThreads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 20:55:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:27:41 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@ static void check_status(t_data *data)
 
 void create_threads(t_data *data)
 {
-	int			i;
+	t_philo	*philo2;
+	int		i;
 
 	i = 0;
 	pthread_mutex_lock(&data->init);
 	while (i < data->num_philos)
 	{
-		if (pthread_create(&data->philo[i].thread, NULL, routine, &data->philo[i]) != 0)
+		philo2 = &data->philo[i];
+		if (pthread_create(&philo2->thread, NULL, routine, philo2) != 0)
 			print_and_free(data);
 		i++;
 	}

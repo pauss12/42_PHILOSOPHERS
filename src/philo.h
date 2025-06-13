@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 22:26:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:50:30 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@
 # define CYAN "\033[0;36m"
 # define BOLD "\033[1m"
 
-#define TAKEN_RIGHT_FORK    MAGENTA "has taken right fork 🍴" RESET
-#define TAKEN_LEFT_FORK     ORANGE "has taken left fork 🍴" RESET
-#define IS_EATING           GREEN " is eating 🍝" RESET
-#define IS_SLEEPING         CYAN " is sleeping 😴" RESET
-#define IS_THINKING         BLUE "is thinking 🤔 " RESET
-#define HAS_DIED            RED BOLD "is dead 💀" RESET
-
+# define TAKEN_RIGHT_FORK    "has taken right fork 🍴"
+# define TAKEN_LEFT_FORK     "has taken left fork 🍴"
+# define IS_EATING           " is eating 🍝"
+# define IS_SLEEPING         " is sleeping 😴"
+# define IS_THINKING         "is thinking 🤔 "
+# define HAS_DIED            "is dead 💀"
 # define RELEASE_FORKS "has released forks"
 
 typedef struct s_philo
@@ -123,6 +122,7 @@ void	*ft_memset(void *str, int c, size_t len);
 // ############################# UTILS2 ########################################
 // ##############################################################################
 int		ft_strlen(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
 
 // ##############################################################################
 // ############################# UTILS_PRINT ####################################
