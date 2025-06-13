@@ -1,58 +1,16 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:55 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/06 14:14:58 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 21:21:24 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
-
-static size_t	total_length(int count, va_list args)
-{
-	size_t	length;
-	int		i;
-
-	length = 0;
-	i = 0;
-	while (i < count)
-	{
-		length += ft_strlen(va_arg(args, char *));
-		i++;
-	}
-	return (length);
-}
-
-char	*ft_strjoin_variadica(int count, ...)
-{
-	char	*result;
-	char	*str;
-	va_list	args;
-	size_t	total_len;
-	size_t	index;
-
-	va_start(args, count);
-	index = 0;
-	total_len = total_length(count, args);
-	va_end(args);
-	result = (char *)ft_calloc(total_len + 1, sizeof(char));
-	if (!result)
-		return (NULL);
-	va_start(args, count);
-	while ((int)index < count)
-	{
-		str = va_arg(args, char *);
-		while (*str)
-			result[index++] = *str++;
-	}
-	va_end(args);
-	result[index] = '\0';
-	return (result);
-}
 
 /**
  * Asigna memoria dinámicamente y la inicializa a cero.
@@ -78,7 +36,7 @@ void	*ft_calloc(size_t count, size_t size)
 	ptr = (void *)malloc(count * size);
 	if (ptr == NULL)
 		return (NULL);
-	ft_memset(ptr, 0, count * size);
+	memset(ptr, 0, count * size);
 	return (ptr);
 }
 
@@ -119,17 +77,64 @@ int	ft_atoi(const char *str)
 	return (num);
 }
 
-void	*ft_memset(void *str, int c, size_t len)
-{
-	size_t		n;
-	char		*p;
 
-	p = (char *)str;
-	n = 0;
-	while (n < len)
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	if (s1 == NULL || s2 == NULL)
+		return (1);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
 	{
-		p[n] = c;
-		n++;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+static char *other(int len, int value)
+{
+	char	*str;
+
+	str = (char *)ft_calloc((len + 1), sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	str[len] = '\0';
+	while (value != 0)
+	{
+		str[--len] = (value % 10) + '0';
+		value = value / 10;
+	}
+	return (str);
+}
+
+char *ft_itoa(int value)
+{
+	char	*str;
+	int		temp;
+	int		len;
+
+	str = NULL;
+	if (value >= 0 && value <= 9)
+	{
+		str = (char *)ft_calloc(2, sizeof(char));
+		if (str == NULL)
+			return (NULL);
+		str[0] = value + '0';
+		str[1] = '\0';
+	}
+	else
+	{
+		len = 0;
+		temp = value;
+		while (temp != 0)
+		{
+			temp /= 10;
+			len++;
+		}
+		str = other(len, value);
 	}
 	return (str);
 }
