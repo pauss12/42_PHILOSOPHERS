@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:50:30 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 20:48:26 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/time.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include <string.h>
 # include <stdarg.h>
 
 # define GREEN "\033[0;32m"
@@ -113,10 +114,12 @@ void	create_threads(t_data *data);
 // ##############################################################################
 // ############################# UTILS ##########################################
 // ##############################################################################
-char	*ft_strjoin_variadica(int count, ...);
+// char	*ft_strjoin_variadica(int count, ...);
+char	*ft_strjoin_variadica(char *index, ...);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_atoi(const char *str);
 void	*ft_memset(void *str, int c, size_t len);
+char	*ft_itoa(int value);
 
 // ##############################################################################
 // ############################# UTILS2 ########################################
@@ -130,6 +133,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	print_error(char *error_message);
 void	ft_putendl_fd(char *s, int fd);
 void	print_and_free(t_data *data);
+char	*ft_strjoin(char *s1, char *s2);
 
 // ##############################################################################
 // ############################# FORK TREATMENT #################################

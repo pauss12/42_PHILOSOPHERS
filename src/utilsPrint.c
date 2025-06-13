@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_print.c                                      :+:      :+:    :+:   */
+/*   utilsPrint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:37 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 20:47:43 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 20:49:11 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_error(char *error_message)
 
 	if (error_message == NULL)
 		return ;
-	str = ft_strjoin_variadica(3, RED "Error\n" RESET, ": ", error_message);
+	str = ft_strjoin_variadica(RED "Error\n" RESET, ": %s ", error_message);
 	if (str == NULL)
 	{
 		printf(RED "Error\n" RESET);
@@ -58,4 +58,45 @@ void	print_and_free(t_data *data)
 {
 	print_error("Error creating philosopher thread");
 	free_struct(data);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	char	*ptr1;
+	char	*ptr2;
+	size_t	i;
+	size_t	j;
+
+	ptr1 = (char *)s1;
+	ptr2 = (char *)s2;
+	i = 0;
+	j = 0;
+	str = malloc(((ft_strlen(ptr1) + ft_strlen(ptr2)) + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }

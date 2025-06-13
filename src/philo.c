@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 21:21:30 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 21:26:58 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ int main(int argc, char **argv)
 	create_threads(&data);
 	free_struct(&data);
 	printf("\n\nMAIN HAS FINISHED\n");
+
+	// (void)argc;
+	// (void)argv;
+
+	// printf("Testing ft_strjoin_variadica function\n");
+
+	// char *str;
+
+	//str = ft_strjoin_variadica(6, RED BOLD, 2, ": PHILO ", 2, "dice hola",  RESET);
+	// str = ft_strjoin_variadica(RED BOLD "%lu: PHILO %d %s\n" RESET, 23, 2, "dice hola");
+	// printf("%s\n", str);
+
     return (0);
 }
 
