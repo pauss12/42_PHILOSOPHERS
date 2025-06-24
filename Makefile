@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/06/12 22:27:42 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/06/24 19:45:14 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ FILES = src/philo.c \
 		src/utils.c \
 		src/utils2.c \
 		src/utilsPrint.c \
-		src/forkTreatment.c
+		src/forkTreatment.c \
+		src/itoa_joinLong.c
 
 OBJS = $(FILES:.c=.o)
 

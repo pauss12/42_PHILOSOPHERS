@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:15:02 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/13 21:26:24 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/24 19:47:05 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static char *joinInt(char *result, int value)
 	if (str_value == NULL)
 		return (NULL);
 	if (result == NULL)
-	{
 		result = str_value;
-	}
 	else
 	{
 		new_result = ft_strjoin(result, str_value);
@@ -40,12 +38,12 @@ static char *joinString(char *result, char *str)
 	char	*new_result;
 
 	i = 0;
+	new_result = NULL;
 	if (result == NULL)
 	{
 		result = ft_calloc(ft_strlen((char *)str), sizeof(char));
 		if (result == NULL)
 			return (NULL);
-		
 		while (str[i] != '\0')
 		{
 			result[i] = str[i];
@@ -101,8 +99,8 @@ char	*ft_strjoin_variadica(char *index, ...)
 				result = joinString(result, va_arg(args, char *));
 			else if (*index == 'c')
 				result = joinChar(result, (char )va_arg(args, int));
-			else if (*index == 'l' && *(index++ + 1) == 'u')
-				result = joinInt(result, va_arg(args, unsigned long));
+			else if (*index == 'l' && *(index + 1) == 'u')
+				result = joinLong(result, va_arg(args, unsigned long));
 		}
 		else
 			result = joinChar(result, *index);
