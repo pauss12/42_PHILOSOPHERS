@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   treat_memory.c                                     :+:      :+:    :+:   */
+/*   treatMemory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/12 21:07:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/24 20:32:01 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static void	assign_mutex_to_philos(t_data *data)
 		data->philo[i].init = &data->init;
 		data->philo[i].dead = &data->dead;
 		data->philo[i].eat = &data->eat;
-
-		// Assigning forks
 		data->philo[i].fork_left = &data->forks[i];
 		if (i == data->num_philos - 1)
 			data->philo[i].fork_right = &data->forks[0];
