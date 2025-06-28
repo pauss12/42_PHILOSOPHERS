@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 17:27:17 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:59:09 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void print_message_philo(t_philo *philo, char *message)
 	pthread_mutex_unlock(philo->print);
 }
 
-
 int	ft_sleep(int total_sleep, t_data *data)
 {
 	int	current_time;
@@ -91,5 +90,7 @@ int check_if_philo_dead(t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_unlock(philo->dead);
+	printf("Checking if philosopher %d is dead\n", philo->id_philo);
+	printf("philo->is_dead: %d\n", *(philo->is_dead));
 	return (0);
 }

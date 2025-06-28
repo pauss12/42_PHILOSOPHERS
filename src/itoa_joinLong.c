@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 19:44:53 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/24 19:46:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:39:32 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,19 +100,18 @@ static char *ft_itoa_unsigned_long(unsigned long n)
     return (str);
 }
 
-char    *joinLong(char *result, unsigned long value)
+char    *joinLong(char *result, unsigned long value, char **index)
 {
 	char	*str_value;
 	char	*new_result;
 
-	printf("ENTRA EN JOINLONG\n");
+	if (index == NULL || *index == NULL)
+		return (NULL);
 	str_value = ft_itoa_unsigned_long(value);
 	if (str_value == NULL)
 		return (NULL);
 	if (result == NULL)
-	{
 		result = str_value;
-	}
 	else
 	{
 		new_result = ft_strjoin(result, str_value);
@@ -120,5 +119,6 @@ char    *joinLong(char *result, unsigned long value)
 		free(str_value);
 		result = new_result;
 	}
+	*index += 1;
 	return (result);
 }

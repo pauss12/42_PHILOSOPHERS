@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/24 20:12:18 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:43:43 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ typedef struct s_philo
 {
 	int				id_philo;
 	int				nb_philos;
-	long			start_time;
-	long			last_meal;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	unsigned long			start_time;
+	unsigned long			last_meal;
+	unsigned long			ms_to_die_argv;
+	unsigned long			time_to_eat;
+	unsigned long			time_to_die;
+	unsigned long			time_to_sleep;
 	int			    *meals;
 	int				times_each_philosopher_must_eat;
 	pthread_mutex_t	*print;
@@ -63,6 +64,11 @@ typedef struct s_philo
 	pthread_t		thread;
 
 }	t_philo;
+
+// time_to_die ==> El tiempo que un filósofo puede estar sin comer antes de morir; es el contador final
+// al que se le suma el tiempo de la última comida.
+
+// ms_to_die_argv ==> Tiempo de muerte pasado como argumento. NO SE ACTUALIZA
 
 typedef struct s_data
 {
@@ -129,7 +135,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 // ############################# ITOA_JOIN_LONG #################################
 // ##############################################################################
 char	*ft_itoa(int value);
-char	*joinLong(char *result, unsigned long value);
+char	*joinLong(char *result, unsigned long value, char **index);
 
 
 // ##############################################################################

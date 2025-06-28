@@ -6,13 +6,13 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 17:03:32 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:18:26 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	assign_mutex_to_philos(t_data *data)
+static void	assign_mutex_death_times_to_philos(t_data *data)
 {
 	int i;
 
@@ -28,6 +28,12 @@ static void	assign_mutex_to_philos(t_data *data)
 			data->philo[i].fork_right = &data->forks[0];
 		else
 			data->philo[i].fork_right = &data->forks[i + 1];
+		// data->philo[i].is_dead = &data->is_dead;
+		data->philo[i].meals = &data->meals;
+		data->philo[i].nb_philos = data->num_philos;
+		data->philo[i].last_meal = get_time();
+		data->philo[i].time_to_die = data->philo[i].last_meal + \
+		data->philo[i].ms_to_die_argv;
 		i++;
 	}
 }
@@ -46,11 +52,8 @@ void	initialize_philos(t_data *data, char *argv[])
 	while (i < data->num_philos)
 	{
 		data->philo[i].id_philo = i + 1;
-		data->philo[i].meals = &data->meals;
-		data->philo[i].is_dead = &data->is_dead;
-		data->philo[i].nb_philos = data->num_philos;
 		data->philo[i].start_time = get_time();
-		data->philo[i].time_to_die = ft_atoi(argv[2]);
+		data->philo[i].ms_to_die_argv = ft_atoi(argv[2]);
 		data->philo[i].time_to_eat = ft_atoi(argv[3]);
 		data->philo[i].time_to_sleep = ft_atoi(argv[4]);
 		if (argv[5])
@@ -59,7 +62,7 @@ void	initialize_philos(t_data *data, char *argv[])
 			data->philo[i].times_each_philosopher_must_eat = -1;
 		i++;
 	}
-	assign_mutex_to_philos(data);
+	assign_mutex_death_times_to_philos(data);
 }
 
 void	initialize_struct(t_data *data, char *argv[])

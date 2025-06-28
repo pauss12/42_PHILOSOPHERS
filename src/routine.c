@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/24 20:32:17 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:05:06 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ int eating(t_philo *philo)
 	if (check_if_philo_dead(philo) == 1)
 		return (1);
 	takeForks(philo);
-	
-	//TODO: Bloqueo el mutex de comida
 	pthread_mutex_lock(philo->eat);
 	philo->last_meal = get_time();
+	philo->time_to_die = philo->last_meal + philo->time_to_die;
 	print_message_philo(philo, IS_EATING);
 
 	//TODO: Actualizar tiempo de comida y  muerte. Justo cuando empieza a comer.
@@ -73,7 +72,7 @@ int eating(t_philo *philo)
 			releaseForks(philo);
 			return (1);
 		}
-		if (get_time() - philo->last_meal >= (unsigned long)philo->time_to_eat)
+		if (get_time() - philo->last_meal >= philo->time_to_eat)
 			break ;
 		usleep(10);
 	}
@@ -83,13 +82,10 @@ int eating(t_philo *philo)
 	return (0);
 }
 
-static void *onlyOne(t_philo *philo)
+static void onlyOne(t_philo *philo)
 {
-	pthread_mutex_lock(philo->fork_left);
 	print_message_philo(philo, TAKEN_LEFT_FORK);
-	usleep(philo->time_to_die * 1000);
-	pthread_mutex_unlock(philo->fork_left);
-	return (NULL);
+	usleep(philo->time_to_die);
 }
 
 void	*routine(void *arg)
@@ -99,19 +95,19 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->init);
 	pthread_mutex_unlock(philo->init);
-	if (philo->nb_philos == 1)
-		onlyOne(philo);
-	else
+	while (1)
 	{
-		while (check_if_philo_dead(philo) == 0)
+		if (philo->nb_philos == 1)
 		{
-			if (eating(philo) == 1)
-				return (NULL);
-			if (sleeping(philo) == 1)
-				return (NULL);
-			if (thinking(philo) == 1)
-				return (NULL);
+			onlyOne(philo);
+			return (NULL);
 		}
+		if (eating(philo) == 1)
+			return (NULL);
+		if (sleeping(philo) == 1)
+			return (NULL);
+		if (thinking(philo) == 1)
+			return (NULL);
 	}
 	return (NULL);
 }

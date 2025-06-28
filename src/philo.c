@@ -6,21 +6,40 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 16:59:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:03:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void wait_for_threads(t_data *data)
+{
+	int			i;
+
+	i = 0;
+	while (i < data->num_philos)
+	{
+		if (pthread_join(data->philo[i].thread, NULL) != 0)
+		{
+			pthread_mutex_lock(&data->print);
+			print_error("Error joining philosopher thread");
+			pthread_mutex_unlock(&data->print);
+		}
+		i++;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_data data;
 
+	data = (t_data){0};
     if (check_args(argc, argv) == 1)
 		return (1);
 	initialize_struct(&data, argv);
 	initialize_philos(&data, argv);
 	create_threads(&data);
+	wait_for_threads(&data);
 	free_struct(&data);
 	printf("\n\nMAIN HAS FINISHED\n");
 

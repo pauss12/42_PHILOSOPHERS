@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:27:41 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 21:13:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,23 @@ static int check_philo_dead(t_data *data)
 	return (0);
 }
 
-static void wait_for_threads(t_data *data)
+//TODO: Comprobar que el tiempo de muerte de cada filósofo no se ha superado
+static void check_time_dead(t_data *data)
 {
-	int			i;
+	int	i;
 
 	i = 0;
+	printf("Checking time dead\n");
 	while (i < data->num_philos)
 	{
-		if (pthread_join(data->philo[i].thread, NULL) != 0)
+		pthread_mutex_lock(&data->dead);
+		if (get_time() > data->philo[i].time_to_die)
 		{
-			pthread_mutex_lock(&data->print);
-			print_error("Error joining philosopher thread");
-			pthread_mutex_unlock(&data->print);
+			data->is_dead = 1;
+			pthread_mutex_unlock(&data->dead);
+			return ;
 		}
+		pthread_mutex_unlock(&data->dead);
 		i++;
 	}
 }
@@ -56,9 +60,22 @@ static void wait_for_threads(t_data *data)
 static void check_status(t_data *data)
 {
 	while (1)
-	{	
-		if (check_philos_eaten(data) || check_philo_dead(data))
+	{
+
+		printf("HELOOO\n");
+		if (data->num_philos == 1)
+		{
+			pthread_mutex_lock(&data->dead);
+			data->is_dead = 1;
+			pthread_mutex_unlock(&data->dead);
 			break ;
+		}
+		check_time_dead(data);
+		if (check_philos_eaten(data) == 1)
+			break ;
+		if (check_philo_dead(data) == 1)
+			break ;
+		usleep(10);
 	}
 }
 
@@ -78,5 +95,4 @@ void create_threads(t_data *data)
 	}
 	pthread_mutex_unlock(&data->init);
 	check_status(data);
-	wait_for_threads(data);
 }

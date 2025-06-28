@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:15:02 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/24 19:47:05 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:37:05 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*ft_strjoin_variadica(char *index, ...)
 			else if (*index == 'c')
 				result = joinChar(result, (char )va_arg(args, int));
 			else if (*index == 'l' && *(index + 1) == 'u')
-				result = joinLong(result, va_arg(args, unsigned long));
+				result = joinLong(result, va_arg(args, unsigned long), &index);
 		}
 		else
 			result = joinChar(result, *index);
