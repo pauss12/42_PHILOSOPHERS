@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/24 20:32:01 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:03:32 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,21 @@ void	initialize_struct(t_data *data, char *argv[])
 	pthread_mutex_init(&data->eat, NULL);
 }
 
+static void free_for_philo(t_data *data, int *i)
+{
+	pthread_mutex_destroy(&data->forks[*i]);
+	pthread_mutex_destroy(data->philo[*i].print);
+	pthread_mutex_destroy(data->philo[*i].init);
+	pthread_mutex_destroy(data->philo[*i].dead);
+	pthread_mutex_destroy(data->philo[*i].eat);
+	pthread_mutex_destroy(data->philo[*i].fork_left);
+	pthread_mutex_destroy(data->philo[*i].fork_right);
+	if (data->philo[*i].meals)
+		free(data->philo[*i].meals);
+	if (data->philo[*i].is_dead)
+		free(data->philo[*i].is_dead);
+}
+
 void	free_struct(t_data *data)
 {
 	int	i;
@@ -90,11 +105,7 @@ void	free_struct(t_data *data)
 	{
 		while (i < data->num_philos)
 		{
-			pthread_mutex_destroy(&data->forks[i]);
-			pthread_mutex_destroy(data->philo[i].print);
-			pthread_mutex_destroy(data->philo[i].init);
-			pthread_mutex_destroy(data->philo[i].dead);
-			pthread_mutex_destroy(data->philo[i].eat);
+			free_for_philo(data, &i);
 			i++;
 		}
 		free(data->philo);
