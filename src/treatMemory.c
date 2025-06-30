@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 20:18:26 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:54:45 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ static void	assign_mutex_death_times_to_philos(t_data *data)
 			data->philo[i].fork_right = &data->forks[0];
 		else
 			data->philo[i].fork_right = &data->forks[i + 1];
-		// data->philo[i].is_dead = &data->is_dead;
+		data->philo[i].is_dead = &data->is_dead;
 		data->philo[i].meals = &data->meals;
 		data->philo[i].nb_philos = data->num_philos;
 		data->philo[i].last_meal = get_time();
-		data->philo[i].time_to_die = data->philo[i].last_meal + \
-		data->philo[i].ms_to_die_argv;
+		data->philo[i].time_to_die = data->philo[i].ms_to_die_argv;
 		i++;
 	}
 }
@@ -93,10 +92,6 @@ static void free_for_philo(t_data *data, int *i)
 	pthread_mutex_destroy(data->philo[*i].eat);
 	pthread_mutex_destroy(data->philo[*i].fork_left);
 	pthread_mutex_destroy(data->philo[*i].fork_right);
-	if (data->philo[*i].meals)
-		free(data->philo[*i].meals);
-	if (data->philo[*i].is_dead)
-		free(data->philo[*i].is_dead);
 }
 
 void	free_struct(t_data *data)

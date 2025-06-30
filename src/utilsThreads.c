@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 19:59:09 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:15:53 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,64 @@ void print_message_philo(t_philo *philo, char *message)
 	pthread_mutex_unlock(philo->print);
 }
 
-int	ft_sleep(int total_sleep, t_data *data)
-{
-	int	current_time;
+// int	ft_sleep(t_philo *philo, unsigned long total_sleep)
+// {
+// 	unsigned long	current_time;
 
-	current_time = get_time();
-	while (get_time() - current_time < (unsigned long)total_sleep)
-	{
-		pthread_mutex_lock(&data->dead);
-		if (data->is_dead == 1)
-		{
-			pthread_mutex_unlock(&data->dead);
-			return (1);
-		}
-		pthread_mutex_unlock(&data->dead);
-		usleep(10);
-	}
-	return (0);
+// 	current_time = get_time();
+// 	printf("TOTAL SLEEP ==> %lu\n", total_sleep);
+// 	while (get_time() - current_time < total_sleep)
+// 	{
+// 		pthread_mutex_lock(philo->dead);
+// 		if (*(philo->is_dead) == 1)
+// 		{
+// 			pthread_mutex_unlock(philo->dead);
+// 			return (1);
+// 		}
+// 		pthread_mutex_unlock(philo->dead);
+// 		usleep(10);
+// 	}
+// 	return (0);
+// }
+
+int ft_sleep(t_philo *philo, unsigned long total_sleep)
+{
+    unsigned long   start_time;
+    unsigned long   elapsed_time;
+
+    const unsigned int  sleep_interval_us = 500;
+
+    start_time = get_time();
+    printf("DEBUG: ft_sleep called for %lu ms (Philo %d)\n", total_sleep, philo->id_philo);
+
+    while (1)
+    {
+        elapsed_time = get_time() - start_time;
+
+        if (elapsed_time >= total_sleep) {
+            printf("DEBUG: ft_sleep completed for %lu ms (Philo %d)\n", elapsed_time, philo->id_philo);
+            break;
+        }
+        pthread_mutex_lock(philo->dead);
+        if (*(philo->is_dead) == 1)
+        {
+            pthread_mutex_unlock(philo->dead);
+            printf("DEBUG: ft_sleep interrupted due to death (Philo %d)\n", philo->id_philo);
+            return (1);
+        }
+        pthread_mutex_unlock(philo->dead);
+        unsigned long remaining_sleep_us = (total_sleep - elapsed_time) * 1000;
+
+        unsigned long sleep_duration_us = sleep_interval_us;
+        if (remaining_sleep_us < sleep_interval_us) {
+            sleep_duration_us = remaining_sleep_us;
+        }
+
+        if (sleep_duration_us > 0) {
+            usleep(sleep_duration_us);
+        }
+    }
+    return (0);
 }
 
 size_t	get_time(void)

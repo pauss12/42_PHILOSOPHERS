@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 21:05:06 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:16:51 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,14 @@ int eating(t_philo *philo)
 static void onlyOne(t_philo *philo)
 {
 	print_message_philo(philo, TAKEN_LEFT_FORK);
-	usleep(philo->time_to_die);
+
+	ft_sleep(philo, philo->time_to_die);
 }
+
+// pthread_mutex_lock(philo->print);
+// printf("Hola\n");
+// printf("%lu\n", philo->time_to_die);
+// pthread_mutex_unlock(philo->print);
 
 void	*routine(void *arg)
 {
@@ -102,6 +108,7 @@ void	*routine(void *arg)
 			onlyOne(philo);
 			return (NULL);
 		}
+		//TODO: Hacer esperar a los hilos impares ¿?
 		if (eating(philo) == 1)
 			return (NULL);
 		if (sleeping(philo) == 1)

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 20:03:10 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:25:29 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void wait_for_threads(t_data *data)
 			print_error("Error joining philosopher thread");
 			pthread_mutex_unlock(&data->print);
 		}
+		pthread_mutex_unlock(&data->print);
 		i++;
 	}
 }
@@ -40,6 +41,7 @@ int main(int argc, char **argv)
 	initialize_philos(&data, argv);
 	create_threads(&data);
 	wait_for_threads(&data);
+	printf("Sale de wait threads\n");
 	free_struct(&data);
 	printf("\n\nMAIN HAS FINISHED\n");
 

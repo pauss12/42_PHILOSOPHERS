@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 19:43:43 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/06/30 19:52:27 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		check_args(int argc, char **argv);
 // ############################# UTILS_THREADS.C ###############################
 // #############################################################################
 void	print_message_philo(t_philo *philo, char *message);
-int		ft_sleep(int total_sleep, t_data *data);
+int		ft_sleep(t_philo *philo, unsigned long total_sleep);
 size_t	get_time(void);
 int		check_if_philo_dead(t_philo *philo);
 
