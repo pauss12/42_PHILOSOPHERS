@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/30 20:15:53 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:15:04 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,63 +75,36 @@ void print_message_philo(t_philo *philo, char *message)
 
 int ft_sleep(t_philo *philo, unsigned long total_sleep)
 {
-    unsigned long   start_time;
-    unsigned long   elapsed_time;
+	unsigned long	current;
 
-    const unsigned int  sleep_interval_us = 500;
-
-    start_time = get_time();
-    printf("DEBUG: ft_sleep called for %lu ms (Philo %d)\n", total_sleep, philo->id_philo);
-
-    while (1)
-    {
-        elapsed_time = get_time() - start_time;
-
-        if (elapsed_time >= total_sleep) {
-            printf("DEBUG: ft_sleep completed for %lu ms (Philo %d)\n", elapsed_time, philo->id_philo);
-            break;
-        }
-        pthread_mutex_lock(philo->dead);
-        if (*(philo->is_dead) == 1)
-        {
-            pthread_mutex_unlock(philo->dead);
-            printf("DEBUG: ft_sleep interrupted due to death (Philo %d)\n", philo->id_philo);
-            return (1);
-        }
-        pthread_mutex_unlock(philo->dead);
-        unsigned long remaining_sleep_us = (total_sleep - elapsed_time) * 1000;
-
-        unsigned long sleep_duration_us = sleep_interval_us;
-        if (remaining_sleep_us < sleep_interval_us) {
-            sleep_duration_us = remaining_sleep_us;
-        }
-
-        if (sleep_duration_us > 0) {
-            usleep(sleep_duration_us);
-        }
-    }
-    return (0);
+	(void)philo;
+	current = get_time();
+	while (get_time() - current < total_sleep)
+	{
+		usleep(10);
+	}
+	return (0);
 }
 
-size_t	get_time(void)
+unsigned long	get_time(void)
 {
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	return ((time.tv_sec * 1000UL) + (time.tv_usec / 1000));
 }
+
 
 int check_if_philo_dead(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead);
 	if (*(philo->is_dead) == 1)
 	{
+		print_message_philo(philo, HAS_DIED);
 		pthread_mutex_unlock(philo->dead);
 		return (1);
 	}
 	pthread_mutex_unlock(philo->dead);
-	printf("Checking if philosopher %d is dead\n", philo->id_philo);
-	printf("philo->is_dead: %d\n", *(philo->is_dead));
 	return (0);
 }

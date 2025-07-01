@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/30 19:54:45 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:06:21 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	assign_mutex_death_times_to_philos(t_data *data)
 		data->philo[i].is_dead = &data->is_dead;
 		data->philo[i].meals = &data->meals;
 		data->philo[i].nb_philos = data->num_philos;
-		data->philo[i].last_meal = get_time();
+		data->philo[i].last_meal = data->philo[i].start_time;
 		data->philo[i].time_to_die = data->philo[i].ms_to_die_argv;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/30 19:25:29 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:44:39 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int main(int argc, char **argv)
 	initialize_philos(&data, argv);
 	create_threads(&data);
 	wait_for_threads(&data);
-	printf("Sale de wait threads\n");
 	free_struct(&data);
 	printf("\n\nMAIN HAS FINISHED\n");
 

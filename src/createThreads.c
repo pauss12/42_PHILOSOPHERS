@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 21:13:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:52:45 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int check_philo_dead(t_data *data)
 	pthread_mutex_lock(&data->dead);
 	if (data->is_dead == 1)
 	{
+		print_message_philo(data->philo, HAS_DIED);
 		pthread_mutex_unlock(&data->dead);
 		return (1);
 	}
@@ -39,20 +40,22 @@ static int check_philo_dead(t_data *data)
 //TODO: Comprobar que el tiempo de muerte de cada filósofo no se ha superado
 static void check_time_dead(t_data *data)
 {
+	unsigned long current;
 	int	i;
 
 	i = 0;
-	printf("Checking time dead\n");
+	current = get_time();
 	while (i < data->num_philos)
 	{
-		pthread_mutex_lock(&data->dead);
-		if (get_time() > data->philo[i].time_to_die)
+		pthread_mutex_lock(&data->philo[i].dead);
+		if (data->philo[i].is_dead == 0)
 		{
-			data->is_dead = 1;
-			pthread_mutex_unlock(&data->dead);
-			return ;
+			if (current - data->philo[i].last_meal >= data->philo[i].time_to_die)
+			{
+				*(data->philo[i].is_dead) = 1;
+			}
 		}
-		pthread_mutex_unlock(&data->dead);
+		pthread_mutex_unlock(&data->philo[i].dead);
 		i++;
 	}
 }
@@ -61,15 +64,6 @@ static void check_status(t_data *data)
 {
 	while (1)
 	{
-
-		printf("HELOOO\n");
-		if (data->num_philos == 1)
-		{
-			pthread_mutex_lock(&data->dead);
-			data->is_dead = 1;
-			pthread_mutex_unlock(&data->dead);
-			break ;
-		}
 		check_time_dead(data);
 		if (check_philos_eaten(data) == 1)
 			break ;
