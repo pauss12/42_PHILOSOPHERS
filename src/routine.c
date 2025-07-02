@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/01 20:51:32 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:14:13 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
@@ -58,12 +58,10 @@ int eating(t_philo *philo)
 		return (1);
 	takeForks(philo);
 	pthread_mutex_lock(philo->eat);
+	//TODO: Actualizar tiempo de comida y  muerte. Justo cuando empieza a comer.
 	philo->last_meal = get_time();
 	philo->time_to_die = philo->last_meal + philo->time_to_die;
 	print_message_philo(philo, IS_EATING);
-
-	//TODO: Actualizar tiempo de comida y  muerte. Justo cuando empieza a comer.
-
 	pthread_mutex_unlock(philo->eat);
 	while (1)
 	{

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   treatMemory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/01 20:06:21 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:27:14 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
@@ -83,33 +83,9 @@ void	initialize_struct(t_data *data, char *argv[])
 	pthread_mutex_init(&data->eat, NULL);
 }
 
-static void free_for_philo(t_data *data, int *i)
-{
-	pthread_mutex_destroy(&data->forks[*i]);
-	pthread_mutex_destroy(data->philo[*i].print);
-	pthread_mutex_destroy(data->philo[*i].init);
-	pthread_mutex_destroy(data->philo[*i].dead);
-	pthread_mutex_destroy(data->philo[*i].eat);
-	pthread_mutex_destroy(data->philo[*i].fork_left);
-	pthread_mutex_destroy(data->philo[*i].fork_right);
-}
-
 void	free_struct(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	if (data->philo)
-	{
-		while (i < data->num_philos)
-		{
-			free_for_philo(data, &i);
-			i++;
-		}
-		free(data->philo);
-	}
-	if (data->forks)
-		free(data->forks);
+	free(data->philo);
 	if (data->num_philos > 0)
 	{
 		pthread_mutex_destroy(&data->print);
@@ -117,4 +93,6 @@ void	free_struct(t_data *data)
 		pthread_mutex_destroy(&data->dead);
 		pthread_mutex_destroy(&data->eat);
 	}
+	if (data->forks)
+		free(data->forks);
 }
