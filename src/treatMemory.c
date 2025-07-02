@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   treatMemory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/02 18:27:14 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/02 20:59:37 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -44,10 +44,7 @@ void	initialize_philos(t_data *data, char *argv[])
 	i = 0;
 	data->philo = ft_calloc(data->num_philos, sizeof(t_philo));
 	if (!data->philo)
-	{
-		printf(RED "ERROR \n" RESET "Malloc failed\n");
-		exit(1);
-	}
+		print_and_free(data, RED "ERROR \n" RESET "Malloc failed\n");
 	while (i < data->num_philos)
 	{
 		data->philo[i].id_philo = i + 1;
@@ -85,6 +82,9 @@ void	initialize_struct(t_data *data, char *argv[])
 
 void	free_struct(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	free(data->philo);
 	if (data->num_philos > 0)
 	{

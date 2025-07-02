@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/01 19:57:08 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/02 20:52:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ char	*joinLong(char *result, unsigned long value, char **index);
 // ##############################################################################
 void	print_error(char *error_message);
 void	ft_putendl_fd(char *s, int fd);
-void	print_and_free(t_data *data);
+void	print_and_free(t_data *data, char *message);
 char	*ft_strjoin(char *s1, char *s2);
 
 // ##############################################################################

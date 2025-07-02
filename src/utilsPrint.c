@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:37 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/24 19:42:29 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/02 20:50:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-void	print_and_free(t_data *data)
+void	print_and_free(t_data *data, char *message)
 {
-	print_error("Error creating philosopher thread");
+	print_error(message);
 	free_struct(data);
 }
 

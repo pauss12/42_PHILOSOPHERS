@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   createThreads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/02 18:54:27 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/02 20:50:49 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -81,7 +81,7 @@ void create_threads(t_data *data)
 	{
 		philo2 = &data->philo[i];
 		if (pthread_create(&philo2->thread, NULL, routine, philo2) != 0)
-			print_and_free(data);
+			print_and_free(data, "Error creating philosopher thread");
 		i++;
 	}
 	pthread_mutex_unlock(&data->init);
