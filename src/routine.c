@@ -1,34 +1,62 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 18:11:55 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 20:03:13 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
+
+// int	sleeping(t_philo *philo)
+// {
+// 	long start_time;
+
+// 	print_message_philo(philo, IS_SLEEPING);
+// 	pthread_mutex_lock(philo->dead);
+// 	start_time = get_time();
+// 	while (get_time() - start_time < (unsigned long)philo->time_to_sleep)
+// 	{
+// 		if (*(philo->is_dead) == 1)
+// 		{
+// 			pthread_mutex_unlock(philo->dead);
+// 			return (1);
+// 		}
+// 		usleep(100);
+// 	}
+// 	pthread_mutex_unlock(philo->dead);
+// 	return (0);
+// }
+
+
+// MI 0 ==> es que ha ido bien
+// MI 1 ==> es que ha ido mal
 
 int	sleeping(t_philo *philo)
 {
 	long start_time;
 
-	print_message_philo(philo, IS_SLEEPING);
-	pthread_mutex_lock(philo->dead);
 	start_time = get_time();
-	while (get_time() - start_time < (unsigned long)philo->time_to_sleep)
+	printf("PHILO %d IS SLEEPING\n", philo->id_philo);
+	//print_message_philo(philo, IS_SLEEPING);
+	while (1)
 	{
+		pthread_mutex_lock(philo->dead);
 		if (*(philo->is_dead) == 1)
 		{
 			pthread_mutex_unlock(philo->dead);
+			// print_message_philo(philo, "I AM DEAD");
 			return (1);
 		}
+		pthread_mutex_unlock(philo->dead);
+		if (get_time() - start_time >= (unsigned long)philo->time_to_sleep)
+			return (0);
 		usleep(100);
 	}
-	pthread_mutex_unlock(philo->dead);
 	return (0);
 }
 
@@ -63,7 +91,6 @@ int eating(t_philo *philo)
 		return (1);
 	takeForks(philo);
 	pthread_mutex_lock(philo->dead);
-	//TODO: Actualizar tiempo de comida y  muerte. Justo cuando empieza a comer.
 	philo->last_meal = get_time();
 	philo->time_to_die = philo->last_meal + philo->time_to_die;
 	pthread_mutex_unlock(philo->dead);
@@ -108,7 +135,10 @@ void	*routine(void *arg)
 		if (philo->id_philo % 2 == 0)
 			usleep(1);
 		if (eating(philo) == 1)
+		{
+			print_message_philo(philo, "PASA POR AQUIIIIIIIIIIII");
 			return (NULL);
+		}
 		if (sleeping(philo) == 1)
 			return (NULL);
 		if (thinking(philo) == 1)

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   createThreads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 18:11:07 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:55:55 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
@@ -27,6 +27,12 @@ static int check_philos_eaten(t_data *data)
 static int check_philo_dead(t_data *data)
 {
 	pthread_mutex_lock(&data->dead);
+	
+	pthread_mutex_lock(&data->print);
+	printf("La variable is_dead es: %d\n", data->is_dead);
+	pthread_mutex_unlock(&data->print);
+
+	
 	if (data->is_dead == 1)
 	{
 		print_message_philo(data->philo, HAS_DIED);
