@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 17:16:10 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:11:55 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ int thinking(t_philo *philo)
 
 static int eaten(t_philo *philo)
 {
-	pthread_mutex_lock(philo->eat);
+	pthread_mutex_lock(philo->dead);
 	if (philo->times_each_philosopher_must_eat != -1)
 	{
 		philo->times_each_philosopher_must_eat--;
 		if (philo->times_each_philosopher_must_eat == 0)
 		{
 			*philo->meals += 1;
-			pthread_mutex_unlock(philo->eat);
+			pthread_mutex_unlock(philo->dead);
 			return (1);
 		}
 	}
-	pthread_mutex_unlock(philo->eat);
+	pthread_mutex_unlock(philo->dead);
 	return (0);
 }
 
@@ -62,11 +62,11 @@ int eating(t_philo *philo)
 	if (check_if_philo_dead(philo) == 1)
 		return (1);
 	takeForks(philo);
-	pthread_mutex_lock(philo->eat);
+	pthread_mutex_lock(philo->dead);
 	//TODO: Actualizar tiempo de comida y  muerte. Justo cuando empieza a comer.
 	philo->last_meal = get_time();
 	philo->time_to_die = philo->last_meal + philo->time_to_die;
-	pthread_mutex_unlock(philo->eat);
+	pthread_mutex_unlock(philo->dead);
 	print_message_philo(philo, IS_EATING);
 	while (1)
 	{

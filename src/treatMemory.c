@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 17:00:44 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:12:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	assign_mutex_death_times_to_philos(t_data *data)
 		data->philo[i].print = &data->print;
 		data->philo[i].init = &data->init;
 		data->philo[i].dead = &data->dead;
-		data->philo[i].eat = &data->eat;
+		// data->philo[i].eat = &data->eat;
 		data->philo[i].fork_left = &data->forks[i];
 		if (i == data->num_philos - 1)
 			data->philo[i].fork_right = &data->forks[0];
@@ -71,7 +71,7 @@ void	initialize_struct(t_data *data, char *argv[])
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->init, NULL);
 	pthread_mutex_init(&data->dead, NULL);
-	pthread_mutex_init(&data->eat, NULL);
+	// pthread_mutex_init(&data->eat, NULL);
 	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
 	if (data->forks == NULL)
 		print_and_free(data, "Error con los forks");
@@ -93,7 +93,7 @@ void	free_struct(t_data *data)
 		pthread_mutex_destroy(&data->print);
 		pthread_mutex_destroy(&data->init);
 		pthread_mutex_destroy(&data->dead);
-		pthread_mutex_destroy(&data->eat);
+		// pthread_mutex_destroy(&data->eat);
 	}
 	if (data->forks)
 		free(data->forks);

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 17:22:59 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:11:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int check_philos_eaten(t_data *data)
 {
-	pthread_mutex_lock(&data->eat);
+	pthread_mutex_lock(&data->dead);
 	if (data->meals == data->num_philos)	
 	{
-		pthread_mutex_unlock(&data->eat);
+		pthread_mutex_unlock(&data->dead);
 		return (1);
 	}
-	pthread_mutex_unlock(&data->eat);
+	pthread_mutex_unlock(&data->dead);
 	return (0);
 }
 
@@ -58,7 +58,7 @@ static int check_philo_dead(t_data *data)
 // }
 
 //TODO: Comprobar que el tiempo de muerte de cada filósofo no se ha superado
-static void check_time_dead(t_data *data)
+static int check_time_dead(t_data *data)
 {
     unsigned long current;
     int i;
@@ -72,18 +72,20 @@ static void check_time_dead(t_data *data)
         {
             data->is_dead = 1;
             pthread_mutex_unlock(&data->dead);
-            return ;
+            return (1);
         }
         i++;
     }
     pthread_mutex_unlock(&data->dead);
+	return (0);
 }
 
 static void check_status(t_data *data)
 {
 	while (1)
 	{
-		check_time_dead(data);
+		if (check_time_dead(data) == 1)
+			break;
 		if (check_philos_eaten(data) == 1)
 			break ;
 		if (check_philo_dead(data) == 1)
