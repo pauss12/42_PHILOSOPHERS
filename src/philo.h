@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/02 20:52:07 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:25:56 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,8 @@ char	*ft_strjoin(char *s1, char *s2);
 // ##############################################################################
 void	takeForks(t_philo *philo);
 void	releaseForks(t_philo *philo);
+
+// philo.c
+void wait_for_threads(t_data *data);
 
 #endif

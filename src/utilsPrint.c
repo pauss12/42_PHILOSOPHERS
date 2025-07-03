@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:37 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/02 20:50:10 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:26:25 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	ft_putendl_fd(char *s, int fd)
 
 void	print_and_free(t_data *data, char *message)
 {
+	pthread_mutex_lock(&data->print);
 	print_error(message);
+	pthread_mutex_unlock(&data->print);
+	wait_for_threads(data);
 	free_struct(data);
 }
 

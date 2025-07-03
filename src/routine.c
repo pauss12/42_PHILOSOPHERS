@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/02 18:14:13 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:16:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -16,14 +16,19 @@ int	sleeping(t_philo *philo)
 {
 	long start_time;
 
-	start_time = get_time();
 	print_message_philo(philo, IS_SLEEPING);
+	pthread_mutex_lock(philo->dead);
+	start_time = get_time();
 	while (get_time() - start_time < (unsigned long)philo->time_to_sleep)
 	{
 		if (*(philo->is_dead) == 1)
+		{
+			pthread_mutex_unlock(philo->dead);
 			return (1);
+		}
 		usleep(100);
 	}
+	pthread_mutex_unlock(philo->dead);
 	return (0);
 }
 
@@ -61,8 +66,8 @@ int eating(t_philo *philo)
 	//TODO: Actualizar tiempo de comida y  muerte. Justo cuando empieza a comer.
 	philo->last_meal = get_time();
 	philo->time_to_die = philo->last_meal + philo->time_to_die;
-	print_message_philo(philo, IS_EATING);
 	pthread_mutex_unlock(philo->eat);
+	print_message_philo(philo, IS_EATING);
 	while (1)
 	{
 		if (check_if_philo_dead(philo) == 1)

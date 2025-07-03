@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/02 20:59:37 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:00:44 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,18 @@ void	initialize_struct(t_data *data, char *argv[])
 	i = 0;
 	data->is_dead = 0;
 	data->num_philos = ft_atoi(argv[1]);
+	pthread_mutex_init(&data->print, NULL);
+	pthread_mutex_init(&data->init, NULL);
+	pthread_mutex_init(&data->dead, NULL);
+	pthread_mutex_init(&data->eat, NULL);
 	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
+	if (data->forks == NULL)
+		print_and_free(data, "Error con los forks");
 	while (i < data->num_philos)
 	{
 		pthread_mutex_init(&data->forks[i], NULL);
 		i++;
 	}
-	pthread_mutex_init(&data->print, NULL);
-	pthread_mutex_init(&data->init, NULL);
-	pthread_mutex_init(&data->dead, NULL);
-	pthread_mutex_init(&data->eat, NULL);
 }
 
 void	free_struct(t_data *data)
