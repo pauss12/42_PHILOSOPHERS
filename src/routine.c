@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 20:03:13 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:42:25 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -41,8 +41,8 @@ int	sleeping(t_philo *philo)
 	long start_time;
 
 	start_time = get_time();
-	printf("PHILO %d IS SLEEPING\n", philo->id_philo);
-	//print_message_philo(philo, IS_SLEEPING);
+	// printf("PHILO %d IS SLEEPING\n", philo->id_philo);
+	print_message_philo(philo, IS_SLEEPING);
 	while (1)
 	{
 		pthread_mutex_lock(philo->dead);
@@ -53,7 +53,7 @@ int	sleeping(t_philo *philo)
 			return (1);
 		}
 		pthread_mutex_unlock(philo->dead);
-		if (get_time() - start_time >= (unsigned long)philo->time_to_sleep)
+		if (get_time() - start_time >= philo->time_to_sleep)
 			return (0);
 		usleep(100);
 	}
@@ -87,23 +87,41 @@ static int eaten(t_philo *philo)
 
 int eating(t_philo *philo)
 {
-	if (check_if_philo_dead(philo) == 1)
-		return (1);
+	if (check_if_philo_dead(philo) == 1) {
+        print_message_philo(philo, "DEBUG: Died before taking forks."); // NEW DEBUG
+        return (1);
+    }
 	takeForks(philo);
 	pthread_mutex_lock(philo->dead);
 	philo->last_meal = get_time();
-	philo->time_to_die = philo->last_meal + philo->time_to_die;
 	pthread_mutex_unlock(philo->dead);
 	print_message_philo(philo, IS_EATING);
 	while (1)
 	{
+		//detecta la muerte del filósofo aqui
+		// if (check_if_philo_dead(philo) == 1)
+		// {
+		// 	pthread_mutex_lock(philo->print);
+		// 	printf("Holaaaaaaaaaaaaaaaaaa, soy el philo %d\n", philo->id_philo);
+		// 	printf("La flag is_dead es: %d\n", *(philo->is_dead));
+		// 	pthread_mutex_unlock(philo->print);
+
+		// 	releaseForks(philo);
+		// 	return (1);
+		// }
+
 		if (check_if_philo_dead(philo) == 1)
-		{
-			releaseForks(philo);
-			return (1);
-		}
+        {
+            print_message_philo(philo, "DEBUG: Died while eating loop."); // NEW DEBUG
+            releaseForks(philo);
+            return (1);
+        }
+
 		if (get_time() - philo->last_meal >= philo->time_to_eat)
+		{
+			print_message_philo(philo, "debe morir");
 			break ;
+		}
 		usleep(10);
 	}
 	releaseForks(philo);
@@ -125,7 +143,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->init);
 	pthread_mutex_unlock(philo->init);
-	while (1)
+	while (check_if_philo_dead(philo) != 1)
 	{
 		if (philo->nb_philos == 1)
 		{

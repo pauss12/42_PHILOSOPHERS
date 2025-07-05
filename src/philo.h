@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 17:25:56 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:35:14 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PHILO_H
 # define PHILO_H
@@ -48,7 +48,6 @@ typedef struct s_philo
 	int				nb_philos;
 	unsigned long			start_time;
 	unsigned long			last_meal;
-	unsigned long			ms_to_die_argv;
 	unsigned long			time_to_eat;
 	unsigned long			time_to_die;
 	unsigned long			time_to_sleep;

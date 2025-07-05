@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/03 19:48:34 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:49:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -17,9 +17,7 @@ static char *create_str(t_philo *philo, char *message, size_t time)
 	char *str;
 
 	str = NULL;
-	if (ft_strcmp(message, HAS_DIED) == 0)
-		str = ft_strjoin_variadica(RED BOLD "%lu : PHILO %d %s\n" RESET, time, philo->id_philo, message);
-	else if (ft_strcmp(message, IS_EATING) == 0)
+	if (ft_strcmp(message, IS_EATING) == 0)
 		str = ft_strjoin_variadica(GREEN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
 		str = ft_strjoin_variadica(CYAN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
