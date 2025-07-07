@@ -6,7 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2025/07/07 20:13:40 by pmendez-         ###   ########.fr       */
+=======
 /*   Updated: 2025/07/05 19:19:29 by pmendez-         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /******************************************************************************/
 
@@ -90,9 +94,17 @@ int eating(t_philo *philo)
 	if (check_if_philo_dead(philo) == 1)
         return (1);
 	takeForks(philo);
+<<<<<<< HEAD
+	pthread_mutex_lock(philo->eat);
+	//TODO: Actualizar tiempo de comida y  muerte. Justo cuando empieza a comer.
+	philo->last_meal = get_time();
+	philo->time_to_die = philo->last_meal + philo->time_to_die;
+	pthread_mutex_unlock(philo->eat);
+=======
 	pthread_mutex_lock(philo->dead);
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(philo->dead);
+>>>>>>> refs/remotes/origin/main
 	print_message_philo(philo, IS_EATING);
 	while (1)
 	{
@@ -101,6 +113,7 @@ int eating(t_philo *philo)
         {
             print_message_philo(philo, "DEBUG: Died while eating loop.");
 			releaseForks(philo);
+			usleep(100);
 			return (1);
         }
 		if (get_time() - philo->last_meal >= philo->time_to_eat)
@@ -119,19 +132,55 @@ static void onlyOne(t_philo *philo)
 	ft_sleep(philo, philo->time_to_die);
 }
 
+// void	*routine(void *arg)
+// {
+// 	t_philo		*philo;
+
+// 	philo = (t_philo *)arg;
+// 	pthread_mutex_lock(philo->init);
+// 	pthread_mutex_unlock(philo->init);
+// 	while (1)
+// 	{
+// 		if (philo->nb_philos == 1)
+// 		{
+// 			onlyOne(philo);
+// 			return (NULL);
+// 		}
+// 		if (philo->id_philo % 2 == 0)
+// 			usleep(1);
+// 		if (eating(philo) == 1)
+// 			return (NULL);
+// 		if (sleeping(philo) == 1)
+// 			return (NULL);
+// 		if (thinking(philo) == 1)
+// 			return (NULL);
+// 	}
+// 	return (NULL);
+// }
+
+// static void	print_addresses(t_philo *philo)
+// {
+// 	printf("pointer of EAT in philo %p\n\n", philo->eat);
+// 	printf("pointer of DEAD in philo %p\n\n", philo->dead);
+// 	printf("pointer of INIT in philo %p\n\n", philo->init);
+// 	printf("pointer of PRINT in data %p\n\n", philo->print);
+// }
+
+
 void	*routine(void *arg)
 {
 	t_philo		*philo;
 
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->init);
+	//print_addresses(philo);
 	pthread_mutex_unlock(philo->init);
-	while (1)
+	while (check_if_philo_dead(philo) == 0)
 	{
 		if (philo->nb_philos == 1)
 		{
 			onlyOne(philo);
-			return (NULL);
+			break;
 		}
 		if (philo->id_philo % 2 == 0)
 			usleep(1);

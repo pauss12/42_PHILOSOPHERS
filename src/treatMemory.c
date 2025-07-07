@@ -6,7 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2025/07/07 19:00:45 by pmendez-         ###   ########.fr       */
+=======
 /*   Updated: 2025/07/05 17:34:48 by pmendez-         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,10 +23,18 @@ static void	assign_mutex_death_times_to_philos(t_data *data)
 	i = 0;
 	while (i < data->num_philos)
 	{
+<<<<<<< HEAD
+		data->philo[i].print = &data->print;
+		data->philo[i].init = &data->init;
+		data->philo[i].dead = &data->dead;
+		data->philo[i].eat = &data->eat;
+		data->philo[i].fork_left = &data->forks[i];
+=======
 		data->philo[i].print = &(data->print);
 		data->philo[i].init = &(data->init);
 		data->philo[i].dead = &(data->dead);
 		data->philo[i].fork_left = &(data->forks[i]);
+>>>>>>> refs/remotes/origin/main
 		if (i == data->num_philos - 1)
 			data->philo[i].fork_right = &(data->forks[0]);
 		else
@@ -69,6 +81,10 @@ void	initialize_struct(t_data *data, char *argv[])
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->init, NULL);
 	pthread_mutex_init(&data->dead, NULL);
+<<<<<<< HEAD
+	pthread_mutex_init(&data->eat, NULL);
+=======
+>>>>>>> refs/remotes/origin/main
 	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
 	if (data->forks == NULL)
 		print_and_free(data, "Error con los forks");
@@ -87,7 +103,7 @@ void	free_struct(t_data *data)
 		pthread_mutex_destroy(&data->print);
 		pthread_mutex_destroy(&data->init);
 		pthread_mutex_destroy(&data->dead);
-		// pthread_mutex_destroy(&data->eat);
+		pthread_mutex_destroy(&data->eat);
 	}
 	if (data->forks)
 		free(data->forks);

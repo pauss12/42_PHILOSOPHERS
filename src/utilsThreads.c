@@ -6,7 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2025/07/07 20:08:27 by pmendez-         ###   ########.fr       */
+=======
 /*   Updated: 2025/07/05 19:27:06 by pmendez-         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /******************************************************************************/
 
@@ -101,6 +105,10 @@ int check_if_philo_dead(t_philo *philo)
 	pthread_mutex_lock(philo->dead);
 	if (*(philo->is_dead) == 1)
 	{
+<<<<<<< HEAD
+		// print_message_philo(philo, HAS_DIED);
+=======
+>>>>>>> refs/remotes/origin/main
 		pthread_mutex_unlock(philo->dead);
 		return (1);
 	}
