@@ -153,6 +153,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->init);
 	pthread_mutex_unlock(philo->init);
+
 	while (check_if_philo_dead(philo) == 0)
 	{
 		if (philo->nb_philos == 1)
@@ -164,6 +165,7 @@ void	*routine(void *arg)
 			usleep(1);
 		if (eating(philo) == 1)
 		{
+			// print_message_philo(philo, "sale de comer");
 			return (NULL);
 		}
 		if (sleeping(philo) == 1)
