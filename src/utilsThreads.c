@@ -1,18 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utilsThreads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/07 20:08:27 by pmendez-         ###   ########.fr       */
-=======
-/*   Updated: 2025/07/05 19:27:06 by pmendez-         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2025/07/08 18:34:42 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -21,9 +17,7 @@ static char *create_str(t_philo *philo, char *message, size_t time)
 	char *str;
 
 	str = NULL;
-	if (ft_strcmp(message, HAS_DIED) == 0)
-		str = ft_strjoin_variadica(RED BOLD "%lu : PHILO %d %s\n" RESET, time, philo->id_philo, message);
-	else if (ft_strcmp(message, IS_EATING) == 0)
+	if (ft_strcmp(message, IS_EATING) == 0)
 		str = ft_strjoin_variadica(GREEN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
 		str = ft_strjoin_variadica(CYAN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
@@ -105,10 +99,6 @@ int check_if_philo_dead(t_philo *philo)
 	pthread_mutex_lock(philo->dead);
 	if (*(philo->is_dead) == 1)
 	{
-<<<<<<< HEAD
-		// print_message_philo(philo, HAS_DIED);
-=======
->>>>>>> refs/remotes/origin/main
 		pthread_mutex_unlock(philo->dead);
 		return (1);
 	}
