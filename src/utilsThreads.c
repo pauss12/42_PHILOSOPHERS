@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/08 18:34:42 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/19 20:13:05 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void print_message_philo(t_philo *philo, char *message)
 		return;
 	str = NULL;
 	time = get_time() - philo->start_time;
+	
+	if (*(philo->is_dead) == 1) 	return;
+
+	//if (check_if_philo_dead(philo) == 1)	return ;
+	
 	pthread_mutex_lock(philo->print);
 	str = create_str(philo, message, time);
 	if (str)
@@ -79,7 +84,7 @@ int ft_sleep(t_philo *philo, unsigned long total_sleep)
 	current = get_time();
 	while (get_time() - current < total_sleep)
 	{
-		usleep(10);
+		usleep(9);
 	}
 	return (0);
 }
