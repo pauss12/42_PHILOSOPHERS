@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/19 20:07:18 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:36:30 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,20 @@ static int check_philos_eaten(t_data *data)
 static int check_time_dead(t_data *data)
 {
     int i;
+	unsigned long last_meal;
 
 	i = 0;
 	pthread_mutex_lock(&data->dead);
-	if (data->is_dead == 1) {
+	if (data->is_dead == 1)
+	{
 		pthread_mutex_unlock(&data->dead);
 		return (1);
 	}
 	pthread_mutex_unlock(&data->dead);
     while (i < data->num_philos)
     {
+		
+
         if (get_time() - data->philo[i].last_meal >= data->philo[i].time_to_die)
         {
 			pthread_mutex_lock(&data->dead);

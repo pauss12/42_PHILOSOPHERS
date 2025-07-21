@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/19 20:13:05 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/21 17:59:11 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void print_message_philo(t_philo *philo, char *message)
 	str = NULL;
 	time = get_time() - philo->start_time;
 	
-	if (*(philo->is_dead) == 1) 	return;
+	if (*(philo->is_dead) == 1)
+		return;
 
 	//if (check_if_philo_dead(philo) == 1)	return ;
 	
@@ -101,12 +102,12 @@ unsigned long	get_time(void)
 
 int check_if_philo_dead(t_philo *philo)
 {
+	int	is_dead;
+
 	pthread_mutex_lock(philo->dead);
-	if (*(philo->is_dead) == 1)
-	{
-		pthread_mutex_unlock(philo->dead);
-		return (1);
-	}
+	is_dead = *(philo->is_dead);
 	pthread_mutex_unlock(philo->dead);
+	if (is_dead == 1)
+		return (1);
 	return (0);
 }
