@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/21 18:36:30 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:22:39 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static int check_time_dead(t_data *data)
 {
     int i;
 	unsigned long last_meal;
+	unsigned long time_to_die;
+	unsigned long start_time;
+	int id_philo;
 
 	i = 0;
 	pthread_mutex_lock(&data->dead);
@@ -53,15 +56,19 @@ static int check_time_dead(t_data *data)
 	pthread_mutex_unlock(&data->dead);
     while (i < data->num_philos)
     {
-		
-
-        if (get_time() - data->philo[i].last_meal >= data->philo[i].time_to_die)
+		pthread_mutex_lock(data->philo[i].eat);
+        last_meal = data->philo[i].last_meal;
+		time_to_die = data->philo[i].time_to_die;
+		start_time = data->philo[i].start_time;
+		id_philo = data->philo[i].id_philo;
+        pthread_mutex_unlock(data->philo[i].eat);
+        if (get_time() - last_meal >= time_to_die)
         {
 			pthread_mutex_lock(&data->dead);
             data->is_dead = 1;
 			pthread_mutex_unlock(&data->dead);
 			pthread_mutex_lock(&data->print);
-			printf(RED BOLD "%lu: PHILO %d %s\n" RESET, get_time() - data->philo[i].start_time , data->philo[i].id_philo, HAS_DIED);
+			printf(RED BOLD "%lu: PHILO %d %s\n" RESET, get_time() - start_time , id_philo, HAS_DIED);
 			pthread_mutex_unlock(&data->print);
             return (1);
         }

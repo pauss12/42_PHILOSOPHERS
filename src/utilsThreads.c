@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/21 17:59:11 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:59:42 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void print_message_philo(t_philo *philo, char *message)
 	if (*(philo->is_dead) == 1)
 		return;
 
-	//if (check_if_philo_dead(philo) == 1)	return ;
+	// if (check_if_philo_dead(philo) == 1)
+	// 	return ;
 	
 	pthread_mutex_lock(philo->print);
 	str = create_str(philo, message, time);
