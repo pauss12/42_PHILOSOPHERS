@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:27:34 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:28:48 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	check_args(int argc, char **argv)
 		show_error_good_usage();
 		return (1);
 	}
-	if (ft_atoi(argv[1]) > 200)
-	{
-		print_error("Number of philosophers must be less than 200");
-		return (1);
-	}
+	// if (ft_atoi(argv[1]) > 200)
+	// {
+	// 	print_error("Number of philosophers must be less than 200");
+	// 	return (1);
+	// }
 	while (i < argc)
 	{
 		j = 0;

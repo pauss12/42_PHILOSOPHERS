@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/22 18:46:45 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/22 20:41:52 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,17 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
 	int				*is_dead;
+	int				*takenFork[2];
 	pthread_t		thread;
 
 }	t_philo;
-
-// time_to_die ==> El tiempo que un filósofo puede estar sin comer antes de morir; es el contador final
-// al que se le suma el tiempo de la última comida.
-
-// ms_to_die_argv ==> Tiempo de muerte pasado como argumento. NO SE ACTUALIZA
 
 typedef struct s_data
 {
 	int				num_philos;
 	int				is_dead;
 	int				meals;
+	int				*occuppiedForks;
 	t_philo			*philo;
 	pthread_mutex_t	print;
 	pthread_mutex_t	init;
