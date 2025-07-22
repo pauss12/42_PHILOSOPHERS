@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/21 20:22:39 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/22 18:44:57 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void wait_for_threads(t_data *data)
 	i = 0;
 	while (i < data->num_philos)
 	{
-		printf("Waiting for philosopher %d to finish\n", data->philo[i].id_philo);
 		if (pthread_join(data->philo[i].thread, NULL) != 0)
 			print_and_free(data, "Error joining philosophers thread");
 		i++;
@@ -112,15 +111,8 @@ void create_threads(t_data *data)
 		i++;
 	}
 	pthread_mutex_unlock(&data->init);
-
 	if (pthread_join(monitor, NULL) != 0)
 		print_and_free(data, "Error joining monitor thread");
-	
-	pthread_mutex_lock(&data->print);
-	printf("Ha esperado al monitor-----------------------\n");
-	pthread_mutex_unlock(&data->print);
-
 	wait_for_threads(data);
 	free_struct(data);
-	printf("\nHa esperado a los philos!!!!!!!!!!!!!!!!\n");
 }

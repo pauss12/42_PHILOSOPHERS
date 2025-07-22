@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/19 17:24:01 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/22 18:45:18 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int main(int argc, char **argv)
 	initialize_struct(&data, argv);
 	initialize_philos(&data, argv);
 	create_threads(&data);
-	printf("\n\nMAIN HAS FINISHED\n");
-
     return (0);
 }
 
@@ -45,40 +43,4 @@ int main(int argc, char **argv)
 // 	printf("pointer of DEAD in philo %p\n\n", philo->dead);
 // 	printf("pointer of INIT in philo %p\n\n", philo->init);
 // 	printf("pointer of PRINT in data %p\n\n", philo->print);
-// }
-
-
-
-//? GONZALO
-// static int	time_checker(t_philo *philos)
-// {
-// 	pthread_mutex_lock(philos->meal);
-// 	if (get_time() > philos->time_to_die)
-// 	{
-// 		pthread_mutex_unlock(philos->meal);
-// 		return (0);
-// 	}
-// 	pthread_mutex_unlock(philos->meal);
-// 	return (1);
-// }
-
-// int	check_philos(t_philo *philos)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < philos->nb_philos)
-// 	{
-// 		if (!time_checker(&philos[i]))
-// 		{
-// 			print_thread(&philos[i], philos[i].id, PHILO_DIE);
-// 			pthread_mutex_lock(philos->dead);
-// 			*philos[i].dead_flag = 1;
-// 			pthread_mutex_unlock(philos->dead);
-// 			return (0);
-// 		}
-// 		i++;
-// 		usleep(10);
-// 	}
-// 	return (1);
 // }

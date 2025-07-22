@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/21 19:59:42 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:16:20 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ static char *create_str(t_philo *philo, char *message, size_t time)
 	return (str);
 }
 
+// static char *create_str(t_philo *philo, char *message, size_t time)
+// {
+// 	char *str;
+
+// 	str = NULL;
+// 	if (ft_strcmp(message, IS_EATING) == 0)
+// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
+// 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
+// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
+// 	else if (ft_strcmp(message, IS_THINKING) == 0)
+// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
+// 	else if (ft_strcmp(message, TAKEN_RIGHT_FORK) == 0)
+// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
+// 	else if (ft_strcmp(message, TAKEN_LEFT_FORK) == 0)
+// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
+// 	else
+// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n", time, philo->id_philo, message);
+// 	return (str);
+// }
+
 void print_message_philo(t_philo *philo, char *message)
 {
 	size_t	time;
@@ -42,11 +62,11 @@ void print_message_philo(t_philo *philo, char *message)
 	str = NULL;
 	time = get_time() - philo->start_time;
 	
-	if (*(philo->is_dead) == 1)
-		return;
+	// if (*(philo->is_dead) == 1)
+	// 	return;
 
-	// if (check_if_philo_dead(philo) == 1)
-	// 	return ;
+	if (check_if_philo_dead(philo) == 1)
+		return ;
 	
 	pthread_mutex_lock(philo->print);
 	str = create_str(philo, message, time);
@@ -103,12 +123,12 @@ unsigned long	get_time(void)
 
 int check_if_philo_dead(t_philo *philo)
 {
-	int	is_dead;
-
 	pthread_mutex_lock(philo->dead);
-	is_dead = *(philo->is_dead);
-	pthread_mutex_unlock(philo->dead);
-	if (is_dead == 1)
+	if (*(philo->is_dead) == 1)
+	{
+		pthread_mutex_unlock(philo->dead);
 		return (1);
+	}
+	pthread_mutex_unlock(philo->dead);
 	return (0);
 }
