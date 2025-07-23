@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/22 18:44:57 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:15:05 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void *check_status(void *arg)
 			break ;
 		if (check_time_dead(data) == 1)
 			break ;
-		usleep(9);
+		usleep(10);
 	}
 	return (NULL);
 }

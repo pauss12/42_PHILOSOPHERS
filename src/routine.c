@@ -28,7 +28,7 @@ int	sleeping(t_philo *philo)
 		pthread_mutex_unlock(philo->dead);
 		if (is_dead == 1)
 			return (1);
-		usleep(9);
+		usleep(10);
 	}
 	return (0);
 }
@@ -81,7 +81,7 @@ int eating(t_philo *philo)
         }
 		if (get_time() - last_meal >= time_to_eat)
 			break ;
-		usleep(9);
+		usleep(10);
 	}
 	releaseForks(philo);
 	if (eaten(philo) == 1)
@@ -91,7 +91,7 @@ int eating(t_philo *philo)
 
 static void onlyOne(t_philo *philo)
 {
-	print_message_philo(philo, TAKEN_LEFT_FORK);
+	print_message_philo(philo, TAKE_FORK);
 	ft_sleep(philo, philo->time_to_die);
 }
 
@@ -103,8 +103,8 @@ void	*routine(void *arg)
 	pthread_mutex_lock(philo->init);
 	pthread_mutex_unlock(philo->init);
 
-	if (philo->id_philo % 2 != 0)
-		usleep(500);
+	// if (philo->id_philo % 2 != 0)
+	// 	usleep(500);
 	while (1)
 	{
 		if (check_if_philo_dead(philo) == 1)
@@ -114,6 +114,8 @@ void	*routine(void *arg)
 			onlyOne(philo);
 			break;
 		}
+		if (philo->id_philo % 2 == 0)
+			usleep(1);
 		if (eating(philo) == 1)
 			return (NULL);
 		if (sleeping(philo) == 1)
