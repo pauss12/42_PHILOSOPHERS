@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/22 20:41:52 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:15:26 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@
 # define CYAN "\033[0;36m"
 # define BOLD "\033[1m"
 
-# define TAKEN_RIGHT_FORK    "has taken right fork 🍴"
-# define TAKEN_LEFT_FORK     "has taken left fork 🍴"
+# define TAKE_FORK    "has taken a fork 🍴"
 # define IS_EATING           " is eating 🍝"
 # define IS_SLEEPING         " is sleeping 😴"
 # define IS_THINKING         "is thinking 🤔 "
@@ -60,7 +59,6 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_left;
 	int				*is_dead;
-	int				*takenFork[2];
 	pthread_t		thread;
 
 }	t_philo;
@@ -70,7 +68,6 @@ typedef struct s_data
 	int				num_philos;
 	int				is_dead;
 	int				meals;
-	int				*occuppiedForks;
 	t_philo			*philo;
 	pthread_mutex_t	print;
 	pthread_mutex_t	init;

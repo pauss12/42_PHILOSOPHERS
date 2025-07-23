@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/22 17:16:20 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:18:01 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,13 @@ static char *create_str(t_philo *philo, char *message, size_t time)
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
 		str = ft_strjoin_variadica(CYAN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
 	else if (ft_strcmp(message, IS_THINKING) == 0)
-		str = ft_strjoin_variadica(BLUE "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
-	else if (ft_strcmp(message, TAKEN_RIGHT_FORK) == 0)
 		str = ft_strjoin_variadica(MAGENTA "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
-	else if (ft_strcmp(message, TAKEN_LEFT_FORK) == 0)
+	else if (ft_strcmp(message, TAKE_FORK) == 0)
 		str = ft_strjoin_variadica(ORANGE "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
 	else
 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n", time, philo->id_philo, message);
 	return (str);
 }
-
-// static char *create_str(t_philo *philo, char *message, size_t time)
-// {
-// 	char *str;
-
-// 	str = NULL;
-// 	if (ft_strcmp(message, IS_EATING) == 0)
-// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
-// 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
-// 	else if (ft_strcmp(message, IS_THINKING) == 0)
-// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
-// 	else if (ft_strcmp(message, TAKEN_RIGHT_FORK) == 0)
-// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
-// 	else if (ft_strcmp(message, TAKEN_LEFT_FORK) == 0)
-// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n" , time, philo->id_philo, message);
-// 	else
-// 		str = ft_strjoin_variadica("%lu: PHILO %d %s\n", time, philo->id_philo, message);
-// 	return (str);
-// }
 
 void print_message_philo(t_philo *philo, char *message)
 {
@@ -106,7 +84,7 @@ int ft_sleep(t_philo *philo, unsigned long total_sleep)
 	current = get_time();
 	while (get_time() - current < total_sleep)
 	{
-		usleep(9);
+		usleep(10);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/22 20:42:12 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:09:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ static void	assign_mutex_death_times_to_philos(t_data *data)
 		data->philo[i].meals = &(data->meals);
 		data->philo[i].nb_philos = data->num_philos;
 		data->philo[i].last_meal = data->philo[i].start_time;
-
-		data->philo[i].takenFork[0] = &data->occuppiedForks[i];
-		if (i == data->num_philos - 1)
-			data->philo[i].takenFork[1] = &(data->occuppiedForks[0]);
-		else
-			data->philo[i].takenFork[1] = &(data->occuppiedForks[i + 1]);
-		
-
 		i++;
 	}
 }
@@ -79,9 +71,6 @@ void	initialize_struct(t_data *data, char *argv[])
 	pthread_mutex_init(&data->init, NULL);
 	pthread_mutex_init(&data->dead, NULL);
 	pthread_mutex_init(&data->eat, NULL);
-	data->occuppiedForks = ft_calloc(data->num_philos, sizeof(int));
-	if (data->occuppiedForks == NULL)
-		print_and_free(data, "Error al crear array enteros comprobacion tenedores ocupados");
 	data->forks = ft_calloc(data->num_philos, sizeof(pthread_mutex_t));
 	if (data->forks == NULL)
 		print_and_free(data, "Error con los forks");
@@ -104,6 +93,4 @@ void	free_struct(t_data *data)
 	}
 	if (data->forks)
 		free(data->forks);
-	if (data->occuppiedForks)
-		free(data->occuppiedForks);
 }
