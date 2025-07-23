@@ -6,10 +6,9 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/07/23 18:03:30 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/07/23 18:29:23 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 GREEN = \033[0;32m
 RED = \033[0;31m
@@ -21,7 +20,7 @@ CLEAN_SHELL = \033[2K\r
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
-
+OBJ_DIR = obj
 
 FILES = src/philo.c \
 		src/checkArgsStart.c \
@@ -35,15 +34,19 @@ FILES = src/philo.c \
 		src/forkTreatment.c \
 		src/itoa_joinLong.c
 
-OBJS = $(FILES:.c=.o)
+# OBJS = $(FILES:.c=.o)
+OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(FILES:.c=.o)))
 
 all: show_progress $(NAME)
 
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
 $(NAME): $(OBJS) src/philo.h
-	@$(CC) $(FILES) -o $(NAME)
+	@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 	@echo "$(CLEAN_SHELL) $(GREEN)\n 🚀 Compilation finished! $(NC)👍"
 
-%.o: %.c
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 	$(eval CURRENT_FILE=$(shell echo $$(($(CURRENT_FILE) + 1))))
 	@printf "$(CLEAN_SHELL) 🚀 Compiling $<... $(shell echo $$(($(CURRENT_FILE) * 100 / $(TOTAL_FILES))))%%"
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -54,7 +57,7 @@ show_progress:
 	fi
 
 clean:
-	@rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
 	@echo "Cleaning finished! 🧹"
 
 fclean: clean
