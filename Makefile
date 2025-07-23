@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/07/23 18:29:23 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/07/23 19:31:36 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ RED = \033[0;31m
 NC = \033[0m
 CURRENT_FILE = 0
 TOTAL_FILES = $(words $(FILES))
-CLEAN_SHELL = \033[2K\r
+CLEAN_SHELL = \033[2K\r.
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=thread
 OBJ_DIR = obj
 
 FILES = src/philo.c \
@@ -34,7 +34,6 @@ FILES = src/philo.c \
 		src/forkTreatment.c \
 		src/itoa_joinLong.c
 
-# OBJS = $(FILES:.c=.o)
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(FILES:.c=.o)))
 
 all: show_progress $(NAME)
@@ -63,9 +62,6 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@echo " Deleting finished! 🗑"
-
-run: $(NAME)
-	@./$(NAME) 4 3 3 3 3
 
 re: fclean all
 

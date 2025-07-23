@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 18:18:01 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:59:57 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,35 @@ static char *create_str(t_philo *philo, char *message, size_t time)
 
 	str = NULL;
 	if (ft_strcmp(message, IS_EATING) == 0)
-		str = ft_strjoin_variadica(GREEN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+		str = ft_strjoin_variadica(GREEN "%lu %d %s\n" RESET, time, philo->id_philo, message);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-		str = ft_strjoin_variadica(CYAN "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+		str = ft_strjoin_variadica(CYAN "%lu %d  %s\n" RESET, time, philo->id_philo, message);
 	else if (ft_strcmp(message, IS_THINKING) == 0)
-		str = ft_strjoin_variadica(MAGENTA "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+		str = ft_strjoin_variadica(MAGENTA "%lu %d %s\n" RESET, time, philo->id_philo, message);
 	else if (ft_strcmp(message, TAKE_FORK) == 0)
-		str = ft_strjoin_variadica(ORANGE "%lu: PHILO %d %s\n" RESET , time, philo->id_philo, message);
+		str = ft_strjoin_variadica(ORANGE "%lu %d %s\n" RESET, time, philo->id_philo, message);
 	else
-		str = ft_strjoin_variadica("%lu: PHILO %d %s\n", time, philo->id_philo, message);
+		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
 	return (str);
 }
+
+// static char *create_str(t_philo *philo, char *message, size_t time)
+// {
+// 	char *str;
+
+// 	str = NULL;
+// 	if (ft_strcmp(message, IS_EATING) == 0)
+// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
+// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 	else if (ft_strcmp(message, IS_THINKING) == 0)
+// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 	else if (ft_strcmp(message, TAKE_FORK) == 0)
+// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 	else
+// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 	return (str);
+// }
 
 void print_message_philo(t_philo *philo, char *message)
 {
@@ -39,13 +57,8 @@ void print_message_philo(t_philo *philo, char *message)
 		return;
 	str = NULL;
 	time = get_time() - philo->start_time;
-	
-	// if (*(philo->is_dead) == 1)
-	// 	return;
-
 	if (check_if_philo_dead(philo) == 1)
-		return ;
-	
+		return ;	
 	pthread_mutex_lock(philo->print);
 	str = create_str(philo, message, time);
 	if (str)
@@ -56,38 +69,37 @@ void print_message_philo(t_philo *philo, char *message)
 	pthread_mutex_unlock(philo->print);
 }
 
-// int	ft_sleep(t_philo *philo, unsigned long total_sleep)
-// {
-// 	unsigned long	current_time;
-
-// 	current_time = get_time();
-// 	printf("TOTAL SLEEP ==> %lu\n", total_sleep);
-// 	while (get_time() - current_time < total_sleep)
-// 	{
-// 		pthread_mutex_lock(philo->dead);
-// 		if (*(philo->is_dead) == 1)
-// 		{
-// 			pthread_mutex_unlock(philo->dead);
-// 			return (1);
-// 		}
-// 		pthread_mutex_unlock(philo->dead);
-// 		usleep(10);
-// 	}
-// 	return (0);
-// }
-
-int ft_sleep(t_philo *philo, unsigned long total_sleep)
+int	ft_sleep(t_philo *philo, unsigned long total_sleep)
 {
-	unsigned long	current;
+	unsigned long	current_time;
 
-	(void)philo;
-	current = get_time();
-	while (get_time() - current < total_sleep)
+	current_time = get_time();
+	while (get_time() - current_time < total_sleep)
 	{
+		pthread_mutex_lock(philo->dead);
+		if (*(philo->is_dead) == 1)
+		{
+			pthread_mutex_unlock(philo->dead);
+			return (1);
+		}
+		pthread_mutex_unlock(philo->dead);
 		usleep(10);
 	}
 	return (0);
 }
+
+// int ft_sleep(t_philo *philo, unsigned long total_sleep)
+// {
+// 	unsigned long	current;
+
+// 	(void)philo;
+// 	current = get_time();
+// 	while (get_time() - current < total_sleep)
+// 	{
+// 		usleep(10);
+// 	}
+// 	return (0);
+// }
 
 unsigned long	get_time(void)
 {

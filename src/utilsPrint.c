@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:37 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/22 18:44:35 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 21:04:22 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	print_error(char *error_message)
 
 	if (error_message == NULL)
 		return ;
-	str = ft_strjoin_variadica(RED "Error\n" RESET, ": %s ", error_message);
+	// str = ft_strjoin_variadica(RED "Error ==> %s" RESET, error_message);
+	str = ft_strjoin_variadica("%s Error%s \n %s ", RED, RESET, error_message);
 	if (str == NULL)
 	{
 		printf(RED "Error\n" RESET);

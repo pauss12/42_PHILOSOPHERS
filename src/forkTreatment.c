@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 21:27:34 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 18:16:57 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 19:24:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void takeForks(t_philo *philo)
 {
-    usleep(10);
+    usleep(100);
     if (philo->id_philo % 2 == 0)
     {
         pthread_mutex_lock(philo->fork_right);

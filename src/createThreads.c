@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 18:15:05 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 19:36:41 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void wait_for_threads(t_data *data)
 
 static int check_philos_eaten(t_data *data)
 {
-	pthread_mutex_lock(&data->dead);
+	pthread_mutex_lock(&data->eat);
 	if (data->meals == data->num_philos)
 	{
-		pthread_mutex_unlock(&data->dead);
+		pthread_mutex_unlock(&data->eat);
 		return (1);
 	}
-	pthread_mutex_unlock(&data->dead);	
+	pthread_mutex_unlock(&data->eat);	
 	return (0);
 }
 
@@ -61,7 +61,7 @@ static int check_time_dead(t_data *data)
 		start_time = data->philo[i].start_time;
 		id_philo = data->philo[i].id_philo;
         pthread_mutex_unlock(data->philo[i].eat);
-        if (get_time() - last_meal >= time_to_die)
+        if (get_time() - last_meal > time_to_die)
         {
 			pthread_mutex_lock(&data->dead);
             data->is_dead = 1;
@@ -88,7 +88,7 @@ static void *check_status(void *arg)
 			break ;
 		if (check_time_dead(data) == 1)
 			break ;
-		usleep(10);
+		usleep(9);
 	}
 	return (NULL);
 }

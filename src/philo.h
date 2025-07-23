@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 18:15:26 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:56:40 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@
 # define IS_THINKING         "is thinking 🤔 "
 # define HAS_DIED            "is dead 💀"
 # define RELEASE_FORKS "has released forks"
+
+// # define TAKE_FORK    "has taken a fork"
+// # define IS_EATING           " is eating"
+// # define IS_SLEEPING         " is sleeping"
+// # define IS_THINKING         "is thinking"
+// # define HAS_DIED            "is dead"
 
 typedef struct s_philo
 {
