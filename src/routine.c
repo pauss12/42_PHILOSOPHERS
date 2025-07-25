@@ -85,8 +85,10 @@ int eating(t_philo *philo)
 
 static void onlyOne(t_philo *philo)
 {
+	pthread_mutex_lock(philo->fork_left);
 	print_message_philo(philo, TAKE_FORK);
 	ft_sleep(philo, philo->time_to_die);
+	pthread_mutex_unlock(philo->fork_left);
 }
 
 void	*routine(void *arg)

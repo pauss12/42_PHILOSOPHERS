@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   createThreads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:37:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 19:36:41 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/25 15:59:53 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
@@ -67,7 +67,7 @@ static int check_time_dead(t_data *data)
             data->is_dead = 1;
 			pthread_mutex_unlock(&data->dead);
 			pthread_mutex_lock(&data->print);
-			printf(RED BOLD "%lu: PHILO %d %s\n" RESET, get_time() - start_time , id_philo, HAS_DIED);
+			printf(RED BOLD "%lu %d %s\n" RESET, get_time() - start_time , id_philo, HAS_DIED);
 			pthread_mutex_unlock(&data->print);
             return (1);
         }
