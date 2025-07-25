@@ -1,32 +1,34 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utilsThreads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:59:57 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:33:36 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
-static char *create_str(t_philo *philo, char *message, size_t time)
+static char	*create_str(t_philo *philo, char *message, size_t time)
 {
-	char *str;
+	char	*str;
+	int		id_philo;
 
 	str = NULL;
+	id_philo = philo->id_philo;
 	if (ft_strcmp(message, IS_EATING) == 0)
-		str = ft_strjoin_variadica(GREEN "%lu %d %s\n" RESET, time, philo->id_philo, message);
+		str = join_variadica(GREEN"%lu %d %s\n"RESET, time, id_philo, message);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-		str = ft_strjoin_variadica(CYAN "%lu %d  %s\n" RESET, time, philo->id_philo, message);
+		str = join_variadica(CYAN"%lu %d  %s\n"RESET, time, id_philo, message);
 	else if (ft_strcmp(message, IS_THINKING) == 0)
-		str = ft_strjoin_variadica(MAGENTA "%lu %d %s\n" RESET, time, philo->id_philo, message);
+		str = join_variadica(PURPLE"%lu %d %s\n"RESET, time, id_philo, message);
 	else if (ft_strcmp(message, TAKE_FORK) == 0)
-		str = ft_strjoin_variadica(ORANGE "%lu %d %s\n" RESET, time, philo->id_philo, message);
+		str = join_variadica(ORANGE"%lu %d %s\n"RESET, time, id_philo, message);
 	else
-		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+		str = join_variadica("%lu %d %s\n", time, id_philo, message);
 	return (str);
 }
 
@@ -36,29 +38,29 @@ static char *create_str(t_philo *philo, char *message, size_t time)
 
 // 	str = NULL;
 // 	if (ft_strcmp(message, IS_EATING) == 0)
-// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
 // 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
 // 	else if (ft_strcmp(message, IS_THINKING) == 0)
-// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
 // 	else if (ft_strcmp(message, TAKE_FORK) == 0)
-// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
 // 	else
-// 		str = ft_strjoin_variadica("%lu %d %s\n", time, philo->id_philo, message);
+// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
 // 	return (str);
 // }
 
-void print_message_philo(t_philo *philo, char *message)
+void	print_message_philo(t_philo *philo, char *message)
 {
 	size_t	time;
 	char	*str;
 
 	if (philo == NULL || message == NULL)
-		return;
+		return ;
 	str = NULL;
 	time = get_time() - philo->start_time;
 	if (check_if_philo_dead(philo) == 1)
-		return ;	
+		return ;
 	pthread_mutex_lock(philo->print);
 	str = create_str(philo, message, time);
 	if (str)
@@ -110,8 +112,7 @@ unsigned long	get_time(void)
 	return ((time.tv_sec * 1000UL) + (time.tv_usec / 1000));
 }
 
-
-int check_if_philo_dead(t_philo *philo)
+int	check_if_philo_dead(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead);
 	if (*(philo->is_dead) == 1)

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/24 23:15:12 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/25 20:00:45 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -14,6 +14,11 @@
 
 static void	show_error_good_usage(void)
 {
+	if (ft_atoi(argv[1]) == 0)
+	{
+		print_error("The program needs at least one philosopher");
+		return ;
+	}
 	printf(RED "ERROR \n" RESET);
 	printf("Usage: ./philo \n");
 	printf(ORANGE "[number_of_philosophers]" RESET " ==> Number of forks \n");
@@ -33,11 +38,6 @@ int	check_args(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 	{
 		show_error_good_usage();
-		return (1);
-	}
-	if (ft_atoi(argv[1]) == 0)
-	{
-		print_error("The program needs at least one philosopher");
 		return (1);
 	}
 	while (i < argc)

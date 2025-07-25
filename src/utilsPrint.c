@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utilsPrint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:37 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 21:04:22 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:30:27 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
@@ -28,7 +28,6 @@ void	print_error(char *error_message)
 
 	if (error_message == NULL)
 		return ;
-	// str = ft_strjoin_variadica(RED "Error ==> %s" RESET, error_message);
 	str = ft_strjoin_variadica("%s Error%s \n %s ", RED, RESET, error_message);
 	if (str == NULL)
 	{
@@ -62,18 +61,6 @@ void	print_and_free(t_data *data, char *message)
 	pthread_mutex_unlock(&data->print);
 	wait_for_threads(data);
 	free_struct(data);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	if (str == NULL)
-		return (0);
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)

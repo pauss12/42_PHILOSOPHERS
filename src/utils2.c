@@ -1,18 +1,18 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:15:02 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/06/28 18:37:05 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:32:52 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
-static char *joinInt(char *result, int value)
+static char	*join_int(char *result, int value)
 {
 	char	*str_value;
 	char	*new_result;
@@ -32,7 +32,7 @@ static char *joinInt(char *result, int value)
 	return (result);
 }
 
-static char *joinString(char *result, char *str)
+static char	*join_string(char *result, char *str)
 {
 	int		i;
 	char	*new_result;
@@ -59,7 +59,7 @@ static char *joinString(char *result, char *str)
 	return (result);
 }
 
-static char *joinChar(char *result, char c)
+static char	*join_char(char *result, char c)
 {
 	char	*str_char;
 	char	*new_result;
@@ -81,7 +81,7 @@ static char *joinChar(char *result, char c)
 	return (result);
 }
 
-char	*ft_strjoin_variadica(char *index, ...)
+char	*join_variadica(char *index, ...)
 {
 	char	*result;
 	va_list	args;
@@ -94,16 +94,16 @@ char	*ft_strjoin_variadica(char *index, ...)
 		{
 			index++;
 			if (*index == 'd' || *index == 'i')
-				result = joinInt(result, va_arg(args, int));
+				result = join_int(result, va_arg(args, int));
 			else if (*index == 's')
-				result = joinString(result, va_arg(args, char *));
+				result = join_string(result, va_arg(args, char *));
 			else if (*index == 'c')
-				result = joinChar(result, (char )va_arg(args, int));
+				result = join_char(result, (char )va_arg(args, int));
 			else if (*index == 'l' && *(index + 1) == 'u')
-				result = joinLong(result, va_arg(args, unsigned long), &index);
+				result = join_long(result, va_arg(args, unsigned long), &index);
 		}
 		else
-			result = joinChar(result, *index);
+			result = join_char(result, *index);
 		index++;
 	}
 	va_end(args);

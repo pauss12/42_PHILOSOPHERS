@@ -1,28 +1,54 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:07:01 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:41:51 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
 	data = (t_data){0};
-    if (check_args(argc, argv) == 1)
+	if (check_args(argc, argv) == 1)
 		return (1);
 	initialize_struct(&data, argv);
 	initialize_philos(&data, argv);
 	create_threads(&data);
-    return (0);
+	return (0);
+}
+
+void	*routine(void *arg)
+{
+	t_philo		*philo;
+
+	philo = (t_philo *)arg;
+	pthread_mutex_lock(philo->init);
+	pthread_mutex_unlock(philo->init);
+	while (1)
+	{
+		if (check_if_philo_dead(philo) == 1)
+			return (NULL);
+		if (philo->nb_philos == 1)
+		{
+			only_one(philo);
+			break ;
+		}
+		if (eating(philo) == 1)
+			return (NULL);
+		if (sleeping(philo) == 1)
+			return (NULL);
+		if (thinking(philo) == 1)
+			return (NULL);
+	}
+	return (NULL);
 }
 
 // static void	print_memory_add(t_data *data)

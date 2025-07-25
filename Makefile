@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/07/23 19:31:36 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/07/25 17:28:09 by pmendez-         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 GREEN = \033[0;32m
 RED = \033[0;31m
@@ -63,6 +63,9 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo " Deleting finished! 🗑"
 
+norminette:
+	@norminette src/*.c src/*.h
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re norminette show_progress

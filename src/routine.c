@@ -1,16 +1,16 @@
-/* *************************************************************************** */
-/*                                                                             */
-/*                                                        :::      ::::::::    */
-/*   routine.c                                          :+:      :+:    :+:    */
-/*                                                    +:+ +:+         +:+      */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+         */
-/*                                                +#+#+#+#+#+   +#+            */
-/*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#              */
-/*   Updated: 2025/07/07 20:13:40 by pmendez-         ###   ########.fr        */ 
-/*                                                                			   */
-/* *************************************************************************** */
+/******************************************************************************/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
+/*   Updated: 2025/07/25 19:40:30 by pmendez-         ###   ########.fr       */
+/*                                                                            */
+/******************************************************************************/
 
-# include "philo.h"
+#include "philo.h"
 
 int	sleeping(t_philo *philo)
 {
@@ -32,7 +32,7 @@ int	sleeping(t_philo *philo)
 	return (0);
 }
 
-int thinking(t_philo *philo)
+int	thinking(t_philo *philo)
 {
 	if (check_if_philo_dead(philo) == 1)
 		return (1);
@@ -40,7 +40,7 @@ int thinking(t_philo *philo)
 	return (0);
 }
 
-static int eaten(t_philo *philo)
+static int	eaten(t_philo *philo)
 {
 	pthread_mutex_lock(philo->eat);
 	if (philo->times_each_philosopher_must_eat != -1)
@@ -57,10 +57,10 @@ static int eaten(t_philo *philo)
 	return (0);
 }
 
-int eating(t_philo *philo)
+int	eating(t_philo *philo)
 {
 	if (check_if_philo_dead(philo) == 1)
-        return (1);
+		return (1);
 	takeForks(philo);
 	pthread_mutex_lock(philo->eat);
 	philo->last_meal = get_time();
@@ -69,10 +69,10 @@ int eating(t_philo *philo)
 	while (1)
 	{
 		if (check_if_philo_dead(philo) == 1)
-        {
+		{
 			releaseForks(philo);
 			return (1);
-        }
+		}
 		if (get_time() - philo->last_meal >= philo->time_to_eat)
 			break ;
 		usleep(10);
@@ -83,38 +83,12 @@ int eating(t_philo *philo)
 	return (0);
 }
 
-static void onlyOne(t_philo *philo)
+static void	only_one(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
 	print_message_philo(philo, TAKE_FORK);
 	ft_sleep(philo, philo->time_to_die);
 	pthread_mutex_unlock(philo->fork_left);
-}
-
-void	*routine(void *arg)
-{
-	t_philo		*philo;
-
-	philo = (t_philo *)arg;
-	pthread_mutex_lock(philo->init);
-	pthread_mutex_unlock(philo->init);
-	while (1)
-	{
-		if (check_if_philo_dead(philo) == 1)
-			return (NULL);
-		if (philo->nb_philos == 1)
-		{
-			onlyOne(philo);
-			break;
-		}
-		if (eating(philo) == 1)
-			return (NULL);
-		if (sleeping(philo) == 1)
-			return (NULL);
-		if (thinking(philo) == 1)
-			return (NULL);
-	}
-	return (NULL);
 }
 
 //caso prueba: ./philo 2 60 120 10 

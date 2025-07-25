@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 20:04:41 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/23 20:56:40 by pmendez-         ###   ########.fr       */
+/*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
+/*   Updated: 2025/07/25 19:58:47 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PHILO_H
 # define PHILO_H
@@ -26,19 +26,18 @@
 # include <stdarg.h>
 
 # define GREEN "\033[0;32m"
-# define RED "\033[0;31m"
+# define RED "\033[0;31m\033[1m"
 # define ORANGE "\001\033[38;5;208m\002"
 # define RESET "\033[0m"
 # define BLUE "\033[0;34m"
-# define MAGENTA "\033[0;35m"
+# define PURPLE "\033[0;35m"
 # define CYAN "\033[0;36m"
-# define BOLD "\033[1m"
 
 # define TAKE_FORK    "has taken a fork 🍴"
 # define IS_EATING           " is eating 🍝"
 # define IS_SLEEPING         " is sleeping 😴"
 # define IS_THINKING         "is thinking 🤔 "
-# define HAS_DIED            "is dead 💀"
+# define DIED            "is dead 💀"
 # define RELEASE_FORKS "has released forks"
 
 // # define TAKE_FORK    "has taken a fork"
@@ -51,12 +50,12 @@ typedef struct s_philo
 {
 	int				id_philo;
 	int				nb_philos;
-	unsigned long			start_time;
-	unsigned long			last_meal;
-	unsigned long			time_to_eat;
-	unsigned long			time_to_die;
-	unsigned long			time_to_sleep;
-	int			    *meals;
+	unsigned long	start_time;
+	unsigned long	last_meal;
+	unsigned long	time_to_eat;
+	unsigned long	time_to_die;
+	unsigned long	time_to_sleep;
+	int				*meals;
 	int				times_each_philosopher_must_eat;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*init;
@@ -91,9 +90,9 @@ int		check_args(int argc, char **argv);
 // #############################################################################
 // ############################# UTILS_THREADS.C ###############################
 // #############################################################################
+unsigned longget_time(void);
 void	print_message_philo(t_philo *philo, char *message);
 int		ft_sleep(t_philo *philo, unsigned long total_sleep);
-unsigned long	get_time(void);
 int		check_if_philo_dead(t_philo *philo);
 
 // #############################################################################
@@ -108,50 +107,49 @@ void	free_struct(t_data *data);
 // #############################################################################
 void	*routine(void *arg);
 int		eating(t_philo *philo);
-int 	thinking(t_philo *philo);
+int		thinking(t_philo *philo);
 int		sleeping(t_philo *philo);
 
-// ##############################################################################
+// #############################################################################
 // ############################# CREATE_THREADS ################################
 // #############################################################################
 void	create_threads(t_data *data);
 
-// ##############################################################################
-// ############################# UTILS ##########################################
-// ##############################################################################
-char	*ft_strjoin_variadica(char *index, ...);
+// #############################################################################
+// ############################# UTILS #########################################
+// #############################################################################
+char	*joinVariadica(char *index, ...);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_atoi(const char *str);
 void	*ft_memset(void *str, int c, size_t len);
 
-// ##############################################################################
+// #############################################################################
 // ############################# UTILS2 ########################################
-// ##############################################################################
+// #############################################################################
 int		ft_strlen(char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 
-// ##############################################################################
-// ############################# ITOA_JOIN_LONG #################################
-// ##############################################################################
+// #############################################################################
+// ############################# ITOA_JOIN_LONG ################################
+// #############################################################################
 char	*ft_itoa(int value);
 char	*joinLong(char *result, unsigned long value, char **index);
 
-
-// ##############################################################################
-// ############################# UTILS_PRINT ####################################
-// ##############################################################################
+// #############################################################################
+// ############################# UTILS_PRINT ###################################
+// #############################################################################
 void	print_error(char *error_message);
 void	ft_putendl_fd(char *s, int fd);
 void	print_and_free(t_data *data, char *message);
 char	*ft_strjoin(char *s1, char *s2);
 
-// ##############################################################################
-// ############################# FORK TREATMENT #################################
-// ##############################################################################
+// #############################################################################
+// ############################# FORK TREATMENT ################################
+// #############################################################################
 void	takeForks(t_philo *philo);
 void	releaseForks(t_philo *philo);
 
 // philo.c
-void wait_for_threads(t_data *data);
+void	wait_for_threads(t_data *data);
 
 #endif
