@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:04:20 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 18:38:59 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:09:57 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,10 @@ void	create_threads(t_data *data)
 	{
 		philo2 = &data->philo[i];
 		if (pthread_create(&philo2->thread, NULL, routine, philo2) != 0)
+		{
+			pthread_mutex_unlock(&data->init);
 			print_and_free(data, "Error creating philosopher thread");
+		}
 		i++;
 	}
 	pthread_mutex_unlock(&data->init);
