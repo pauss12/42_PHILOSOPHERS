@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsThreads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:11:46 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:56:25 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,6 @@ static char	*create_str(t_philo *philo, char *message, size_t time)
 		str = join_variadica("%lu %d %s\n", time, id_philo, message);
 	return (str);
 }
-
-// static char *create_str(t_philo *philo, char *message, size_t time)
-// {
-// 	char *str;
-
-// 	str = NULL;
-// 	if (ft_strcmp(message, IS_EATING) == 0)
-// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
-// 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
-// 	else if (ft_strcmp(message, IS_THINKING) == 0)
-// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
-// 	else if (ft_strcmp(message, TAKE_FORK) == 0)
-// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
-// 	else
-// 		str = join_variadica("%lu %d %s\n", time, philo->id_philo, message);
-// 	return (str);
-// }
 
 void	print_message_philo(t_philo *philo, char *message)
 {
@@ -89,19 +71,6 @@ int	ft_sleep(t_philo *philo, unsigned long total_sleep)
 	}
 	return (0);
 }
-
-// int ft_sleep(t_philo *philo, unsigned long total_sleep)
-// {
-// 	unsigned long	current;
-
-// 	(void)philo;
-// 	current = get_time();
-// 	while (get_time() - current < total_sleep)
-// 	{
-// 		usleep(10);
-// 	}
-// 	return (0);
-// }
 
 unsigned long	get_time(void)
 {
