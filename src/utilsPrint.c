@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsPrint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:37 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:11:28 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:00:45 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_error(char *error_message)
 
 	if (error_message == NULL)
 		return ;
-	str = ft_strjoin_variadica("%s Error%s \n %s ", RED, RESET, error_message);
+	str = join_variadica("%s Error%s \n %s ", RED, RESET, error_message);
 	if (str == NULL)
 	{
 		printf(RED "Error\n" RESET);
