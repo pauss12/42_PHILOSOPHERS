@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:09:49 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:55:08 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@
 # define IS_THINKING         "is thinking 🤔 "
 # define DIED            "is dead 💀"
 # define RELEASE_FORKS "has released forks"
-
-// # define TAKE_FORK    "has taken a fork"
-// # define IS_EATING           " is eating"
-// # define IS_SLEEPING         " is sleeping"
-// # define IS_THINKING         "is thinking"
-// # define HAS_DIED            "is dead"
 
 typedef struct s_philo
 {
@@ -90,7 +84,7 @@ int		check_args(int argc, char **argv);
 // #############################################################################
 // ############################# UTILS_THREADS.C ###############################
 // #############################################################################
-unsigned longget_time(void);
+unsigned long get_time(void);
 void	print_message_philo(t_philo *philo, char *message);
 int		ft_sleep(t_philo *philo, unsigned long total_sleep);
 int		check_if_philo_dead(t_philo *philo);

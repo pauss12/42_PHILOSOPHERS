@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 18:07:04 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:50:36 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	wait_for_threads(t_data *data)
 			print_and_free(data, "Error joining philosophers thread");
 		i++;
 	}
+}
+
+static void	only_one(t_philo *philo)
+{
+	pthread_mutex_lock(philo->fork_left);
+	print_message_philo(philo, TAKE_FORK);
+	ft_sleep(philo, philo->time_to_die);
+	pthread_mutex_unlock(philo->fork_left);
 }
 
 void	*routine(void *arg)

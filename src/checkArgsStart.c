@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   checkArgsStart.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:07:23 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:51:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	show_error_good_usage(void)
+static void	show_error_good_usage(char *argv1)
 {
-	if (ft_atoi(argv[1]) == 0)
+	if (ft_atoi(argv1) == 0)
 	{
 		print_error("The program needs at least one philosopher");
 		return ;
@@ -37,7 +37,7 @@ int	check_args(int argc, char **argv)
 	i = 1;
 	if (argc != 5 && argc != 6)
 	{
-		show_error_good_usage();
+		show_error_good_usage(argv[1]);
 		return (1);
 	}
 	while (i < argc)
