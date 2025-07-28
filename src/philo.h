@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 19:02:04 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:24:16 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,71 +79,72 @@ typedef struct s_data
 // #############################################################################
 // ############################# CHECK_ARGS_START ##############################
 // #############################################################################
-int		check_args(int argc, char **argv);
+int				check_args(int argc, char **argv);
 
 // #############################################################################
 // ############################# UTILS_THREADS.C ###############################
 // #############################################################################
-unsigned long get_time(void);
-void	print_message_philo(t_philo *philo, char *message);
-int		ft_sleep(t_philo *philo, unsigned long total_sleep);
-int		check_if_philo_dead(t_philo *philo);
+
+unsigned long	get_time(void);
+void			print_message_philo(t_philo *philo, char *message);
+int				ft_sleep(t_philo *philo, unsigned long total_sleep);
+int				check_if_philo_dead(t_philo *philo);
 
 // #############################################################################
 // ############################# TREAT_MEMORY ##################################
 // #############################################################################
-void	initialize_struct(t_data *data, char *argv[]);
-void	initialize_philos(t_data *data, char *argv[]);
-void	free_struct(t_data *data);
+void			initialize_struct(t_data *data, char *argv[]);
+void			initialize_philos(t_data *data, char *argv[]);
+void			free_struct(t_data *data);
 
 // #############################################################################
 // ############################# RUTINAS #######################################
 // #############################################################################
-void	*routine(void *arg);
-int		eating(t_philo *philo);
-int		thinking(t_philo *philo);
-int		sleeping(t_philo *philo);
+void			*routine(void *arg);
+int				eating(t_philo *philo);
+int				thinking(t_philo *philo);
+int				sleeping(t_philo *philo);
 
 // #############################################################################
 // ############################# CREATE_THREADS ################################
 // #############################################################################
-void	create_threads(t_data *data);
+void			create_threads(t_data *data);
 
 // #############################################################################
 // ############################# UTILS #########################################
 // #############################################################################
-char	*join_variadica(char *index, ...);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_atoi(const char *str);
-void	*ft_memset(void *str, int c, size_t len);
+char			*join_variadica(char *index, ...);
+void			*ft_calloc(size_t count, size_t size);
+int				ft_atoi(const char *str);
+void			*ft_memset(void *str, int c, size_t len);
 
 // #############################################################################
 // ############################# UTILS2 ########################################
 // #############################################################################
-int		ft_strlen(char *str);
-int		ft_strcmp(const char *s1, const char *s2);
+int				ft_strlen(char *str);
+int				ft_strcmp(const char *s1, const char *s2);
 
 // #############################################################################
 // ############################# ITOA_JOIN_LONG ################################
 // #############################################################################
-char	*ft_itoa(int value);
-char	*join_long(char *result, unsigned long value, char **index);
+char			*ft_itoa(int value);
+char			*join_long(char *result, unsigned long value, char **index);
 
 // #############################################################################
 // ############################# UTILS_PRINT ###################################
 // #############################################################################
-void	print_error(char *error_message);
-void	ft_putendl_fd(char *s, int fd);
-void	print_and_free(t_data *data, char *message);
-char	*ft_strjoin(char *s1, char *s2);
+void			print_error(char *error_message);
+void			ft_putendl_fd(char *s, int fd);
+void			print_and_free(t_data *data, char *message);
+char			*ft_strjoin(char *s1, char *s2);
 
 // #############################################################################
 // ############################# FORK TREATMENT ################################
 // #############################################################################
-void	take_forks(t_philo *philo);
-void	release_forks(t_philo *philo);
+void			take_forks(t_philo *philo);
+void			release_forks(t_philo *philo);
 
 // philo.c
-void	wait_for_threads(t_data *data);
+void			wait_for_threads(t_data *data);
 
 #endif

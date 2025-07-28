@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 21:14:40 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:20:12 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	show_error_good_usage(char *argv1)
 {
-	if (ft_atoi(argv1) == 0)
+	if (argv1 != NULL && ft_atoi(argv1) == 0)
 	{
 		print_error("The program needs at least one philosopher");
 		return ;
 	}
-	if (ft_atoi(argv1) >= 200)
+	if (argv1 != NULL && ft_atoi(argv1) >= 200)
 	{
 		print_error("There are too many philos");
 		return ;
