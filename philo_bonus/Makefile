@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/08/02 20:03:24 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/08/03 00:33:06 by pmendez-         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 GREEN = \033[0;32m
 RED = \033[0;31m
@@ -19,11 +19,19 @@ CLEAN_SHELL = \033[2K\r.
 
 NAME = philo_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3
 OBJ_DIR = obj
 
 FILES = src/philo_bonus.c \
-		src/treat_memory.c
+		src/treat_memory_bonus.c \
+		src/check_args_bonus.c \
+		src/routine_bonus.c \
+		src/utils_print_bonus.c \
+		src/utils2_bonus.c \
+		src/utils_bonus.c \
+		src/itoa_joinLong_bonus.c \
+		src/utils_philo_bonus.c 
+		
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(FILES:.c=.o)))
 
@@ -32,7 +40,7 @@ all: show_progress $(NAME)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(NAME): $(OBJS) src/philo.h
+$(NAME): $(OBJS) include/philo_bonus.h
 	@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 	@echo "$(CLEAN_SHELL) $(GREEN)\n 🚀 Compilation finished! $(NC)👍"
 
@@ -55,7 +63,7 @@ fclean: clean
 	@echo " Deleting finished! 🗑"
 
 norminette:
-	@norminette src/*.c src/*.h
+	@norminette src/*.c include/*.h
 
 re: fclean all
 

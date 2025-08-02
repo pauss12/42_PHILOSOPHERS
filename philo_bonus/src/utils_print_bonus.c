@@ -1,0 +1,129 @@
+/******************************************************************************/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_print_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 00:22:31 by pmendez-          #+#    #+#             */
+/*   Updated: 2025/08/03 00:26:05 by pmendez-         ###   ########.fr       */
+/*                                                                            */
+/******************************************************************************/
+
+#include "philo_bonus.h"
+
+/**
+ * Imprime un mensaje de error en la salida estándar de error.
+ * @param error_message: Mensaje de error a imprimir.
+ * Si el mensaje es nulo, no se imprime nada.
+ * Si la asignación de memoria falla, se imprime un mensaje de error genérico.
+ * El mensaje se imprime en rojo y se precede por "Error: ".
+ * * @example
+ * print_error("Invalid argument");
+ * Imprime: "Error: Invalid argument" en rojo.
+ */
+void	print_error(char *error_message)
+{
+	char	*str;
+
+	if (error_message == NULL)
+		return ;
+	str = join_variadica("%s Error%s \n %s ", RED, RESET, error_message);
+	if (str == NULL)
+	{
+		printf(RED "Error\n" RESET);
+		printf("Memory allocation failed");
+		return ;
+	}
+	ft_putendl_fd(str, 2);
+	free(str);
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
+
+	if (!s || fd < 0)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
+}
+
+void	print_and_free(t_data *data, char *message)
+{
+	sem_wait(data->sem_print);
+	print_error(message);
+	sem_post(data->sem_print);
+	// free_struct(data);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	char	*ptr1;
+	char	*ptr2;
+	size_t	i;
+	size_t	j;
+
+	ptr1 = (char *)s1;
+	ptr2 = (char *)s2;
+	i = 0;
+	j = 0;
+	str = malloc(((ft_strlen(ptr1) + ft_strlen(ptr2)) + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
+/**
+ * Convierte una cadena de caracteres a un número entero.
+ * Ignora los espacios en blanco iniciales y los signos '+' o '-'.
+ * Retorna el número entero correspondiente o 0 si la cadena no contiene 
+ * ningún dígito.
+ *
+ * @param str: La cadena de caracteres a convertir.
+ * @return: El número entero correspondiente a la cadena.
+ */
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	num;
+	int	negativo;
+
+	i = 0;
+	num = 0;
+	negativo = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+	{
+		i++;
+	}
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i++] == '-')
+			negativo++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = num * 10 + (str[i] - '0');
+		i++;
+	}
+	if (negativo % 2 == 1)
+		return (num * -1);
+	return (num);
+}
