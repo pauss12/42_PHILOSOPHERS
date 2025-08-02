@@ -1,5 +1,4 @@
 *.o
 *.vscode/
 es.subject.pdf
-philo
 obj/
