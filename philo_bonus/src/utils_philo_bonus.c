@@ -1,16 +1,16 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils_philo_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:32:47 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/03 00:32:50 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/04 19:06:50 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-# include "philo_bonus.h"
+# include "../include/philo_bonus.h"
 
 static char	*create_str(t_philo *philo, char *message, size_t time)
 {
@@ -32,25 +32,46 @@ static char	*create_str(t_philo *philo, char *message, size_t time)
 	return (str);
 }
 
-void	print_message_philo(t_philo *philo, char *message)
+// void	print_message_philo(t_philo *philo, char *message)
+// {
+// 	size_t	time;
+// 	char	*str;
+
+// 	if (philo == NULL || message == NULL)
+// 		return ;
+// 	str = NULL;
+// 	time = get_time() - philo->start_time;
+// 	if (check_if_philo_dead(philo) == 1)
+// 		return ;
+// 	sem_wait(data->print);
+// 	str = create_str(philo, message, time);
+// 	if (str)
+// 	{
+// 		printf("%s", str);
+// 		free(str);
+// 	}
+// 	sem_post(philo->print);
+// }
+
+void	print_message_philo(t_data *data, char *message)
 {
 	size_t	time;
 	char	*str;
 
-	if (philo == NULL || message == NULL)
+	if (data == NULL || message == NULL)
 		return ;
 	str = NULL;
-	time = get_time() - philo->start_time;
-	if (check_if_philo_dead(philo) == 1)
-		return ;
-	sem_wait(philo->print);
-	str = create_str(philo, message, time);
+	time = get_time() - data->start_time;
+	// if (check_if_philo_dead(philo) == 1)
+	// 	return ;
+	sem_wait(data->sem_print);
+	str = create_str(data, message, time);
 	if (str)
 	{
 		printf("%s", str);
 		free(str);
 	}
-	sem_post(philo->print);
+	sem_post(data->sem_print);
 }
 
 int	ft_sleep(t_philo *philo, unsigned long total_sleep)

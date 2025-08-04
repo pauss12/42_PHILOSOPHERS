@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:16 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/03 00:42:06 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/04 19:11:14 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <stdarg.h>
+# include <semaphore.h>
 
 # define GREEN "\033[0;32m"
 # define RED "\033[0;31m\033[1m"
@@ -44,6 +45,7 @@ typedef struct s_philo
 {
 	pid_t	pid;
 	int		id_philo;
+	int		times_each_philosopher_must_eat;
 	int		*is_dead;
 
 }   t_philo;
@@ -55,14 +57,16 @@ typedef struct s_data
 	int				num_philos;
 	int				meals;
 	unsigned long	last_meal;
+	unsigned long	start_time;
 	unsigned long	time_to_eat;
 	unsigned long	time_to_die;
 	unsigned long	time_to_sleep;
 	t_philo			*philos;
-	sem_t			sem_print;
-	sem_t			sem_init;
-	sem_t			sem_dead;
-	sem_t			sem_eat;
+	pthread_t		monitor;
+	sem_t			*sem_print;
+	sem_t			*sem_init;
+	sem_t			*sem_dead;
+	sem_t			*sem_eat;
 	sem_t			*sem_forks;
 
 }   t_data;
@@ -117,7 +121,7 @@ char			*join_variadica(char *index, ...);
 // #############################################################################
 // ############################# ROUTINE #######################################
 // #############################################################################
-void			*routine(t_data *data);
+void			*philo_routine(t_data *data);
 
 // #############################################################################
 // ############################# PHILO_BONUS ###################################

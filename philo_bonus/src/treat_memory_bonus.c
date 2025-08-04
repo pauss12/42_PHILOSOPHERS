@@ -1,16 +1,16 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   treat_memory_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:42 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/03 00:22:43 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:49:14 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-#include "philo_bonus.h"
+# include "../include/philo_bonus.h"
 
 void semaphore_initialization(t_data *data)
 {
@@ -38,19 +38,18 @@ void	initialize_struct(t_data *data, char *argv[])
 	i = 0;
 	data->is_dead = 0;
 	data->num_philos = ft_atoi(argv[1]);
-	data->philo = ft_calloc(data->num_philos, sizeof(t_philo));
-	if (!data->philo)
+	data->philos = ft_calloc(data->num_philos, sizeof(t_philo));
+	if (!data->philos)
 		print_and_free(data, RED "ERROR \n" RESET "Malloc failed\n");
-	data->nb_philos = data->num_philos;
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->meals = 0;
 	data->philos->is_dead = &data->is_dead;
 	if (argv[5])
-			data->philo[i].times_each_philosopher_must_eat = ft_atoi(argv[5]);
+			data->philos[i].times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		else
-			data->philo[i].times_each_philosopher_must_eat = -1;
+			data->philos[i].times_each_philosopher_must_eat = -1;
 }
 
 void free_semaphores(t_data *data)

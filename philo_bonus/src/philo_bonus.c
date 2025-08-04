@@ -1,16 +1,16 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/03 00:13:22 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:52:26 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-# include "philo_bonus.h"
+# include "../include/philo_bonus.h"
 
 void create_processes(t_data *data)
 {
@@ -24,8 +24,9 @@ void create_processes(t_data *data)
 		if (data->philos[i].pid == 0)
 		{
 			data->philos[i].id_philo = i + 1;
-			philo_routine(&data->philos[i]);
+			philo_routine(data);
 			//TODO: funcion para liberar procesos hijo; es decir, el philo
+			// free_data_philo();
 			exit(0);
 		}
 		else if (data->philos[i].pid < 0)
