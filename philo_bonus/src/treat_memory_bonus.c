@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:42 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/04 18:49:14 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:46:41 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void semaphore_initialization(t_data *data)
 {
-	data->sem_print = sem_open("/sem_print", O_CREAT | O_EXCL, 0644, 1);
+	data->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	if (data->sem_print == SEM_FAILED)
-		print_and_free(data, RED "ERROR \n" RESET "Semaphore creation failed\n");
-	data->sem_init = sem_open("/sem_init", O_CREAT | O_EXCL, 0644, 1);
+		print_and_free(data, "Semaphore /sem_print creation failed\n");
+	data->sem_init = sem_open("/sem_init", O_CREAT, 0644, 1);
 	if (data->sem_init == SEM_FAILED)
-		print_and_free(data, RED "ERROR \n" RESET "Semaphore creation failed\n");
-	data->sem_dead = sem_open("/sem_dead", O_CREAT | O_EXCL, 0644, 1);
+		print_and_free(data, "Semaphore /sem_init creation failed\n");
+	data->sem_dead = sem_open("/sem_dead", O_CREAT, 0644, 1);
 	if (data->sem_dead == SEM_FAILED)
-		print_and_free(data, RED "ERROR \n" RESET "Semaphore creation failed\n");
-	data->sem_eat = sem_open("/sem_eat", O_CREAT | O_EXCL, 0644, 1);
+		print_and_free(data, "Semaphore /sem_dead creation failed\n");
+	data->sem_eat = sem_open("/sem_eat", O_CREAT, 0644, 1);
 	if (data->sem_eat == SEM_FAILED)
-		print_and_free(data, RED "ERROR \n" RESET "Semaphore creation failed\n");
-	data->sem_forks = sem_open("/sem_forks", O_CREAT | O_EXCL, 0644, data->num_philos);
+		print_and_free(data, "Semaphore /sem_eat creation failed\n");
+	data->sem_forks = sem_open("/sem_forks", O_CREAT, 0644, data->num_philos);
 	if (data->sem_forks == SEM_FAILED)
-		print_and_free(data, RED "ERROR \n" RESET "Semaphore creation failed\n");
+		print_and_free(data, "Semaphore /sem_forks creation failed\n");
 }
 
 void	initialize_struct(t_data *data, char *argv[])
@@ -55,16 +55,55 @@ void	initialize_struct(t_data *data, char *argv[])
 void free_semaphores(t_data *data)
 {
 	if (sem_close(data->sem_print) == -1)
-		print_and_free(data, RED "ERROR \n" RESET "Semaphore close failed\n");
-	sem_close(data->sem_init);
-	sem_close(data->sem_dead);
-	sem_close(data->sem_eat);
-	sem_close(data->sem_forks);
+		print_and_free(data, RED "ERROR\n" RESET "/sem_print failed closing\n");
+	if (sem_close(data->sem_init) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_init failed closing\n");
+	if (sem_close(data->sem_dead) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_dead failed closing\n");
+	if (sem_close(data->sem_eat) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_eat failed closing\n");
+	if (sem_close(data->sem_forks) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_forks failed closing\n");
+	if (sem_unlink("/sem_print") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_print unlink failed\n");
+	if (sem_unlink("/sem_init") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_init unlink failed\n");
+	if (sem_unlink("/sem_dead") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_dead unlink failed\n");
+	if (sem_unlink("/sem_eat") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_eat unlink failed\n");
+	if (sem_unlink("/sem_forks") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
+}
+
+static void kill_all_pids(t_data *data)
+{
+	int	i;
+	int status;
+
+	i = 0;
+	status = 0;
+	while (i < data->num_philos)
+	{
+		waitpid(-1, &status, 0);
+		if (status != 0)
+		{
+			i = 0;
+			while (i < data->num_philos)
+			{
+				kill(data->philos[i].pid, SIGKILL);
+				i++;
+			}
+			break ;
+		}
+		i++;
+	}
 }
 
 void	free_struct(t_data *data)
 {
-	
-	free(data->philos);
-	data->philos = NULL;
+	kill_all_pids(data);
+	if (data->philos)
+		free(data->philos);
+	free_semaphores(data);
 }

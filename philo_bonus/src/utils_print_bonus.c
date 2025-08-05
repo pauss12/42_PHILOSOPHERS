@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:31 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/04 18:25:47 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 20:15:47 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_error(char *error_message)
 		printf("Memory allocation failed");
 		return ;
 	}
-	ft_putendl_fd(str, 2);
+	printf("%s\n", str);
 	free(str);
 }
 
@@ -56,74 +56,48 @@ void	ft_putendl_fd(char *s, int fd)
 
 void	print_and_free(t_data *data, char *message)
 {
-	sem_wait(data->sem_print);
 	print_error(message);
-	sem_post(data->sem_print);
-	// free_struct(data);
+	free_struct(data);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+static char	*create_str(t_data *data, char *message, size_t time)
 {
 	char	*str;
-	char	*ptr1;
-	char	*ptr2;
-	size_t	i;
-	size_t	j;
+	int		id_philo;
 
-	ptr1 = (char *)s1;
-	ptr2 = (char *)s2;
-	i = 0;
-	j = 0;
-	str = malloc(((ft_strlen(ptr1) + ft_strlen(ptr2)) + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
+	str = NULL;
+	id_philo = data->philos->id_philo;
+	if (ft_strcmp(message, IS_EATING) == 0)
+		str = join_variadica(GREEN"%lu %d %s\n"RESET, time, id_philo, message);
+	else if (ft_strcmp(message, IS_SLEEPING) == 0)
+		str = join_variadica(CYAN"%lu %d  %s\n"RESET, time, id_philo, message);
+	else if (ft_strcmp(message, IS_THINKING) == 0)
+		str = join_variadica(PURPLE"%lu %d %s\n"RESET, time, id_philo, message);
+	else if (ft_strcmp(message, TAKE_FORK) == 0)
+		str = join_variadica(ORANGE"%lu %d %s\n"RESET, time, id_philo, message);
+	else
+		str = join_variadica("%lu %d %s\n", time, id_philo, message);
 	return (str);
 }
 
-/**
- * Convierte una cadena de caracteres a un número entero.
- * Ignora los espacios en blanco iniciales y los signos '+' o '-'.
- * Retorna el número entero correspondiente o 0 si la cadena no contiene 
- * ningún dígito.
- *
- * @param str: La cadena de caracteres a convertir.
- * @return: El número entero correspondiente a la cadena.
- */
-int	ft_atoi(const char *str)
+void	print_message_philo(t_data *data, char *message)
 {
-	int	i;
-	int	num;
-	int	negativo;
+	size_t	time;
+	char	*str;
 
-	i = 0;
-	num = 0;
-	negativo = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+	if (data == NULL || message == NULL)
+		return ;
+	str = NULL;
+	time = get_time() - data->start_time;
+	// if (check_if_alive(data) == 1)
+	// 	return ;
+	sem_wait(data->sem_print);
+	str = create_str(data, message, time);
+	if (str)
 	{
-		i++;
+		printf("%s", str);
+		free(str);
 	}
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i++] == '-')
-			negativo++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + (str[i] - '0');
-		i++;
-	}
-	if (negativo % 2 == 1)
-		return (num * -1);
-	return (num);
+	sem_post(data->sem_print);
 }
+

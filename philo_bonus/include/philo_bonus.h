@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:16 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/04 19:11:14 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:48:32 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,28 @@
 # include <errno.h>
 # include <limits.h>
 # include <sys/time.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 # include <stdint.h>
 # include <fcntl.h>
 # include <string.h>
 # include <stdarg.h>
 # include <semaphore.h>
+# include <signal.h>
+
+// # include <stdio.h>
+// # include <limits.h>
+// # include <stdlib.h>
+// # include <unistd.h>
+// # include <pthread.h>
+// # include <sys/types.h>
+// # include <sys/wait.h>
+// # include <sys/time.h>
+// # include <semaphore.h>
+// # include <signal.h>
+// # include <fcntl.h>
+// # include <sys/stat.h>
 
 # define GREEN "\033[0;32m"
 # define RED "\033[0;31m\033[1m"
@@ -102,8 +119,8 @@ int				ft_atoi(const char *str);
 // #############################################################################
 // ############################# UTILS PHILO BONUS #############################
 // #############################################################################
-void			print_message_philo(t_philo *philo, char *message);
-int				ft_sleep(t_philo *philo, unsigned long total_sleep);
+void			print_message_philo(t_data *data, char *message);
+int				ft_sleep(t_data *data, unsigned long total_sleep);
 unsigned long	get_time(void);
 
 // #############################################################################

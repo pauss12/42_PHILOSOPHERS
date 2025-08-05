@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:28:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/04 18:25:41 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 18:09:22 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,71 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	char	*ptr1;
+	char	*ptr2;
+	size_t	i;
+	size_t	j;
+
+	ptr1 = (char *)s1;
+	ptr2 = (char *)s2;
+	i = 0;
+	j = 0;
+	str = malloc(((ft_strlen(ptr1) + ft_strlen(ptr2)) + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
+/**
+ * Convierte una cadena de caracteres a un número entero.
+ * Ignora los espacios en blanco iniciales y los signos '+' o '-'.
+ * Retorna el número entero correspondiente o 0 si la cadena no contiene 
+ * ningún dígito.
+ *
+ * @param str: La cadena de caracteres a convertir.
+ * @return: El número entero correspondiente a la cadena.
+ */
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	num;
+	int	negativo;
+
+	i = 0;
+	num = 0;
+	negativo = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+	{
+		i++;
+	}
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i++] == '-')
+			negativo++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = num * 10 + (str[i] - '0');
+		i++;
+	}
+	if (negativo % 2 == 1)
+		return (num * -1);
+	return (num);
+}
+

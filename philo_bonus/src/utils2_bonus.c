@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:27:16 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/04 18:25:49 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 20:22:27 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*join_string(char *result, char *str)
 	new_result = NULL;
 	if (result == NULL)
 	{
-		result = ft_calloc(ft_strlen((char *)str), sizeof(char));
+		result = ft_calloc(ft_strlen((char *)str) + 1, sizeof(char));
 		if (result == NULL)
 			return (NULL);
 		while (str[i] != '\0')
@@ -49,6 +49,7 @@ static char	*join_string(char *result, char *str)
 			result[i] = str[i];
 			i++;
 		}
+		result[i] = '\0';
 	}
 	else
 	{
@@ -109,3 +110,4 @@ char	*join_variadica(char *index, ...)
 	va_end(args);
 	return (result);
 }
+

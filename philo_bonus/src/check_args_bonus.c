@@ -6,24 +6,14 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:18 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/04 18:25:26 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 20:17:48 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../include/philo_bonus.h"
 
-static void	show_error_good_usage(char *argv1)
+static void	show_error_good_usage()
 {
-	if (argv1 != NULL && ft_atoi(argv1) == 0)
-	{
-		print_error("The program needs at least one philosopher");
-		return ;
-	}
-	if (argv1 != NULL && ft_atoi(argv1) >= 200)
-	{
-		print_error("There are too many philos");
-		return ;
-	}
 	printf(RED "ERROR \n" RESET);
 	printf("Usage: ./philo \n");
 	printf(ORANGE "[number_of_philosophers]" RESET " ==> Number of forks \n");
@@ -34,20 +24,21 @@ static void	show_error_good_usage(char *argv1)
 	RESET "\n\n");
 }
 
-int	check_args(int argc, char **argv)
+static int	check(int argc, int i, int j, char *argv[])
 {
-	int	i;
-	int	j;
+	char	*str;
 
-	i = 1;
-	if ((argc != 5 && argc != 6) || ft_atoi(argv[1]) > 200)
-	{
-		show_error_good_usage(argv[1]);
-		return (1);
-	}
+	str = NULL;
 	while (i < argc)
 	{
 		j = 0;
+		if (argv[i][0] == '\0')
+		{
+			str = ft_strjoin("Valor no válido en posicion ", ft_itoa(i));
+			print_error(str);
+			free(str);
+			return (1);
+		}
 		while (argv[i][j] != '\0')
 		{
 			if (argv[i][j] < '0' || argv[i][j] > '9')
@@ -59,5 +50,32 @@ int	check_args(int argc, char **argv)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	check_args(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	if ((argc != 5 && argc != 6))
+	{
+		show_error_good_usage();
+		return (1);
+	}
+	if (argv[i] != NULL && ft_atoi(argv[i]) == 0)
+	{
+		print_error("The program needs at least one philosopher");
+		return (1);
+	}
+	if (argv[i] != NULL && ft_atoi(argv[i]) >= 200)
+	{
+		print_error("There are too many philos");
+		return (1);
+	}
+	if (check(argc, i, j, argv) == 1)
+		return (1);
 	return (0);
 }
