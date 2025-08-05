@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:15:02 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:10:51 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 20:27:54 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*join_string(char *result, char *str)
 	new_result = NULL;
 	if (result == NULL)
 	{
-		result = ft_calloc(ft_strlen((char *)str), sizeof(char));
+		result = ft_calloc(ft_strlen((char *)str) + 1, sizeof(char));
 		if (result == NULL)
 			return (NULL);
 		while (str[i] != '\0')
