@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:52 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 20:04:06 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 20:52:59 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	*check_status(void *arg)
 	// {
 	// 	if (check_philos_eaten(data) == 1)
 	// 		break ;
-		// if (check_time_dead(data) == 1)
-		// 	break ;
+	// 	if (check_time_dead(data) == 1)
+	// 		break ;
 	// 	usleep(9);
 	// }
 	return (NULL);

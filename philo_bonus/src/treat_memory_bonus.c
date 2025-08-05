@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:42 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 19:46:41 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 20:52:42 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,12 @@ static void kill_all_pids(t_data *data)
 	while (i < data->num_philos)
 	{
 		waitpid(-1, &status, 0);
-		if (status != 0)
-		{
-			i = 0;
-			while (i < data->num_philos)
-			{
-				kill(data->philos[i].pid, SIGKILL);
-				i++;
-			}
-			break ;
-		}
+		i++;
+	}
+	i = 0;
+	while (i < data->num_philos)
+	{
+		kill(data->philos[i].pid, SIGKILL);
 		i++;
 	}
 }

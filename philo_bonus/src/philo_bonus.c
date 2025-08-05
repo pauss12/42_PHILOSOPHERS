@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 19:57:03 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/05 20:31:12 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void create_processes(t_data *data)
 			print_and_free(data, RED "ERROR \n" RESET "Fork failed\n");
 			exit(1);
 		}
-
 		i++;
 	}
 	sem_post(data->sem_init);
