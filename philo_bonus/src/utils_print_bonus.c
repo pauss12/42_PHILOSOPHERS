@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:31 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 20:15:47 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:51:36 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	print_message_philo(t_data *data, char *message)
 		return ;
 	str = NULL;
 	time = get_time() - data->start_time;
-	// if (check_if_alive(data) == 1)
-	// 	return ;
+	if (check_time_dead(data) == 1)
+		return ;
 	sem_wait(data->sem_print);
 	str = create_str(data, message, time);
 	if (str)
