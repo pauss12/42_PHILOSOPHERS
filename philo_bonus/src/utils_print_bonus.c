@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:31 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/07 17:51:36 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:23:53 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static char	*create_str(t_data *data, char *message, size_t time)
 		str = join_variadica(PURPLE"%lu %d %s\n"RESET, time, id_philo, message);
 	else if (ft_strcmp(message, TAKE_FORK) == 0)
 		str = join_variadica(ORANGE"%lu %d %s\n"RESET, time, id_philo, message);
+	else if (ft_strcmp(message, DIED) == 0)
+		str = join_variadica(RED "%lu %d %s\n"RESET, time, id_philo, message);
 	else
 		str = join_variadica("%lu %d %s\n", time, id_philo, message);
 	return (str);
@@ -89,7 +91,7 @@ void	print_message_philo(t_data *data, char *message)
 		return ;
 	str = NULL;
 	time = get_time() - data->start_time;
-	if (check_time_dead(data) == 1)
+	if (check_if_alive(data) == 1)
 		return ;
 	sem_wait(data->sem_print);
 	str = create_str(data, message, time);

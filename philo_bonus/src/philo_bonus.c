@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 20:31:12 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:43:16 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static void free_data_philo(t_data *data)
 {
 	if (data->philos)
 		free(data->philos);
-	if (sem_close(data->sem_forks) == -1)
-		(write(2, "Error close sem_forks\n", 17));
 	if (sem_close(data->sem_print) == -1)
-		(write(2, "Error close sem_print\n", 18));
+		print_error(RED "ERROR\n" RESET "/sem_print failed closing\n");
 	if (sem_close(data->sem_init) == -1)
-		(write(2, "Error close sem_init\n", 18));
+		print_error(RED "ERROR\n" RESET "/sem_init failed closing\n");
 	if (sem_close(data->sem_dead) == -1)
-		(write(2, "Error close sem_dead\n", 17));
+		print_error(RED "ERROR\n" RESET "/sem_dead failed closing\n");
 	if (sem_close(data->sem_eat) == -1)
-		(write(2, "Error close sem_eat\n", 17));
+		print_error(RED "ERROR\n" RESET "/sem_eat failed closing\n");
+	if (sem_close(data->sem_forks) == -1)
+		print_error(RED "ERROR\n" RESET "/sem_forks failed closing\n");
 }
 
 void create_processes(t_data *data)
@@ -45,10 +45,7 @@ void create_processes(t_data *data)
 			exit(0);
 		}
 		else if (data->philos[i].pid < 0)
-		{
 			print_and_free(data, RED "ERROR \n" RESET "Fork failed\n");
-			exit(1);
-		}
 		i++;
 	}
 	sem_post(data->sem_init);

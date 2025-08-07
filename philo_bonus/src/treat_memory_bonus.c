@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:42 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 20:52:42 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:05:24 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	initialize_struct(t_data *data, char *argv[])
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->meals = 0;
 	data->philos->is_dead = &data->is_dead;
-	if (argv[5])
+	if (argv[5] !=  NULL)
 			data->philos[i].times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		else
 			data->philos[i].times_each_philosopher_must_eat = -1;

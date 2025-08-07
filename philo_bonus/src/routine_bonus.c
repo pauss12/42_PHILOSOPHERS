@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:52 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/07 18:04:51 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:40:01 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ static int	checking_time(t_data *data)
 	return (0);
 }
 
-int	check_time_dead(t_data *data)
-{
-	sem_wait(data->sem_eat);
-	if (*data->philos->is_dead == 1)
-	{
-		sem_post(data->sem_eat);
-		return (0);
-	}
-	sem_post(data->sem_eat);
-	return (1);
-}
-
 static void	*check_status(void *arg)
 {
 	t_data	*data;
@@ -61,12 +49,20 @@ static void	*check_status(void *arg)
 		sem_post(data->sem_init);
 		if (checking_time(data) == 1)
 			break ;
-		if (check_time_dead(data) == 1)
+		if (check_if_alive(data) == 1)
 			break ;
 		usleep(9);
 	}
-	exit(1);
+	return (NULL);
 }
+
+// static void only_one(t_data *data)
+// {
+// 	sem_wait(data->sem_forks);
+// 	print_message_philo(data, TAKE_FORK);
+// 	ft_sleep(data, data->time_to_die);
+// 	sem_post(data->sem_forks);
+// }
 
 void	*philo_routine(t_data *data)
 {
@@ -76,21 +72,46 @@ void	*philo_routine(t_data *data)
     if (pthread_create(&data->monitor, NULL, check_status, data) != 0)
 		print_and_free(data, "Error creating monitor thread");
     sem_post(data->sem_init);
+
     // while (1)
 	// {
 	// 	if (data->num_philos == 1)
 	// 	{
 	// 		only_one(data);
-	// 		break ;
+	// 		if (pthread_join(data->monitor, NULL) != 0)
+	// 			print_and_free(data, "Error joining monitor thread");
+	// 		return (NULL);
 	// 	}
-	// 	if (eating(philo) == 1)
-	// 		return (NULL);
-	// 	if (sleeping(philo) == 1)
-	// 		return (NULL);
-	// 	if (thinking(philo) == 1)
-	// 		return (NULL);
 	// }
     if (pthread_join(data->monitor, NULL) != 0)
 		print_and_free(data, "Error joining monitor thread");
     return (NULL);
 }
+
+// void	*philo_routine(t_data *data)
+// {
+//     sem_wait(data->sem_init);
+//     data->start_time = get_time();
+//     data->last_meal = get_time();
+//     if (pthread_create(&data->monitor, NULL, check_status, data) != 0)
+// 		print_and_free(data, "Error creating monitor thread");
+//     sem_post(data->sem_init);
+
+//     while (1)
+// 	{
+// 		if (data->num_philos == 1)
+// 		{
+// 			only_one(data);
+// 			break ;
+// 		}
+// 		if (eating(philo) == 1)
+// 			return (NULL);
+// 		if (sleeping(philo) == 1)
+// 			return (NULL);
+// 		if (thinking(philo) == 1)
+// 			return (NULL);
+// 	}
+//     if (pthread_join(data->monitor, NULL) != 0)
+// 		print_and_free(data, "Error joining monitor thread");
+//     return (NULL);
+// }
