@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   treat_memory_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:42 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/07 19:05:24 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 19:12:46 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 # include "../include/philo_bonus.h"
 
@@ -33,9 +33,6 @@ void semaphore_initialization(t_data *data)
 
 void	initialize_struct(t_data *data, char *argv[])
 {
-	int	i;
-
-	i = 0;
 	data->is_dead = 0;
 	data->num_philos = ft_atoi(argv[1]);
 	data->philos = ft_calloc(data->num_philos, sizeof(t_philo));
@@ -44,12 +41,11 @@ void	initialize_struct(t_data *data, char *argv[])
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	data->meals = 0;
 	data->philos->is_dead = &data->is_dead;
 	if (argv[5] !=  NULL)
-			data->philos[i].times_each_philosopher_must_eat = ft_atoi(argv[5]);
+			data->philos->times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		else
-			data->philos[i].times_each_philosopher_must_eat = -1;
+			data->philos->times_each_philosopher_must_eat = -1;
 }
 
 void free_semaphores(t_data *data)
@@ -76,6 +72,26 @@ void free_semaphores(t_data *data)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
 }
 
+// static void kill_all_pids(t_data *data)
+// {
+// 	int	i;
+// 	int status;
+
+// 	i = 0;
+// 	status = 0;
+// 	while (i < data->num_philos)
+// 	{
+// 		waitpid(-1, &status, 0);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < data->num_philos)
+// 	{
+// 		kill(data->philos[i].pid, SIGKILL);
+// 		i++;
+// 	}
+// }
+
 static void kill_all_pids(t_data *data)
 {
 	int	i;
@@ -83,15 +99,17 @@ static void kill_all_pids(t_data *data)
 
 	i = 0;
 	status = 0;
+	waitpid(-1, &status, 0);
+	sem_wait(data->sem_print);
 	while (i < data->num_philos)
 	{
-		waitpid(-1, &status, 0);
+		kill(data->philos[i].pid, SIGKILL);
 		i++;
 	}
 	i = 0;
 	while (i < data->num_philos)
 	{
-		kill(data->philos[i].pid, SIGKILL);
+		waitpid(-1, NULL, 0);
 		i++;
 	}
 }
@@ -99,7 +117,7 @@ static void kill_all_pids(t_data *data)
 void	free_struct(t_data *data)
 {
 	kill_all_pids(data);
+	free_semaphores(data);
 	if (data->philos)
 		free(data->philos);
-	free_semaphores(data);
 }

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils_print_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:31 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/07 19:23:53 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:17:19 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 # include "../include/philo_bonus.h"
 
@@ -60,13 +60,11 @@ void	print_and_free(t_data *data, char *message)
 	free_struct(data);
 }
 
-static char	*create_str(t_data *data, char *message, size_t time)
+static char	*create_str(char *message, size_t time, int id_philo)
 {
 	char	*str;
-	int		id_philo;
 
 	str = NULL;
-	id_philo = data->philos->id_philo;
 	if (ft_strcmp(message, IS_EATING) == 0)
 		str = join_variadica(GREEN"%lu %d %s\n"RESET, time, id_philo, message);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
@@ -94,7 +92,7 @@ void	print_message_philo(t_data *data, char *message)
 	if (check_if_alive(data) == 1)
 		return ;
 	sem_wait(data->sem_print);
-	str = create_str(data, message, time);
+	str = create_str(message, time, data->philos->id_philo);
 	if (str)
 	{
 		printf("%s", str);

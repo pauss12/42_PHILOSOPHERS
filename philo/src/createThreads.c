@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   createThreads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:04:20 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 21:09:57 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:34:44 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "philo.h"
 
@@ -23,45 +23,6 @@ static int	check_philos_eaten(t_data *data)
 	pthread_mutex_unlock(&data->eat);
 	return (0);
 }
-
-// static int	check_time_dead(t_data *data)
-// {
-// 	int				i;
-// 	unsigned long	last_meal;
-// 	unsigned long	time_to_die;
-// 	unsigned long	start;
-// 	int				id;
-
-// 	i = 0;
-// 	pthread_mutex_lock(&data->dead);
-// 	if (data->is_dead == 1)
-// 	{
-// 		pthread_mutex_unlock(&data->dead);
-// 		return (1);
-// 	}
-// 	pthread_mutex_unlock(&data->dead);
-// 	while (i < data->num_philos)
-// 	{
-// 		pthread_mutex_lock(data->philo[i].eat);
-// 		last_meal = data->philo[i].last_meal;
-// 		time_to_die = data->philo[i].time_to_die;
-// 		start = data->philo[i].start_time;
-// 		id = data->philo[i].id_philo;
-// 		pthread_mutex_unlock(data->philo[i].eat);
-// 		if (get_time() - last_meal > time_to_die)
-// 		{
-// 			pthread_mutex_lock(&data->dead);
-// 			data->is_dead = 1;
-// 			pthread_mutex_unlock(&data->dead);
-// 			pthread_mutex_lock(&data->print);
-// 			printf(RED"%lu %d %s\n"RESET, get_time() - start, id, DIED);
-// 			pthread_mutex_unlock(&data->print);
-// 			return (1);
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
 
 static int	checking_time(t_data *data, t_philo *philo)
 {

@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/08/03 00:33:06 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/08/13 16:57:08 by pmendez-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,7 +30,8 @@ FILES = src/philo_bonus.c \
 		src/utils2_bonus.c \
 		src/utils_bonus.c \
 		src/itoa_joinLong_bonus.c \
-		src/utils_philo_bonus.c 
+		src/utils_philo_bonus.c \
+		src/utils_routine.c
 		
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(FILES:.c=.o)))

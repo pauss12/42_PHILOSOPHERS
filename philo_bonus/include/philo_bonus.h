@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:16 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/07 18:36:30 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:40:56 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
@@ -29,19 +29,6 @@
 # include <stdarg.h>
 # include <semaphore.h>
 # include <signal.h>
-
-// # include <stdio.h>
-// # include <limits.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-// # include <pthread.h>
-// # include <sys/types.h>
-// # include <sys/wait.h>
-// # include <sys/time.h>
-// # include <semaphore.h>
-// # include <signal.h>
-// # include <fcntl.h>
-// # include <sys/stat.h>
 
 # define GREEN "\033[0;32m"
 # define RED "\033[0;31m\033[1m"
@@ -72,7 +59,6 @@ typedef struct s_data
 {
 	int				is_dead;
 	int				num_philos;
-	int				meals;
 	unsigned long	last_meal;
 	unsigned long	start_time;
 	unsigned long	time_to_eat;
@@ -137,13 +123,20 @@ int				ft_strlen(char *str);
 char			*join_variadica(char *index, ...);
 
 // #############################################################################
-// ############################# ROUTINE #######################################
-// #############################################################################
-void			*philo_routine(t_data *data);
-
-// #############################################################################
 // ############################# PHILO_BONUS ###################################
 // #############################################################################
 void			create_processes(t_data *data);
+
+// #############################################################################
+// ############################# UTILS ROUTINE #################################
+// #############################################################################
+int				check_meals(t_data *data);
+void			take_and_release_forks(t_data *data, int released);
+void			*check_status(void *arg);
+
+// #############################################################################
+// ############################# ROUTINE BONUS #################################
+// #############################################################################
+void			*philo_routine(t_data *data);
 
 #endif
