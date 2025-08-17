@@ -6,17 +6,18 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/13 18:28:17 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:00:56 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 # include "../include/philo_bonus.h"
 
-void create_processes(t_data *data)
+static void create_processes(t_data *data)
 {
 	int	i;
 
 	i = 0;
+	sem_wait(data->sem_init);
 	while (i < data->num_philos)
 	{
 		data->philos[i].pid = fork();
@@ -27,12 +28,10 @@ void create_processes(t_data *data)
 			exit(0);
 		}
 		else if (data->philos[i].pid < 0)
-		{
 			print_and_free(data, RED "ERROR \n" RESET "Fork failed\n");
-			exit(1);
-		}
 		i++;
 	}
+	sem_post(data->sem_init);
 }
 
 int	main(int argc, char **argv)

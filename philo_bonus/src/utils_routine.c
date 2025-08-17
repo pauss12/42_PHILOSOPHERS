@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 14:26:53 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/13 18:43:32 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:13:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -23,9 +23,7 @@ static int	checking_time(t_data *data)
 	if (get_time() - last_meal > time_to_die)
 	{
 		print_message_philo(data, DIED);
-		sem_wait(data->sem_dead);
 		*data->philos->is_dead = 1;
-		sem_post(data->sem_dead);
 		sem_post(data->sem_eat);
 		return (1);
 	}
@@ -41,7 +39,7 @@ void	*check_status(void *arg)
 	while (1)
 	{
 		sem_wait(data->sem_init);
-		if (data->philos->times_each_philosopher_must_eat == 0)
+		if (data->times_each_philosopher_must_eat == 0)
 		{
 			sem_post(data->sem_init);
 			return (NULL);
@@ -51,7 +49,7 @@ void	*check_status(void *arg)
 			break ;
 		if (check_if_alive(data) == 1)
 			break ;
-		usleep(9);
+		usleep(10);
 	}
 	exit(0);
 }
@@ -75,30 +73,15 @@ void take_and_release_forks(t_data *data, int released)
 	}
 }
 
-// int check_meals(t_data *data)
-// {
-// 	if (data->times_each_philosopher_must_eat > 0)
-// 	{
-// 		data->times_each_philosopher_must_eat--;
-// 		if (data->times_each_philosopher_must_eat == 0)
-// 		{
-// 			ft_sleep(data, data->time_to_sleep / 2);
-// 			sem_post(data->sem_init);
-// 			return (1);
-// 		}
-// 	}
-// 	return (0);
-// }
-
 int check_meals(t_data *data)
 {
-	if (data->philos->times_each_philosopher_must_eat > 0)
+	if (data->times_each_philosopher_must_eat > 0)
 	{
-		data->philos->times_each_philosopher_must_eat--;
-		if (data->philos->times_each_philosopher_must_eat == 0)
+		data->times_each_philosopher_must_eat--;
+		if (data->times_each_philosopher_must_eat == 0)
 		{
 			ft_sleep(data, data->time_to_sleep / 2);
-			sem_post(data->sem_init);
+			// sem_post(data->sem_init);
 			return (1);
 		}
 	}

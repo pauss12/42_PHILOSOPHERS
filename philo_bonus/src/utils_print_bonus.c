@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:31 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/13 17:17:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:42:14 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -56,7 +56,10 @@ void	ft_putendl_fd(char *s, int fd)
 
 void	print_and_free(t_data *data, char *message)
 {
-	print_error(message);
+	if (data->sem_print == SEM_FAILED)
+		write(1, message, ft_strlen(message));
+	else
+		print_error(message);
 	free_struct(data);
 }
 

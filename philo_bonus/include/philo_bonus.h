@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:16 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/13 18:40:56 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:44:02 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -49,7 +49,6 @@ typedef struct s_philo
 {
 	pid_t	pid;
 	int		id_philo;
-	int		times_each_philosopher_must_eat;
 	int		*is_dead;
 
 }   t_philo;
@@ -59,6 +58,7 @@ typedef struct s_data
 {
 	int				is_dead;
 	int				num_philos;
+	int				times_each_philosopher_must_eat;
 	unsigned long	last_meal;
 	unsigned long	start_time;
 	unsigned long	time_to_eat;
@@ -121,11 +121,6 @@ int				ft_strlen(char *str);
 // ########################### UTILS2 BONUS ####################################
 // #############################################################################
 char			*join_variadica(char *index, ...);
-
-// #############################################################################
-// ############################# PHILO_BONUS ###################################
-// #############################################################################
-void			create_processes(t_data *data);
 
 // #############################################################################
 // ############################# UTILS ROUTINE #################################

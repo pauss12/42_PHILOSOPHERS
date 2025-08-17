@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:42 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/13 19:12:46 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:05:08 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -43,9 +43,9 @@ void	initialize_struct(t_data *data, char *argv[])
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->philos->is_dead = &data->is_dead;
 	if (argv[5] !=  NULL)
-			data->philos->times_each_philosopher_must_eat = ft_atoi(argv[5]);
+			data->times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		else
-			data->philos->times_each_philosopher_must_eat = -1;
+			data->times_each_philosopher_must_eat = -1;
 }
 
 void free_semaphores(t_data *data)
@@ -92,24 +92,47 @@ void free_semaphores(t_data *data)
 // 	}
 // }
 
-static void kill_all_pids(t_data *data)
+// static void kill_all_pids(t_data *data)
+// {
+// 	int	i;
+// 	int status;
+
+// 	i = 0;
+// 	status = 0;
+// 	waitpid(-1, &status, 0);
+// 	while (i < data->num_philos)
+// 	{
+// 		kill(data->philos[i].pid, SIGKILL);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < data->num_philos)
+// 	{
+// 		waitpid(-1, NULL, 0);
+// 		i++;
+// 	}
+// }
+
+void	kill_all_pids(t_data *data)
 {
 	int	i;
-	int status;
+	int	status;
 
-	i = 0;
 	status = 0;
-	waitpid(-1, &status, 0);
-	sem_wait(data->sem_print);
-	while (i < data->num_philos)
-	{
-		kill(data->philos[i].pid, SIGKILL);
-		i++;
-	}
 	i = 0;
 	while (i < data->num_philos)
 	{
-		waitpid(-1, NULL, 0);
+		waitpid(-1, &status, 0);
+		if (status != 0)
+		{
+			i = 0;
+			while (i < data->num_philos)
+			{
+				kill(data->philos[i].pid, SIGKILL);
+				i++;
+			}
+			break ;
+		}
 		i++;
 	}
 }
