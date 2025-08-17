@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:30:15 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/13 12:31:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:28:49 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-# include "../include/philo_bonus.h"
+#include "../include/philo_bonus.h"
 
 static char	*other(int len, int value)
 {
@@ -61,8 +61,8 @@ static int	get_ulong_digits(unsigned long n)
 {
 	int	count;
 
-	// if (n < 0)
-	// 	return (-1);
+	if (n < 0)
+		return (-1);
 	if (n == 0)
 		return (1);
 	count = 0;

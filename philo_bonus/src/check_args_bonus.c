@@ -1,18 +1,18 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   check_args_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:18 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 20:17:48 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:29:19 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
-# include "../include/philo_bonus.h"
+#include "../include/philo_bonus.h"
 
-static void	show_error_good_usage()
+static void	show_error_good_usage(void)
 {
 	printf(RED "ERROR \n" RESET);
 	printf("Usage: ./philo \n");

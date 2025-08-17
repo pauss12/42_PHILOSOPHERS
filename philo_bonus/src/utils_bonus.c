@@ -1,16 +1,16 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:28:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/05 18:09:22 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:23:48 by pmendez-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
-# include "../include/philo_bonus.h"
+#include "../include/philo_bonus.h"
 
 /**
  * Asigna memoria dinámicamente y la inicializa a cero.
@@ -24,7 +24,6 @@
  * @return: Puntero al bloque de memoria asignado, o nulo si la 
  * asignación falló.
  */
-
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
@@ -67,7 +66,6 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -134,4 +132,3 @@ int	ft_atoi(const char *str)
 		return (num * -1);
 	return (num);
 }
-

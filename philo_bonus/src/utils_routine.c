@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 14:26:53 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:13:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:21:54 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -54,7 +54,7 @@ void	*check_status(void *arg)
 	exit(0);
 }
 
-void take_and_release_forks(t_data *data, int released)
+void	take_and_release_forks(t_data *data, int released)
 {
 	if (released == 0)
 	{
@@ -73,7 +73,7 @@ void take_and_release_forks(t_data *data, int released)
 	}
 }
 
-int check_meals(t_data *data)
+int	check_meals(t_data *data)
 {
 	if (data->times_each_philosopher_must_eat > 0)
 	{
@@ -81,7 +81,7 @@ int check_meals(t_data *data)
 		if (data->times_each_philosopher_must_eat == 0)
 		{
 			ft_sleep(data, data->time_to_sleep / 2);
-			// sem_post(data->sem_init);
+			sem_post(data->sem_init);
 			return (1);
 		}
 	}

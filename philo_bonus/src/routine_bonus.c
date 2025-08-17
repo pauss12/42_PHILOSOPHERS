@@ -6,26 +6,21 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:52 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:11:59 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:27:50 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-# include "../include/philo_bonus.h"
+#include "../include/philo_bonus.h"
 
-static int eating(t_data *data)
+static int	eating(t_data *data)
 {
 	if (check_if_alive(data) == 1)
 		return (1);
 	take_and_release_forks(data, 0);
-
-
 	sem_wait(data->sem_eat);
 	data->last_meal = get_time();
 	sem_post(data->sem_eat);
-	
 	print_message_philo(data, IS_EATING);
-
-	
 	while (1)
 	{
 		if (check_if_alive(data) == 1)
@@ -45,7 +40,7 @@ static int eating(t_data *data)
 	return (0);
 }
 
-static int thinking(t_data *data)
+static int	thinking(t_data *data)
 {
 	if (check_if_alive(data) == 1)
 		return (1);
@@ -53,9 +48,9 @@ static int thinking(t_data *data)
 	return (0);
 }
 
-static int sleeping(t_data *data)
+static int	sleeping(t_data *data)
 {
-	long start;
+	long	start;
 
 	start = get_time();
 	if (check_if_alive(data) == 1)
@@ -74,16 +69,13 @@ static int sleeping(t_data *data)
 
 void	*philo_routine(t_data *data)
 {
-    sem_wait(data->sem_init);
-    data->last_meal = get_time();
-    data->start_time = get_time();
-    if (pthread_create(&data->monitor, NULL, check_status, data) != 0)
-	{
+	sem_wait(data->sem_init);
+	data->last_meal = get_time();
+	data->start_time = get_time();
+	if (pthread_create(&data->monitor, NULL, check_status, data) != 0)
 		print_and_free(data, "Error creating monitor thread");
-		exit(1);
-	}
 	sem_post(data->sem_init);
-    while (1)
+	while (1)
 	{
 		if (data->num_philos == 1)
 		{
@@ -98,7 +90,7 @@ void	*philo_routine(t_data *data)
 		if (thinking(data) == 1)
 			return (NULL);
 	}
-    if (pthread_join(data->monitor, NULL) != 0)
+	if (pthread_join(data->monitor, NULL) != 0)
 		print_and_free(data, "Error joining monitor thread");
-    return (NULL);
+	return (NULL);
 }

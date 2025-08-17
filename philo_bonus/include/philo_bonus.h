@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:16 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/17 15:44:02 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:30:01 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -51,8 +51,7 @@ typedef struct s_philo
 	int		id_philo;
 	int		*is_dead;
 
-}   t_philo;
-
+}	t_philo;
 
 typedef struct s_data
 {
@@ -72,7 +71,7 @@ typedef struct s_data
 	sem_t			*sem_eat;
 	sem_t			*sem_forks;
 
-}   t_data;
+}	t_data;
 
 // #############################################################################
 // ############################# CHECK_ARGS_START ##############################

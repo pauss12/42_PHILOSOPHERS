@@ -6,13 +6,13 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:42 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:05:08 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:25:17 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-# include "../include/philo_bonus.h"
+#include "../include/philo_bonus.h"
 
-void semaphore_initialization(t_data *data)
+void	semaphore_initialization(t_data *data)
 {
 	data->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	if (data->sem_print == SEM_FAILED)
@@ -42,13 +42,13 @@ void	initialize_struct(t_data *data, char *argv[])
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->philos->is_dead = &data->is_dead;
-	if (argv[5] !=  NULL)
-			data->times_each_philosopher_must_eat = ft_atoi(argv[5]);
-		else
-			data->times_each_philosopher_must_eat = -1;
+	if (argv[5] != NULL)
+		data->times_each_philosopher_must_eat = ft_atoi(argv[5]);
+	else
+		data->times_each_philosopher_must_eat = -1;
 }
 
-void free_semaphores(t_data *data)
+void	free_semaphores(t_data *data)
 {
 	if (sem_close(data->sem_print) == -1)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_print failed closing\n");
@@ -72,67 +72,22 @@ void free_semaphores(t_data *data)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
 }
 
-// static void kill_all_pids(t_data *data)
-// {
-// 	int	i;
-// 	int status;
-
-// 	i = 0;
-// 	status = 0;
-// 	while (i < data->num_philos)
-// 	{
-// 		waitpid(-1, &status, 0);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i < data->num_philos)
-// 	{
-// 		kill(data->philos[i].pid, SIGKILL);
-// 		i++;
-// 	}
-// }
-
-// static void kill_all_pids(t_data *data)
-// {
-// 	int	i;
-// 	int status;
-
-// 	i = 0;
-// 	status = 0;
-// 	waitpid(-1, &status, 0);
-// 	while (i < data->num_philos)
-// 	{
-// 		kill(data->philos[i].pid, SIGKILL);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i < data->num_philos)
-// 	{
-// 		waitpid(-1, NULL, 0);
-// 		i++;
-// 	}
-// }
-
-void	kill_all_pids(t_data *data)
+static void	kill_all_pids(t_data *data)
 {
 	int	i;
 	int	status;
 
-	status = 0;
 	i = 0;
+	status = 0;
 	while (i < data->num_philos)
 	{
 		waitpid(-1, &status, 0);
-		if (status != 0)
-		{
-			i = 0;
-			while (i < data->num_philos)
-			{
-				kill(data->philos[i].pid, SIGKILL);
-				i++;
-			}
-			break ;
-		}
+		i++;
+	}
+	i = 0;
+	while (i < data->num_philos)
+	{
+		kill(data->philos[i].pid, SIGKILL);
 		i++;
 	}
 }

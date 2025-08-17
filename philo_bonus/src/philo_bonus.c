@@ -6,13 +6,13 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:13:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:00:56 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:28:21 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-# include "../include/philo_bonus.h"
+#include "../include/philo_bonus.h"
 
-static void create_processes(t_data *data)
+static void	create_processes(t_data *data)
 {
 	int	i;
 

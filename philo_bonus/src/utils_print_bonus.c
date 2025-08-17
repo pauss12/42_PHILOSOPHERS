@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 00:22:31 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/17 15:42:14 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:22:47 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-# include "../include/philo_bonus.h"
+#include "../include/philo_bonus.h"
 
 /**
  * Imprime un mensaje de error en la salida estándar de error.
@@ -103,4 +103,3 @@ void	print_message_philo(t_data *data, char *message)
 	}
 	sem_post(data->sem_print);
 }
-
