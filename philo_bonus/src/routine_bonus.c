@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:18:32 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/25 19:41:42 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void	*philo_routine(t_data *data)
 		}
 		usleep(20);
 		if (eating(data) == 1)
-			return (NULL);
+			break ;
 		if (sleeping(data) == 1)
-			return (NULL);
+			break ;
 		if (thinking(data) == 1)
-			return (NULL);
+			break ;
 	}
 	if (pthread_join(data->monitor, NULL) != 0)
 		print_and_free(data, "Error joining monitor thread");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:21:06 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/25 19:46:55 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*check_status(void *arg)
 			break ;
 		usleep(10);
 	}
-	exit(0);
+	exit(1);
 }
 
 void	take_and_release_forks(t_data *data, int released)
