@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_memory_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:18:51 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/25 21:24:16 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,26 @@ void	free_semaphores(t_data *data)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
 }
 
+// static void	kill_all_pids(t_data *data)
+// {
+// 	int	i;
+// 	int	status;
+
+// 	i = 0;
+// 	status = 0;
+// 	while (i < data->num_philos)
+// 	{
+// 		waitpid(-1, &status, 0);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < data->num_philos)
+// 	{
+// 		kill(data->philos[i].pid, SIGKILL);
+// 		i++;
+// 	}
+// }
+
 static void	kill_all_pids(t_data *data)
 {
 	int	i;
@@ -79,18 +99,31 @@ static void	kill_all_pids(t_data *data)
 
 	i = 0;
 	status = 0;
-	while (i < data->num_philos)
+	while (waitpid(-1, &status, 0) > 0)
 	{
-		waitpid(-1, &status, 0);
-		i++;
-	}
-	i = 0;
-	while (i < data->num_philos)
-	{
-		kill(data->philos[i].pid, SIGKILL);
-		i++;
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
+		{
+			kill_all_pids(data);
+			break ;
+		}
 	}
 }
+
+// static void wait_processes(t_data *data)
+// {
+//     int status;
+//     pid_t pid;
+
+//     while ((pid = waitpid(-1, &status, 0)) > 0)
+//     {
+//         if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
+//         {
+//             kill_all_pids(data);
+//             break;
+//         }
+//     }
+// }
+
 
 void	free_struct(t_data *data)
 {

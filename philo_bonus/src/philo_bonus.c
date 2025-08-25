@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:16:53 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:16:54 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/25 21:17:44 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	create_processes(t_data *data)
 	int	i;
 
 	i = 0;
-	sem_wait(data->sem_init);
 	while (i < data->num_philos)
 	{
 		data->philos[i].pid = fork();
@@ -31,7 +30,6 @@ static void	create_processes(t_data *data)
 			print_and_free(data, RED "ERROR \n" RESET "Fork failed\n");
 		i++;
 	}
-	sem_post(data->sem_init);
 }
 
 int	main(int argc, char **argv)

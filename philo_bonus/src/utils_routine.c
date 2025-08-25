@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/25 19:46:55 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/25 21:24:59 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static int	checking_time(t_data *data)
 	if (get_time() - last_meal > time_to_die)
 	{
 		print_message_philo(data, DIED);
+		sem_wait(data->sem_dead);
 		*data->philos->is_dead = 1;
+		sem_post(data->sem_dead);
 		sem_post(data->sem_eat);
 		return (1);
 	}
@@ -51,6 +53,7 @@ void	*check_status(void *arg)
 			break ;
 		usleep(10);
 	}
+	printf("Pasa por aqui ------------------\n");
 	exit(1);
 }
 
