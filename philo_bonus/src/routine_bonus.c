@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/25 19:41:42 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:58:05 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	*philo_routine(t_data *data)
 	data->start_time = get_time();
 	if (pthread_create(&data->monitor, NULL, check_status, data) != 0)
 		print_and_free(data, "Error creating monitor thread");
+	if (pthread_detach(data->monitor) != 0)
+		print_and_free(data, "Error detaching monitor thread\n");
 	sem_post(data->sem_init);
 	while (1)
 	{
@@ -90,7 +92,5 @@ void	*philo_routine(t_data *data)
 		if (thinking(data) == 1)
 			break ;
 	}
-	if (pthread_join(data->monitor, NULL) != 0)
-		print_and_free(data, "Error joining monitor thread");
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/25 21:24:16 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:01:40 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,6 @@ void	initialize_struct(t_data *data, char *argv[])
 
 void	free_semaphores(t_data *data)
 {
-	if (sem_close(data->sem_print) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_print failed closing\n");
-	if (sem_close(data->sem_init) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_init failed closing\n");
-	if (sem_close(data->sem_dead) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_dead failed closing\n");
-	if (sem_close(data->sem_eat) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_eat failed closing\n");
-	if (sem_close(data->sem_forks) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_forks failed closing\n");
 	if (sem_unlink("/sem_print") == -1)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_print unlink failed\n");
 	if (sem_unlink("/sem_init") == -1)
@@ -70,59 +60,33 @@ void	free_semaphores(t_data *data)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_eat unlink failed\n");
 	if (sem_unlink("/sem_forks") == -1)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
+	if (sem_close(data->sem_print) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_print failed closing\n");
+	if (sem_close(data->sem_init) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_init failed closing\n");
+	if (sem_close(data->sem_dead) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_dead failed closing\n");
+	if (sem_close(data->sem_eat) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_eat failed closing\n");
+	if (sem_close(data->sem_forks) == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_forks failed closing\n");
 }
 
-// static void	kill_all_pids(t_data *data)
-// {
-// 	int	i;
-// 	int	status;
-
-// 	i = 0;
-// 	status = 0;
-// 	while (i < data->num_philos)
-// 	{
-// 		waitpid(-1, &status, 0);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i < data->num_philos)
-// 	{
-// 		kill(data->philos[i].pid, SIGKILL);
-// 		i++;
-// 	}
-// }
-
-static void	kill_all_pids(t_data *data)
+static void kill_all_pids(t_data *data)
 {
-	int	i;
-	int	status;
+    int   i;
+    int   status;
+    pid_t pid;
 
-	i = 0;
-	status = 0;
-	while (waitpid(-1, &status, 0) > 0)
-	{
-		if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
-		{
-			kill_all_pids(data);
-			break ;
-		}
-	}
+    while ((pid = waitpid(-1, &status, 0)) > 0)
+    {
+        if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
+        {
+            for (i = 0; i < data->num_philos; i++)
+                kill(data->philos[i].pid, SIGKILL);
+        }
+    }
 }
-
-// static void wait_processes(t_data *data)
-// {
-//     int status;
-//     pid_t pid;
-
-//     while ((pid = waitpid(-1, &status, 0)) > 0)
-//     {
-//         if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
-//         {
-//             kill_all_pids(data);
-//             break;
-//         }
-//     }
-// }
 
 
 void	free_struct(t_data *data)
@@ -132,3 +96,4 @@ void	free_struct(t_data *data)
 	if (data->philos)
 		free(data->philos);
 }
+
