@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/27 20:01:40 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/02 21:56:26 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	semaphore_initialization(t_data *data)
 {
+	sem_unlink("/sem_print");
+	sem_unlink("/sem_forks");
+	sem_unlink("/sem_dead");
+	sem_unlink("/sem_eat");
 	data->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	if (data->sem_print == SEM_FAILED)
 		print_and_free(data, "Semaphore /sem_print creation failed\n");
@@ -50,16 +54,6 @@ void	initialize_struct(t_data *data, char *argv[])
 
 void	free_semaphores(t_data *data)
 {
-	if (sem_unlink("/sem_print") == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_print unlink failed\n");
-	if (sem_unlink("/sem_init") == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_init unlink failed\n");
-	if (sem_unlink("/sem_dead") == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_dead unlink failed\n");
-	if (sem_unlink("/sem_eat") == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_eat unlink failed\n");
-	if (sem_unlink("/sem_forks") == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
 	if (sem_close(data->sem_print) == -1)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_print failed closing\n");
 	if (sem_close(data->sem_init) == -1)
@@ -70,22 +64,42 @@ void	free_semaphores(t_data *data)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_eat failed closing\n");
 	if (sem_close(data->sem_forks) == -1)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_forks failed closing\n");
+	
+	if (sem_unlink("/sem_print") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_print unlink failed\n");
+	if (sem_unlink("/sem_init") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_init unlink failed\n");
+	if (sem_unlink("/sem_dead") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_dead unlink failed\n");
+	if (sem_unlink("/sem_eat") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_eat unlink failed\n");
+	if (sem_unlink("/sem_forks") == -1)
+		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
 }
 
 static void kill_all_pids(t_data *data)
 {
     int   i;
+	int j;
     int   status;
-    pid_t pid;
 
-    while ((pid = waitpid(-1, &status, 0)) > 0)
-    {
-        if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
-        {
-            for (i = 0; i < data->num_philos; i++)
-                kill(data->philos[i].pid, SIGKILL);
-        }
-    }
+	i = 0;
+	status = 0;
+	while (i < data->num_philos)
+	{
+		j = 0;
+		waitpid(-1, &status, 0);
+		if (status != 0)
+		{
+			while (j < data->num_philos)
+			{
+				kill(data->philos[j].pid, SIGKILL);
+				j++;
+			}
+			break ;
+		}
+		i++;
+	}
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/25 21:24:59 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/02 21:59:11 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	*check_status(void *arg)
 			break ;
 		usleep(10);
 	}
-	printf("Pasa por aqui ------------------\n");
 	exit(1);
 }
 
@@ -80,6 +79,7 @@ int	check_meals(t_data *data)
 {
 	if (data->times_each_philosopher_must_eat > 0)
 	{
+		printf("%d - Entra en check_meals\n", data->philos->id_philo);
 		data->times_each_philosopher_must_eat--;
 		if (data->times_each_philosopher_must_eat == 0)
 		{
