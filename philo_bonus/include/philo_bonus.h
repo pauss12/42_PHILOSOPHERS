@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:21:32 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:38:19 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct s_data
 	unsigned long	time_to_eat;
 	unsigned long	time_to_die;
 	unsigned long	time_to_sleep;
-	t_philo			*philos;
+	// t_philo			*philos;
+	t_philo			philos[201];
 	pthread_t		monitor;
 	sem_t			*sem_print;
 	sem_t			*sem_init;

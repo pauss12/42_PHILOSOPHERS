@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/02 21:56:26 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:54:34 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	semaphore_initialization(t_data *data)
 	sem_unlink("/sem_forks");
 	sem_unlink("/sem_dead");
 	sem_unlink("/sem_eat");
+	sem_unlink("/sem_init");
 	data->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	if (data->sem_print == SEM_FAILED)
 		print_and_free(data, "Semaphore /sem_print creation failed\n");
@@ -39,9 +40,9 @@ void	initialize_struct(t_data *data, char *argv[])
 {
 	data->is_dead = 0;
 	data->num_philos = ft_atoi(argv[1]);
-	data->philos = ft_calloc(data->num_philos, sizeof(t_philo));
-	if (!data->philos)
-		print_and_free(data, RED "ERROR \n" RESET "Malloc failed\n");
+	// data->philos = ft_calloc(data->num_philos, sizeof(t_philo));
+	// if (!data->philos)
+	// 	print_and_free(data, RED "ERROR \n" RESET "Malloc failed\n");
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
@@ -102,12 +103,32 @@ static void kill_all_pids(t_data *data)
 	}
 }
 
+// static void kill_all_pids(t_data *data)
+// {
+//     int   status;
+//     pid_t pid;
+//     int   i;
+
+//     while ((pid = waitpid(-1, &status, 0)) > 0)
+//     {
+//         if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+//         {
+//             i = 0;
+//             while (i < data->num_philos)
+//             {
+//                 kill(data->philos[i].pid, SIGKILL);
+//                 i++;
+//             }
+//             break ;
+//         }
+//     }
+// }
 
 void	free_struct(t_data *data)
 {
 	kill_all_pids(data);
 	free_semaphores(data);
-	if (data->philos)
-		free(data->philos);
+	// if (data->philos)
+	// 	free(data->philos);
 }
 

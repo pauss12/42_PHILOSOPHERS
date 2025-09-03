@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:15:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:15:55 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:38:36 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_args(int argc, char **argv)
 		print_error("The program needs at least one philosopher");
 		return (1);
 	}
-	if (argv[i] != NULL && ft_atoi(argv[i]) >= 200)
+	if (argv[i] != NULL && ft_atoi(argv[i]) > 200)
 	{
 		print_error("There are too many philos");
 		return (1);
