@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 19:02:10 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:15:09 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,4 @@ int	eating(t_philo *philo)
 		return (1);
 	return (0);
 }
-//caso prueba: ./philo 2 60 120 10 
+

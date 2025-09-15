@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/29 00:28:25 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:01:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	only_one(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
 	print_message_philo(philo, TAKE_FORK);
-	ft_sleep(philo, philo->time_to_die);
+	ft_sleep(philo->time_to_die);
 	pthread_mutex_unlock(philo->fork_left);
 }
 
@@ -42,10 +42,11 @@ void	*routine(void *arg)
 	pthread_mutex_unlock(philo->init);
 	while (1)
 	{
-		if (philo->id_philo % 2 != 0)
-			usleep(10);
+		
 		if (check_if_philo_dead(philo) == 1)
 			return (NULL);
+		if (philo->id_philo % 2 != 0)
+			usleep(1);
 		if (philo->nb_philos == 1)
 		{
 			only_one(philo);
@@ -73,23 +74,3 @@ int	main(int argc, char **argv)
 	create_threads(&data);
 	return (0);
 }
-
-// static void	print_memory_add(t_data *data)
-// {
-// 	printf("pointer of mutex eat: %p\n", (void *)&data->eat);
-// 	printf("pointer of EAT in philo %p\n\n", (void *)data->philo->eat);
-// 	printf("pointer of mutex dead: %p\n", (void *)&data->dead);
-// 	printf("pointer of DEAD in philo %p\n\n", (void *)data->philo->dead);
-// 	printf("pointer of mutex init: %p\n", (void *)&data->init);
-// 	printf("pointer of INIT in philo %p\n\n", (void *)data->philo->init);
-// 	printf("pointer of mutex print: %p\n", (void *)&data->print);
-// 	printf("pointer of PRINT in data %p\n\n", (void *)data->philo->print);
-// }
-
-// static void	print_addresses(t_philo *philo)
-// {
-// 	printf("pointer of EAT in philo %p\n\n", philo->eat);
-// 	printf("pointer of DEAD in philo %p\n\n", philo->dead);
-// 	printf("pointer of INIT in philo %p\n\n", philo->init);
-// 	printf("pointer of PRINT in data %p\n\n", philo->print);
-// }

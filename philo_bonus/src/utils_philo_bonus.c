@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_philo_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:20:39 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:20:40 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:32:01 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ unsigned long	get_time(void)
 
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
-	return ((time.tv_sec * 1000UL) + (time.tv_usec / 1000));
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	check_if_alive(t_data *data)

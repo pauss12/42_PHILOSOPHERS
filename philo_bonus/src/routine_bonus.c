@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/02 21:59:03 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:44:58 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ void	*philo_routine(t_data *data)
 	}
 	if (pthread_join(data->monitor, NULL) != 0)
 		print_and_free(data, "Error joining the monitor");
-	exit(1);
+	return (NULL);
+	// exit(1);
 }

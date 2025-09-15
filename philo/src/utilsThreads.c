@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 18:56:25 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:35:53 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,25 @@ void	print_message_philo(t_philo *philo, char *message)
 	pthread_mutex_unlock(philo->print);
 }
 
-int	ft_sleep(t_philo *philo, unsigned long total_sleep)
+int	ft_sleep(unsigned long total_sleep)
 {
 	unsigned long	current_time;
 
 	current_time = get_time();
 	while (get_time() - current_time < total_sleep)
-	{
-		pthread_mutex_lock(philo->dead);
-		if (*(philo->is_dead) == 1)
-		{
-			pthread_mutex_unlock(philo->dead);
-			return (1);
-		}
-		pthread_mutex_unlock(philo->dead);
-		usleep(10);
-	}
+		usleep(50);
 	return (0);
 }
 
 unsigned long	get_time(void)
 {
 	struct timeval	time;
+	long			time_returned;
 
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
-	return ((time.tv_sec * 1000UL) + (time.tv_usec / 1000));
+	time_returned = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (time_returned);
 }
 
 int	check_if_philo_dead(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/03 19:38:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:29:00 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define CYAN "\033[0;36m"
 
 # define TAKE_FORK    "has taken a fork 🍴"
-# define IS_EATING           " is eating 🍝"
-# define IS_SLEEPING         " is sleeping 😴"
+# define IS_EATING           "is eating 🍝"
+# define IS_SLEEPING         "is sleeping 😴"
 # define IS_THINKING         "is thinking 🤔 "
 # define DIED            "is dead 💀"
 # define RELEASE_FORKS "has released forks"
@@ -63,7 +63,6 @@ typedef struct s_data
 	unsigned long	time_to_eat;
 	unsigned long	time_to_die;
 	unsigned long	time_to_sleep;
-	// t_philo			*philos;
 	t_philo			philos[201];
 	pthread_t		monitor;
 	sem_t			*sem_print;

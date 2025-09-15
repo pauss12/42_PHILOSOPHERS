@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   createThreads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:14:23 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:14:27 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:33:40 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ static void	*check_status(void *arg)
 	while (1)
 	{
 		if (check_philos_eaten(data) == 1)
-			break ;
+			return (NULL);
 		if (check_time_dead(data) == 1)
-			break ;
+			return (NULL);
 		usleep(9);
 	}
 	return (NULL);
