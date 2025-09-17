@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 20:59:20 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/17 23:32:49 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 static int	eating(t_data *data)
 {
+	long	last_meal;
+
 	take_and_release_forks(data, 0);
 	sem_wait(data->sem_eat);
 	data->last_meal = get_time();
+	last_meal = data->last_meal;
 	sem_post(data->sem_eat);
 	print_message_philo(data, IS_EATING);
 	while (1)
 	{
-		if (get_time() - data->last_meal >= data->time_to_eat)
+		if (get_time() - last_meal >= data->time_to_eat)
 			break ;
 		usleep(15);
 	}
@@ -61,6 +64,11 @@ void	*philo_routine(t_data *data)
 	data->start_time = get_time();
 	if (pthread_create(&data->monitor, NULL, check_status, data) != 0)
 		print_and_free(data, "Error creating monitor thread");
+	// if (pthread_create(&data->monitor, NULL, check_status, data) != 0)
+	// {
+	// 	write(1, "Error creating monitor thread", 30);
+	// 	exit(1);
+	// }
 	sem_post(data->sem_init);
 	while (1)
 	{
@@ -79,5 +87,10 @@ void	*philo_routine(t_data *data)
 	}
 	if (pthread_join(data->monitor, NULL) != 0)
 		print_and_free(data, "Error joining the monitor");
+	// if (pthread_join(data->monitor, NULL) != 0)
+	// {
+	// 	write(1, "Error joining the monitor", 26);
+	// 	exit(1);
+	// }
 	return (NULL);
 }

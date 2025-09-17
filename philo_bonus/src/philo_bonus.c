@@ -6,26 +6,39 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:16:53 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 20:26:24 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/17 23:46:22 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo_bonus.h"
 
-void free_pid_child(t_data *data)
+void	free_pid_child(t_data *data)
 {
-	if (data->philos)
-		free(data->philos);
 	if (sem_close(data->sem_print) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_print failed closing\n");
+	{
+		write(1, "Error /sem_print failed closing", 30);
+		exit(1);
+	}
 	if (sem_close(data->sem_init) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_init failed closing\n");
+	{
+		write(1, "Error /sem_init failed closing", 30);
+		exit(1);
+	}
 	if (sem_close(data->sem_dead) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_dead failed closing\n");
+	{
+		write(1, "Error /sem_dead failed closing", 30);
+		exit(1);
+	}
 	if (sem_close(data->sem_eat) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_eat failed closing\n");
+	{
+		write(1, "Error /sem_eat failed closing", 30);
+		exit(1);
+	}
 	if (sem_close(data->sem_forks) == -1)
-		print_and_free(data, RED "ERROR\n" RESET "/sem_forks failed closing\n");
+	{
+		write(1, "Error /sem_forks failed closing", 30);
+		exit(1);
+	}
 }
 
 static void	create_processes(t_data *data)
