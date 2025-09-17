@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/15 20:35:53 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/17 20:36:36 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,34 @@ void	print_message_philo(t_philo *philo, char *message)
 	pthread_mutex_unlock(philo->print);
 }
 
-int	ft_sleep(unsigned long total_sleep)
+// int	ft_sleep(unsigned long total_sleep)
+// {
+// 	unsigned long	current_time;
+
+// 	current_time = get_time();
+// 	while (get_time() - current_time < total_sleep)
+// 	{
+// 		usleep(50);
+// 	}
+// 	return (0);
+// }
+
+int	ft_sleep(t_philo *philo, unsigned long total_sleep)
 {
 	unsigned long	current_time;
 
 	current_time = get_time();
 	while (get_time() - current_time < total_sleep)
-		usleep(50);
+	{
+		pthread_mutex_lock(philo->dead);
+		if (*(philo->is_dead) == 1)
+		{
+			pthread_mutex_unlock(philo->dead);
+			return (1);
+		}
+		pthread_mutex_unlock(philo->dead);
+		usleep(10);
+	}
 	return (0);
 }
 

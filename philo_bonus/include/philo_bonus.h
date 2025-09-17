@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/15 21:29:00 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:13:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ typedef struct s_philo
 {
 	pid_t	pid;
 	int		id_philo;
-	int		*is_dead;
 
 }	t_philo;
 
 typedef struct s_data
 {
-	int				is_dead;
 	int				num_philos;
 	int				times_each_philosopher_must_eat;
 	unsigned long	last_meal;
@@ -63,7 +61,7 @@ typedef struct s_data
 	unsigned long	time_to_eat;
 	unsigned long	time_to_die;
 	unsigned long	time_to_sleep;
-	t_philo			philos[201];
+	t_philo			*philos;
 	pthread_t		monitor;
 	sem_t			*sem_print;
 	sem_t			*sem_init;
@@ -72,6 +70,11 @@ typedef struct s_data
 	sem_t			*sem_forks;
 
 }	t_data;
+
+// #############################################################################
+// #############################  ##############################
+// #############################################################################
+void			free_pid_child(t_data *data);
 
 // #############################################################################
 // ############################# CHECK_ARGS_START ##############################
@@ -105,9 +108,8 @@ int				ft_atoi(const char *str);
 // ############################# UTILS PHILO BONUS #############################
 // #############################################################################
 void			print_message_philo(t_data *data, char *message);
-int				ft_sleep(t_data *data, unsigned long total_sleep);
+int				ft_sleep(unsigned long total_sleep);
 unsigned long	get_time(void);
-int				check_if_alive(t_data *data);
 
 // #############################################################################
 // ############################# UTILS #########################################

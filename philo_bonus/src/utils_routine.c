@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/15 21:46:36 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:00:03 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ static int	checking_time(t_data *data)
 	if (get_time() - last_meal > time_to_die)
 	{
 		print_message_philo(data, DIED);
-		sem_wait(data->sem_dead);
-		*data->philos->is_dead = 1;
-		sem_post(data->sem_dead);
 		sem_post(data->sem_eat);
 		return (1);
 	}
@@ -49,10 +46,9 @@ void	*check_status(void *arg)
 		sem_post(data->sem_init);
 		if (checking_time(data) == 1)
 			break ;
-		if (check_if_alive(data) == 1)
-			break ;
 		usleep(10);
 	}
+	free_pid_child(data);
 	exit(1);
 }
 
@@ -83,7 +79,7 @@ int	check_meals(t_data *data)
 		data->times_each_philosopher_must_eat--;
 		if (data->times_each_philosopher_must_eat == 0)
 		{
-			ft_sleep(data, data->time_to_sleep / 2);
+			ft_sleep(data->time_to_sleep / 2);
 			sem_post(data->sem_init);
 			return (1);
 		}

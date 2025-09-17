@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/15 21:44:58 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/17 20:59:20 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int	eating(t_data *data)
 {
-	if (check_if_alive(data) == 1)
-		return (1);
 	take_and_release_forks(data, 0);
 	sem_wait(data->sem_eat);
 	data->last_meal = get_time();
@@ -23,11 +21,6 @@ static int	eating(t_data *data)
 	print_message_philo(data, IS_EATING);
 	while (1)
 	{
-		if (check_if_alive(data) == 1)
-		{
-			take_and_release_forks(data, 1);
-			return (1);
-		}
 		if (get_time() - data->last_meal >= data->time_to_eat)
 			break ;
 		usleep(15);
@@ -42,8 +35,6 @@ static int	eating(t_data *data)
 
 static int	thinking(t_data *data)
 {
-	if (check_if_alive(data) == 1)
-		return (1);
 	print_message_philo(data, IS_THINKING);
 	return (0);
 }
@@ -53,13 +44,9 @@ static int	sleeping(t_data *data)
 	long	start;
 
 	start = get_time();
-	if (check_if_alive(data) == 1)
-		return (1);
 	print_message_philo(data, IS_SLEEPING);
 	while (1)
 	{
-		if (check_if_alive(data) == 1)
-			return (1);
 		if (get_time() - start >= data->time_to_sleep)
 			break ;
 		usleep(10);
@@ -93,5 +80,4 @@ void	*philo_routine(t_data *data)
 	if (pthread_join(data->monitor, NULL) != 0)
 		print_and_free(data, "Error joining the monitor");
 	return (NULL);
-	// exit(1);
 }
