@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 20:36:36 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:15:37 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 static char	*create_str(t_philo *philo, char *message, size_t time)
 {
@@ -20,15 +20,15 @@ static char	*create_str(t_philo *philo, char *message, size_t time)
 	str = NULL;
 	id_philo = philo->id_philo;
 	if (ft_strcmp(message, IS_EATING) == 0)
-		str = join_variadica(GREEN"%lu %d %s\n"RESET, time, id_philo, message);
+		str = join_strings(time, message, id_philo, GREEN);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-		str = join_variadica(CYAN"%lu %d  %s\n"RESET, time, id_philo, message);
+		str = join_strings(time, message, id_philo,CYAN);
 	else if (ft_strcmp(message, IS_THINKING) == 0)
-		str = join_variadica(PURPLE"%lu %d %s\n"RESET, time, id_philo, message);
+		str = join_strings(time, message, id_philo, PURPLE);
 	else if (ft_strcmp(message, TAKE_FORK) == 0)
-		str = join_variadica(ORANGE"%lu %d %s\n"RESET, time, id_philo, message);
+		str = join_strings(time, message, id_philo, ORANGE);
 	else
-		str = join_variadica("%lu %d %s\n", time, id_philo, message);
+		str = join_strings(time, message, id_philo, RESET);
 	return (str);
 }
 
@@ -52,18 +52,6 @@ void	print_message_philo(t_philo *philo, char *message)
 	}
 	pthread_mutex_unlock(philo->print);
 }
-
-// int	ft_sleep(unsigned long total_sleep)
-// {
-// 	unsigned long	current_time;
-
-// 	current_time = get_time();
-// 	while (get_time() - current_time < total_sleep)
-// 	{
-// 		usleep(50);
-// 	}
-// 	return (0);
-// }
 
 int	ft_sleep(t_philo *philo, unsigned long total_sleep)
 {

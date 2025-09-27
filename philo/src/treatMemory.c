@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   treatMemory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <pmendez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 17:10:35 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:17:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 static void	assign_mutex_death_times_to_philos(t_data *data)
 {

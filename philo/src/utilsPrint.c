@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:37 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 20:54:53 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:19:08 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 /**
  * Imprime un mensaje de error en la salida estándar de error.
@@ -28,7 +28,7 @@ void	print_error(char *error_message)
 
 	if (error_message == NULL)
 		return ;
-	str = join_variadica("%s Error%s \n %s ", RED, RESET, error_message);
+	str = ft_strjoin(RED "Error\n" RESET, error_message);
 	if (str == NULL)
 	{
 		printf(RED "Error\n" RESET);

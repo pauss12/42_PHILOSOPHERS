@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/07/28 21:20:12 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:16:56 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 static void	show_error_good_usage(char *argv1)
 {

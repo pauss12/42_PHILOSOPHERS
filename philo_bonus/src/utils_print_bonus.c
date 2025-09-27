@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:20:52 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 23:29:28 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:27:24 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_error(char *error_message)
 
 	if (error_message == NULL)
 		return ;
-	str = join_variadica("%s Error%s \n %s ", RED, RESET, error_message);
+	str = ft_strjoin(RED "Error\n" RESET, error_message);
 	if (str == NULL)
 	{
 		printf(RED "Error\n" RESET);
@@ -63,43 +63,23 @@ void	print_and_free(t_data *data, char *message)
 	free_struct(data);
 }
 
-// static char	*create_str(char *message, size_t time, int id_philo)
-// {
-// 	char	*str;
-
-// 	str = NULL;
-// 	if (ft_strcmp(message, IS_EATING) == 0)
-// 		str = join_variadica(GREEN"%lu %d %s\n"RESET, time, id_philo, message);
-// 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-// 		str = join_variadica(CYAN"%lu %d  %s\n"RESET, time, id_philo, message);
-// 	else if (ft_strcmp(message, IS_THINKING) == 0)
-// 		str = join_variadica(PURPLE"%lu %d %s\n"RESET, time, id_philo, message);
-// 	else if (ft_strcmp(message, TAKE_FORK) == 0)
-// 		str = join_variadica(ORANGE"%lu %d %s\n"RESET, time, id_philo, message);
-// 	else if (ft_strcmp(message, DIED) == 0)
-// 		str = join_variadica(RED "%lu %d %s\n"RESET, time, id_philo, message);
-// 	else
-// 		str = join_variadica("%lu %d %s\n", time, id_philo, message);
-// 	return (str);
-// }
-
 static char	*create_str(char *message, size_t time, int id_philo)
 {
 	char	*str;
 
 	str = NULL;
 	if (ft_strcmp(message, IS_EATING) == 0)
-		str = join_variadica("%lu %d %s\n", time, id_philo, message);
+		str = join_strings(time, message, id_philo, GREEN);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-		str = join_variadica("%lu %d  %s\n", time, id_philo, message);
+		str = join_strings(time, message, id_philo,CYAN);
 	else if (ft_strcmp(message, IS_THINKING) == 0)
-		str = join_variadica("%lu %d %s\n", time, id_philo, message);
+		str = join_strings(time, message, id_philo, PURPLE);
 	else if (ft_strcmp(message, TAKE_FORK) == 0)
-		str = join_variadica("%lu %d %s\n", time, id_philo, message);
+		str = join_strings(time, message, id_philo, ORANGE);
 	else if (ft_strcmp(message, DIED) == 0)
-		str = join_variadica("%lu %d %s\n", time, id_philo, message);
+		str = join_strings(time, message, id_philo, RED);
 	else
-		str = join_variadica("%lu %d %s\n", time, id_philo, message);
+		str = join_strings(time, message, id_philo, RESET);
 	return (str);
 }
 

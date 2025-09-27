@@ -3,110 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:19:11 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:19:23 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:16:54 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo_bonus.h"
 
-static char	*join_int(char *result, int value)
-{
-	char	*str_value;
-	char	*new_result;
 
-	str_value = ft_itoa(value);
-	if (str_value == NULL)
+// char	*join_strings(size_t time, char *msg, int id_philo, char *color)
+// {
+// 	char	*temp1;
+// 	char	*temp2;
+// 	char	*aux;
+
+// 	temp1 = NULL;
+// 	temp2 = NULL;
+// 	temp1 = join_long(color, time);
+// 	if (temp1 == NULL)
+// 		return (NULL);
+// 	temp2 = ft_strjoin(temp1, " ");
+// 	free(temp1);
+// 	if (temp2 == NULL)
+// 		return (NULL);
+// 	aux = ft_itoa(id_philo);
+// 	if (aux == NULL)
+// 	{
+// 		free(temp2);
+// 		return (NULL);
+// 	}
+// 	temp1 = ft_strjoin(temp2, aux);
+//     free(temp2);
+// 	free(aux);
+// 	if (temp1 == NULL)
+// 		return (NULL);
+//  temp2 = ft_strjoin(temp1, " ");
+//  free(temp1);
+//  aux = ft_strjoin(temp2, msg);
+//  free(temp2);
+// 	if (aux == NULL)
+// 		return (NULL);
+// 	temp1 = ft_strjoin(aux, RESET);
+// 	free(aux);
+// 	if (temp1 == NULL)
+// 		return (NULL);
+// 	printf("cadena [%s]\n", temp1);
+// 	return (NULL);
+// }
+
+static char	*first_part(char *color, size_t time, int id_philo)
+{
+	char	*temp1;
+	char	*temp2;
+	char	*aux;
+
+	temp1 = join_long(color, time);
+	if (temp1 == NULL)
 		return (NULL);
-	if (result == NULL)
-		result = str_value;
-	else
-	{
-		new_result = ft_strjoin(result, str_value);
-		free(result);
-		free(str_value);
-		result = new_result;
-	}
-	return (result);
-}
-
-static char	*join_string(char *result, char *str)
-{
-	int		i;
-	char	*new_result;
-
-	i = 0;
-	new_result = NULL;
-	if (result == NULL)
-	{
-		result = ft_calloc(ft_strlen((char *)str) + 1, sizeof(char));
-		if (result == NULL)
-			return (NULL);
-		while (str[i] != '\0')
-		{
-			result[i] = str[i];
-			i++;
-		}
-		result[i] = '\0';
-	}
-	else
-	{
-		new_result = ft_strjoin(result, str);
-		free(result);
-		result = new_result;
-	}
-	return (result);
-}
-
-static char	*join_char(char *result, char c)
-{
-	char	*str_char;
-	char	*new_result;
-
-	str_char = (char *)ft_calloc(2, sizeof(char));
-	if (str_char == NULL)
+	temp2 = ft_strjoin(temp1, " ");
+	free(temp1);
+	if (temp2 == NULL)
 		return (NULL);
-	str_char[0] = c;
-	str_char[1] = '\0';
-	if (result == NULL)
-		result = str_char;
-	else
+	aux = ft_itoa(id_philo);
+	if (aux == NULL)
 	{
-		new_result = ft_strjoin(result, str_char);
-		free(result);
-		free(str_char);
-		result = new_result;
+		free(temp2);
+		return (NULL);
 	}
-	return (result);
+	temp1 = ft_strjoin(temp2, aux);
+    free(temp2);
+	free(aux);
+	if (temp1 == NULL)
+		return (NULL);
+	return (temp1);
 }
 
-char	*join_variadica(char *index, ...)
+char	*join_strings(size_t time, char *msg, int id_philo, char *color)
 {
-	char	*result;
-	va_list	args;
+	char	*temp1;
+	char	*temp2;
+	char	*aux;
 
-	result = NULL;
-	va_start(args, index);
-	while (*index)
-	{
-		if (*index == '%')
-		{
-			index++;
-			if (*index == 'd' || *index == 'i')
-				result = join_int(result, va_arg(args, int));
-			else if (*index == 's')
-				result = join_string(result, va_arg(args, char *));
-			else if (*index == 'c')
-				result = join_char(result, (char )va_arg(args, int));
-			else if (*index == 'l' && *(index + 1) == 'u')
-				result = join_long(result, va_arg(args, unsigned long), &index);
-		}
-		else
-			result = join_char(result, *index);
-		index++;
-	}
-	va_end(args);
-	return (result);
+	temp1 = NULL;
+	temp2 = NULL;
+	temp1 =  first_part(color, time, id_philo);
+    temp2 = ft_strjoin(temp1, " ");
+    free(temp1);
+    aux = ft_strjoin(temp2, msg);
+    free(temp2);
+	if (aux == NULL)
+		return (NULL);
+	temp2 = ft_strjoin(aux, RESET);
+	free(aux);
+	if (temp1 == NULL)
+		return (NULL);
+	temp1 = ft_strjoin(temp2, "\n");
+	free(temp2);
+	if (temp1 == NULL)
+		return (NULL);
+	return (temp1);
 }

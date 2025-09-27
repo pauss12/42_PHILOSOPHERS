@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:20:21 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:20:23 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:31:13 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	if (count > SIZE_MAX / size)
 		return (NULL);
-	ptr = (void *)malloc(count * size);
+	ptr = malloc(count * size);
 	if (ptr == NULL)
 		return (NULL);
 	memset(ptr, 0, count * size);

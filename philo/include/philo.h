@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 20:38:21 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:18:25 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void			create_threads(t_data *data);
 // #############################################################################
 // ############################# UTILS #########################################
 // #############################################################################
-char			*join_variadica(char *index, ...);
 void			*ft_calloc(size_t count, size_t size);
 int				ft_atoi(const char *str);
 void			*ft_memset(void *str, int c, size_t len);
@@ -123,12 +122,13 @@ void			*ft_memset(void *str, int c, size_t len);
 // #############################################################################
 int				ft_strlen(char *str);
 int				ft_strcmp(const char *s1, const char *s2);
+char			*join_strings(size_t time, char *msg, int id_philo, char *color);
 
 // #############################################################################
 // ############################# ITOA_JOIN_LONG ################################
 // #############################################################################
 char			*ft_itoa(int value);
-char			*join_long(char *result, unsigned long value, char **index);
+char			*join_long(char *result, unsigned long value);
 
 // #############################################################################
 // ############################# UTILS_PRINT ###################################

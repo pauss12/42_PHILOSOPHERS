@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   itoa_joinLong_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmendez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:16:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/08/23 19:16:29 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:16:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,11 @@ static char	*ft_itoa_unsigned_long(unsigned long n)
 	return (str);
 }
 
-char	*join_long(char *result, unsigned long value, char **index)
+char	*join_long(char *result, unsigned long value)
 {
 	char	*str_value;
 	char	*new_result;
-
-	if (index == NULL || *index == NULL)
-		return (NULL);
+	
 	str_value = ft_itoa_unsigned_long(value);
 	if (str_value == NULL)
 		return (NULL);
@@ -115,10 +113,8 @@ char	*join_long(char *result, unsigned long value, char **index)
 	else
 	{
 		new_result = ft_strjoin(result, str_value);
-		free(result);
 		free(str_value);
 		result = new_result;
 	}
-	*index += 1;
 	return (result);
 }

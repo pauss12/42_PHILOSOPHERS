@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/15 21:01:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:09:38 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 void	wait_for_threads(t_data *data)
 {
@@ -29,7 +29,7 @@ static void	only_one(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
 	print_message_philo(philo, TAKE_FORK);
-	ft_sleep(philo->time_to_die);
+	ft_sleep(philo, philo->time_to_die);
 	pthread_mutex_unlock(philo->fork_left);
 }
 

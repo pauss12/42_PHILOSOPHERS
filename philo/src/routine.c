@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/15 20:15:09 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:17:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 int	sleeping(t_philo *philo)
 {

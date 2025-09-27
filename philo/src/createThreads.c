@@ -6,11 +6,11 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:14:23 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/15 21:33:40 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:16:59 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 static int	check_philos_eaten(t_data *data)
 {

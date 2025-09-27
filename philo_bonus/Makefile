@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/09/17 20:50:01 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/09/27 20:25:58 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CLEAN_SHELL = \033[2K\r.
 
 NAME = philo_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=thread
 OBJ_DIR = obj
 
 FILES = src/philo_bonus.c \
@@ -31,7 +31,7 @@ FILES = src/philo_bonus.c \
 		src/utils_bonus.c \
 		src/itoa_joinLong_bonus.c \
 		src/utils_philo_bonus.c \
-		src/utils_routine.c
+		src/monitoring.c
 		
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(FILES:.c=.o)))
