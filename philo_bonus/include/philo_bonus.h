@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/27 20:21:55 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/30 00:00:22 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <stdarg.h>
 # include <semaphore.h>
 # include <signal.h>
+# include <ctype.h>
 
 # define GREEN "\033[0;32m"
 # define RED "\033[0;31m\033[1m"
@@ -122,6 +123,9 @@ int				ft_strlen(char *str);
 // ########################### UTILS2 BONUS ####################################
 // #############################################################################
 char			*join_strings(size_t time, char *msg, int id_philo, char *color);
+char			*ft_strtrim(char *s1, char *set);
+char			*ft_strchr(char *s, int c);
+size_t			ft_strlcpy(char *dest, char *src, size_t dstsize);
 
 // #############################################################################
 // ############################# UTILS ROUTINE #################################

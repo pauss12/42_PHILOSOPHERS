@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_routine.c                                    :+:      :+:    :+:   */
+/*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 22:57:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/30 00:21:52 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	take_and_release_forks(t_data *data, int released)
 	{
 		if (data->philos->id_philo % 2 == 0)
 			usleep(50);
+		// print_message_philo(data, RELEASE_FORKS);
 		sem_post(data->sem_forks);
+		// print_message_philo(data, RELEASE_FORKS);
 		sem_post(data->sem_forks);
 	}
 }
