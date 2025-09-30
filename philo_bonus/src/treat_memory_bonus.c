@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 23:00:02 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:04:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,47 @@ void	free_semaphores(t_data *data)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
 }
 
+// void	kill_pids(t_data *data)
+// {
+// 	int	i;
+// 	int	status;
+
+// 	status = 0;
+// 	i = 0;
+// 	while (i < data->nb_philos)
+// 	{
+// 		waitpid(-1, &status, 0);
+// 		if (status != 0)
+// 		{
+// 			i = 0;
+// 			while (i < data->nb_philos)
+// 			{
+// 				kill(data->philos[i].pid, 15);
+// 				i++;
+// 			}
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// }
+
 static void kill_all_pids(t_data *data)
 {
     int   i;
-	int j;
     int   status;
 
 	i = 0;
 	status = 0;
 	while (i < data->num_philos)
 	{
-		j = 0;
 		waitpid(-1, &status, 0);
 		if (status != 0)
 		{
-			while (j < data->num_philos)
+			i = 0;
+			while (i < data->num_philos)
 			{
-				kill(data->philos[j].pid, SIGKILL);
-				j++;
+				kill(data->philos[i].pid, SIGKILL);
+				i++;
 			}
 			break ;
 		}

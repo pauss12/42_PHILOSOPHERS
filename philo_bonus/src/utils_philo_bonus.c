@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:20:39 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 21:00:12 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:02:04 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_sleep(unsigned long total_sleep)
 
 	current_time = get_time();
 	while (get_time() - current_time < total_sleep)
-		usleep(50);
+		usleep(9);
 	return (0);
 }
 
