@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:16:53 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/17 23:46:22 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/04 22:47:17 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ static void	create_processes(t_data *data)
 	int	i;
 
 	i = 0;
+	sem_wait(data->sem_init);
 	while (i < data->num_philos)
 	{
 		data->philos[i].pid = fork();
+		// printf("Hilo %d creado con id: %d - pid ==> %d\n", i, data->philos[i].id_philo,  data->philos[i].pid);
 		if (data->philos[i].pid == 0)
 		{
 			data->philos->id_philo = i + 1;
@@ -60,6 +62,7 @@ static void	create_processes(t_data *data)
 			print_and_free(data, RED "ERROR \n" RESET "Fork failed\n");
 		i++;
 	}
+	sem_post(data->sem_init);
 }
 
 int	main(int argc, char **argv)
