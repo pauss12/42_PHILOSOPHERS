@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/09 00:25:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/09 00:49:37 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	checking_time(t_data *data)
 {
 	unsigned long	last_meal;
 	unsigned long	time_to_die;
-	
+
 	sem_wait(data->sem_eat);
 	last_meal = data->last_meal;
 	time_to_die = data->time_to_die;

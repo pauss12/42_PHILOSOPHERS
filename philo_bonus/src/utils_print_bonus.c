@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:20:52 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/08 19:58:49 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/09 00:48:35 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*create_str(char *message, size_t time, int id_philo)
 	if (ft_strcmp(message, IS_EATING) == 0)
 		str = join_strings(time, message, id_philo, GREEN);
 	else if (ft_strcmp(message, IS_SLEEPING) == 0)
-		str = join_strings(time, message, id_philo,CYAN);
+		str = join_strings(time, message, id_philo, CYAN);
 	else if (ft_strcmp(message, IS_THINKING) == 0)
 		str = join_strings(time, message, id_philo, PURPLE);
 	else if (ft_strcmp(message, TAKE_FORK) == 0)

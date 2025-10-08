@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/06 20:42:50 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/09 00:50:05 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int				ft_strlen(char *str);
 // #############################################################################
 // ########################### UTILS2 BONUS ####################################
 // #############################################################################
-char			*join_strings(size_t time, char *msg, int id_philo, char *color);
+char			*join_strings(size_t time, char *msg, int id_philo, char *col);
 char			*ft_strtrim(char *s1, char *set);
 char			*ft_strchr(char *s, int c);
 size_t			ft_strlcpy(char *dest, char *src, size_t dstsize);

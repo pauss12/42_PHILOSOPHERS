@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:16:26 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/27 20:16:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/09 00:47:08 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*join_long(char *result, unsigned long value)
 {
 	char	*str_value;
 	char	*new_result;
-	
+
 	str_value = ft_itoa_unsigned_long(value);
 	if (str_value == NULL)
 		return (NULL);
