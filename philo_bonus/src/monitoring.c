@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/04 23:00:05 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/09 00:25:31 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	checking_time(t_data *data)
 {
 	unsigned long	last_meal;
 	unsigned long	time_to_die;
-
+	
 	sem_wait(data->sem_eat);
 	last_meal = data->last_meal;
 	time_to_die = data->time_to_die;
@@ -25,7 +25,6 @@ static int	checking_time(t_data *data)
 		print_message_philo(data, DIED);
 		sem_wait(data->sem_dead);
 		sem_post(data->sem_eat);
-		printf("antes del return 1\n");
 		return (1);
 	}
 	sem_post(data->sem_eat);
@@ -80,7 +79,6 @@ int	check_meals(t_data *data)
 		if (data->times_each_philosopher_must_eat == 0)
 		{
 			ft_sleep(data->time_to_sleep / 2);
-			sem_post(data->sem_init);
 			return (1);
 		}
 	}

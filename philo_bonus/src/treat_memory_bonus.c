@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/04 23:10:20 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/09 00:06:00 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,48 +76,52 @@ void	free_semaphores(t_data *data)
 		print_and_free(data, RED "ERROR\n" RESET "/sem_forks unlink failed\n");
 }
 
-// static void kill_all_pids(t_data *data)
-// {
-//     int   i;
-//     int   status;
-
-// 	i = 0;
-// 	status = 0;
-// 	printf("Kill all pids\n");
-// 	while (i < data->num_philos)
-// 	{
-// 		printf("antes del waitpid\n");
-// 		waitpid(-1, &status, 0);
-// 		printf("status \n"); 
-// 		if (status != 0)
-// 		{
-// 			i = 0;
-// 			while (i < data->num_philos)
-// 			{
-// 				kill(data->philos[i].pid, SIGKILL);
-// 				i++;
-// 			}
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// }
-
 static void kill_all_pids(t_data *data)
 {
-    int   i;
+	int	i;
+	int	status;
 
 	i = 0;
+	status = 0;
 	printf("Kill all pids\n");
-	wait(NULL);
-	printf("status \n"); 
 	while (i < data->num_philos)
 	{
-		printf("EL pid a morir es %d\n", data->philos[i].pid);
-		//kill(data->philos[i].pid, SIGKILL);
+		printf("antes del waitpid\n");
+		waitpid(-1, &status, 0);
+		printf("status ES %d \n", status); 
+		if (status != 0)
+		{
+			i = 0;
+			while (i < data->num_philos)
+			{
+				printf("EL pid a morir es %d\n", data->philos[i].pid);
+				kill(data->philos[i].pid, SIGTERM);
+				i++;
+			}
+			break ;
+		}
 		i++;
 	}
 }
+
+
+
+// static void kill_all_pids(t_data *data)
+// {
+//     int   i;
+
+// 	i = 0;
+// 	wait(NULL);
+	
+// 	printf("status\n");
+
+// 	while (i < data->num_philos)
+// 	{
+// 		printf("EL pid a morir es %d\n", data->philos[i].pid);
+// 		kill(data->philos[i].pid, SIGKILL);
+// 		i++;
+// 	}
+// }
 
 void	free_struct(t_data *data)
 {

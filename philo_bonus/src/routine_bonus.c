@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/04 23:11:31 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/08 20:01:55 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	eating(t_data *data)
 	{
 		if (get_time() - last_meal >= data->time_to_eat)
 			break ;
-		usleep(9);
+		usleep(10);
 	}
 	take_and_release_forks(data, 1);
 	sem_wait(data->sem_init);
@@ -53,12 +53,14 @@ static int	sleeping(t_data *data)
 {
 	long	start;
 
-	start = get_time();
 	sem_wait(data->sem_dead);
 	sem_post(data->sem_dead);
+	start = get_time();
 	print_message_philo(data, IS_SLEEPING);
 	while (1)
 	{
+		sem_wait(data->sem_dead);
+		sem_post(data->sem_dead);
 		if (get_time() - start >= data->time_to_sleep)
 			break ;
 		usleep(10);
