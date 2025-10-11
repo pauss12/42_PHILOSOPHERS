@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/10/09 00:12:53 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/10/11 20:01:06 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,11 @@ CLEAN_SHELL = \033[2K\r.
 
 NAME = philo_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread  -pthread
 OBJ_DIR = obj
+
+#TSAN_CFLAGS = -fsanitize=thread -g -O1 -fno-omit-frame-pointer
+#TSAN_LDFLAGS = -fsanitize=thread -pthread
 
 FILES = src/philo_bonus.c \
 		src/treat_memory_bonus.c \

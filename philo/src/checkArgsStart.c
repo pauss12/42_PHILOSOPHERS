@@ -6,24 +6,14 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:40 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/27 19:16:56 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/11 21:33:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static void	show_error_good_usage(char *argv1)
+static void	show_error_good_usage(void)
 {
-	if (argv1 != NULL && ft_atoi(argv1) == 0)
-	{
-		print_error("The program needs at least one philosopher");
-		return ;
-	}
-	if (argv1 != NULL && ft_atoi(argv1) >= 200)
-	{
-		print_error("There are too many philos");
-		return ;
-	}
 	printf(RED "ERROR \n" RESET);
 	printf("Usage: ./philo \n");
 	printf(ORANGE "[number_of_philosophers]" RESET " ==> Number of forks \n");
@@ -34,22 +24,33 @@ static void	show_error_good_usage(char *argv1)
 	RESET "\n\n");
 }
 
-int	check_args(int argc, char **argv)
+static int	check_first_character(char *line, char **str, int i)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	if ((argc != 5 && argc != 6) || ft_atoi(argv[1]) > 200)
+	if (line[0] == '\0')
 	{
-		show_error_good_usage(argv[1]);
+		*str = ft_strjoin("Valor no válido en posicion ", ft_itoa(i));
+		print_error(*str);
+		free(*str);
 		return (1);
 	}
+	return (0);
+}
+
+static int	check(int argc, int i, int j, char *argv[])
+{
+	char	*str;
+
+	str = NULL;
 	while (i < argc)
 	{
 		j = 0;
+		argv[i] = ft_strtrim(argv[i], " ");
+		if (check_first_character(argv[i], &str, i) == 1)
+			return (1);
 		while (argv[i][j] != '\0')
 		{
+			if (argv[i][0] == '+')
+				argv[i] = ft_strtrim(argv[i] + 1, " ");
 			if (argv[i][j] < '0' || argv[i][j] > '9')
 			{
 				print_error("Arguments must be digits");
@@ -59,5 +60,32 @@ int	check_args(int argc, char **argv)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	check_args(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	if ((argc != 5 && argc != 6))
+	{
+		show_error_good_usage();
+		return (1);
+	}
+	if (argv[i] != NULL && ft_atoi(argv[i]) == 0)
+	{
+		print_error("The program needs at least one philosopher");
+		return (1);
+	}
+	if (argv[i] != NULL && ft_atoi(argv[i]) > 200)
+	{
+		print_error("There are too many philos");
+		return (1);
+	}
+	if (check(argc, i, j, argv) == 1)
+		return (1);
 	return (0);
 }

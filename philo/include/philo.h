@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/27 20:18:25 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/11 21:40:47 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,10 @@ void			*ft_memset(void *str, int c, size_t len);
 // #############################################################################
 int				ft_strlen(char *str);
 int				ft_strcmp(const char *s1, const char *s2);
-char			*join_strings(size_t time, char *msg, int id_philo, char *color);
+char			*ft_strtrim(char *s1, char *set);
+size_t			ft_strlcpy(char *dest, char *src, size_t dstsize);
+char			*ft_strchr(char *s, int c);
+char			*join_strings(size_t time, char *msg, int id_philo, char *col);
 
 // #############################################################################
 // ############################# ITOA_JOIN_LONG ################################

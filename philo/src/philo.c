@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/27 20:09:38 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/11 21:36:13 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	*routine(void *arg)
 	pthread_mutex_unlock(philo->init);
 	while (1)
 	{
-		
 		if (check_if_philo_dead(philo) == 1)
 			return (NULL);
 		if (philo->id_philo % 2 != 0)
