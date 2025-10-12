@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/10/12 13:09:59 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/10/12 13:52:17 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,16 @@ CURRENT_FILE = 0
 TOTAL_FILES = $(words $(FILES))
 CLEAN_SHELL = \033[2K\r.
 
+NAME = philo_bonus
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3
+OBJ_DIR = obj
+
 DEBUG ?=
 
 ifdef DEBUG
 	CFLAGS += -g3 -fsanitize=thread
 endif
-
-NAME = philo_bonus
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
-OBJ_DIR = obj
 
 #TSAN_CFLAGS = -fsanitize=thread -g -O1 -fno-omit-frame-pointer
 #TSAN_LDFLAGS = -fsanitize=thread -pthread
