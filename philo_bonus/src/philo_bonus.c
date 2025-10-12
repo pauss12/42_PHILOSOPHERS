@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:16:53 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/09 00:25:48 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 13:49:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	free_pid_child(t_data *data)
 		write(1, "Error /sem_forks failed closing", 30);
 		exit(1);
 	}
+	if (data->philos)
+		free(data->philos);
 }
 
 static void	create_processes(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/09 00:50:05 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 13:38:41 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int				ft_atoi(const char *str);
 void			print_message_philo(t_data *data, char *message);
 int				ft_sleep(unsigned long total_sleep);
 unsigned long	get_time(void);
+char			*ft_strdup(const char *s1);
 
 // #############################################################################
 // ############################# UTILS #########################################

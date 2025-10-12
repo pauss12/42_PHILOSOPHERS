@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:20:39 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/30 21:02:04 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 13:38:16 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,27 @@ unsigned long	get_time(void)
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		len;
+	char	*dest;
+	int		contador;
+	char	*str1;
+
+	str1 = (char *)s1;
+	len = 0;
+	contador = 0;
+	while (str1[len] != '\0')
+		len++;
+	dest = (char *)malloc((len + 1) * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	while (contador <= len)
+	{
+		dest[contador] = str1[contador];
+		contador++;
+	}
+	return (dest);
 }

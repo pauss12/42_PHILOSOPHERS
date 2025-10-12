@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:15:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/30 00:11:19 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 13:45:10 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,53 @@ static void	show_error_good_usage(void)
 	RESET "\n\n");
 }
 
-static int	check_first_character(char *line, char **str, int i)
+static int	check_first_character(char *line, int i, char **temp)
 {
-	if (line[0] == '\0')
+	char	*aux;
+	char	**str;
+
+	aux = NULL;
+	str = NULL;
+	aux = ft_strtrim(line, " ");
+	if (aux[0] == '\0')
 	{
 		*str = ft_strjoin("Valor no válido en posicion ", ft_itoa(i));
 		print_error(*str);
 		free(*str);
+		free(aux);
 		return (1);
 	}
+	if (aux[0] == '+')
+		*temp = ft_strtrim(aux + 1, " ");
+	else
+		*temp = ft_strdup(aux);
+	free(aux);
 	return (0);
 }
 
 static int	check(int argc, int i, int j, char *argv[])
 {
-	char	*str;
+	char	*temp;
 
-	str = NULL;
+	temp = NULL;
 	while (i < argc)
 	{
 		j = 0;
-		argv[i] = ft_strtrim(argv[i], " ");
-		if (check_first_character(argv[i], &str, i) == 1)
+		if (check_first_character(argv[i], i, &temp) == 1)
 			return (1);
-		while (argv[i][j] != '\0')
+		while (temp[j] != '\0')
 		{
-			if (argv[i][0] == '+')
-				argv[i] = ft_strtrim(argv[i] + 1, " ");
-			if (argv[i][j] < '0' || argv[i][j] > '9')
+			if (temp[0] == '+')
+				temp = ft_strtrim(temp + 1, " ");
+			if (temp[j] < '0' || temp[j] > '9')
 			{
 				print_error("Arguments must be digits");
+				free(temp);
 				return (1);
 			}
 			j++;
 		}
+		free(temp);
 		i++;
 	}
 	return (0);
