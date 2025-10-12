@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:14:55 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/27 19:17:12 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 13:51:12 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,27 @@ int	ft_strlen(char *str)
 	while (str[i] != '\0')
 		i++;
 	return (i);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		len;
+	char	*dest;
+	int		contador;
+	char	*str1;
+
+	str1 = (char *)s1;
+	len = 0;
+	contador = 0;
+	while (str1[len] != '\0')
+		len++;
+	dest = (char *)malloc((len + 1) * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	while (contador <= len)
+	{
+		dest[contador] = str1[contador];
+		contador++;
+	}
+	return (dest);
 }

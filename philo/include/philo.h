@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/11 21:40:47 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 13:51:32 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void			create_threads(t_data *data);
 void			*ft_calloc(size_t count, size_t size);
 int				ft_atoi(const char *str);
 void			*ft_memset(void *str, int c, size_t len);
+char			*ft_strdup(const char *s1);
 
 // #############################################################################
 // ############################# UTILS2 ########################################

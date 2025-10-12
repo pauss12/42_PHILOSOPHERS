@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/10/11 18:58:11 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/10/12 13:52:29 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,14 @@ CLEAN_SHELL = \033[2K\r.
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3
 OBJ_DIR = obj
+
+DEBUG ?=
+
+ifdef DEBUG
+	CFLAGS += -g3 -fsanitize=thread
+endif
 
 FILES = src/philo.c \
 		src/checkArgsStart.c \
