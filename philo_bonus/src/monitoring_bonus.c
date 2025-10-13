@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitoring.c                                       :+:      :+:    :+:   */
+/*   monitoring_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 19:21:05 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/12 13:04:04 by pmendez-         ###   ########.fr       */
+/*   Created: 2025/10/12 14:50:47 by pmendez-          #+#    #+#             */
+/*   Updated: 2025/10/12 17:08:22 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*check_status(void *arg)
 	while (1)
 	{
 		sem_wait(data->sem_init);
-		if (data->times_each_philosopher_must_eat == 0)
+		if (data->must_eat == 0)
 		{
 			sem_post(data->sem_init);
 			return (NULL);
@@ -73,10 +73,10 @@ void	take_and_release_forks(t_data *data, int released)
 
 int	check_meals(t_data *data)
 {
-	if (data->times_each_philosopher_must_eat > 0)
+	if (data->must_eat > 0)
 	{
-		data->times_each_philosopher_must_eat--;
-		if (data->times_each_philosopher_must_eat == 0)
+		data->must_eat--;
+		if (data->must_eat == 0)
 		{
 			ft_sleep(data->time_to_sleep / 2);
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:21:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/12 13:38:41 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 17:14:36 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define IS_EATING           "is eating 🍝"
 # define IS_SLEEPING         "is sleeping 😴"
 # define IS_THINKING         "is thinking 🤔 "
-# define DIED            "is dead 💀"
+# define DIED            "died 💀"
 # define RELEASE_FORKS "has released forks"
 
 typedef struct s_philo
@@ -56,7 +56,7 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int				num_philos;
-	int				times_each_philosopher_must_eat;
+	int				must_eat;
 	unsigned long	last_meal;
 	unsigned long	start_time;
 	unsigned long	time_to_eat;
@@ -73,9 +73,10 @@ typedef struct s_data
 }	t_data;
 
 // #############################################################################
-// #############################  ##############################
+// ############################# PHILO BONUS ###################################
 // #############################################################################
 void			free_pid_child(t_data *data);
+void			show_error_good_usage(void);
 
 // #############################################################################
 // ############################# CHECK_ARGS_START ##############################
@@ -102,23 +103,26 @@ void			free_semaphores(t_data *data);
 void			print_error(char *error_message);
 void			ft_putendl_fd(char *s, int fd);
 void			print_and_free(t_data *data, char *message);
-char			*ft_strjoin(char *s1, char *s2);
-int				ft_atoi(const char *str);
+void			print_message_philo(t_data *data, char *message);
 
 // #############################################################################
 // ############################# UTILS PHILO BONUS #############################
 // #############################################################################
-void			print_message_philo(t_data *data, char *message);
 int				ft_sleep(unsigned long total_sleep);
 unsigned long	get_time(void);
 char			*ft_strdup(const char *s1);
+long			value_parsing(char *str);
+long			ft_atol(char *str);
 
 // #############################################################################
-// ############################# UTILS #########################################
+// ############################# UTILS BONUS####################################
 // #############################################################################
 void			*ft_calloc(size_t count, size_t size);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strlen(char *str);
+int				ft_strlen(char *str);
+char			*ft_strjoin(char *s1, char *s2);
+int				ft_atoi(const char *str);
 
 // #############################################################################
 // ########################### UTILS2 BONUS ####################################
@@ -129,7 +133,7 @@ char			*ft_strchr(char *s, int c);
 size_t			ft_strlcpy(char *dest, char *src, size_t dstsize);
 
 // #############################################################################
-// ############################# UTILS ROUTINE #################################
+// ############################# MONITORING BONUS ##############################
 // #############################################################################
 int				check_meals(t_data *data);
 void			take_and_release_forks(t_data *data, int released);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   treatMemory.c                                      :+:      :+:    :+:   */
+/*   treat_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:05:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/09/27 19:17:10 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 17:08:12 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	initialize_philos(t_data *data, char *argv[])
 	{
 		data->philo[i].id_philo = i + 1;
 		data->philo[i].start_time = get_time();
-		data->philo[i].time_to_die = ft_atoi(argv[2]);
-		data->philo[i].time_to_eat = ft_atoi(argv[3]);
-		data->philo[i].time_to_sleep = ft_atoi(argv[4]);
+		data->philo[i].time_to_die = value_parsing(argv[2]);
+		data->philo[i].time_to_eat = value_parsing(argv[3]);
+		data->philo[i].time_to_sleep = value_parsing(argv[4]);
 		if (argv[5])
-			data->philo[i].times_each_philosopher_must_eat = ft_atoi(argv[5]);
+			data->philo[i].must_eat = (int)value_parsing(argv[5]);
 		else
-			data->philo[i].times_each_philosopher_must_eat = -1;
+			data->philo[i].must_eat = -1;
 		i++;
 	}
 	assign_mutex_death_times_to_philos(data);
@@ -66,7 +66,7 @@ void	initialize_struct(t_data *data, char *argv[])
 
 	i = 0;
 	data->is_dead = 0;
-	data->num_philos = ft_atoi(argv[1]);
+	data->num_philos = value_parsing(argv[1]);
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->init, NULL);
 	pthread_mutex_init(&data->dead, NULL);

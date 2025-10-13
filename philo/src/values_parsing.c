@@ -1,58 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_philo_bonus.c                                :+:      :+:    :+:   */
+/*   values_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 19:20:39 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/12 17:15:51 by pmendez-         ###   ########.fr       */
+/*   Created: 2025/10/12 17:08:49 by pmendez-          #+#    #+#             */
+/*   Updated: 2025/10/12 17:09:05 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo_bonus.h"
-
-int	ft_sleep(unsigned long total_sleep)
-{
-	unsigned long	current_time;
-
-	current_time = get_time();
-	while (get_time() - current_time < total_sleep)
-		usleep(9);
-	return (0);
-}
-
-unsigned long	get_time(void)
-{
-	struct timeval	time;
-
-	if (gettimeofday(&time, NULL) == -1)
-		write(2, "gettimeofday() error\n", 22);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
-char	*ft_strdup(const char *s1)
-{
-	int		len;
-	char	*dest;
-	int		contador;
-	char	*str1;
-
-	str1 = (char *)s1;
-	len = 0;
-	contador = 0;
-	while (str1[len] != '\0')
-		len++;
-	dest = (char *)malloc((len + 1) * sizeof(char));
-	if (dest == NULL)
-		return (NULL);
-	while (contador <= len)
-	{
-		dest[contador] = str1[contador];
-		contador++;
-	}
-	return (dest);
-}
+#include "../include/philo.h"
 
 long	ft_atol(char *str)
 {

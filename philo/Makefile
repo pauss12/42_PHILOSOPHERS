@@ -6,7 +6,7 @@
 #    By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/24 20:03:59 by pmendez-          #+#    #+#              #
-#    Updated: 2025/10/12 13:52:29 by pmendez-         ###   ########.fr        #
+#    Updated: 2025/10/12 18:28:53 by pmendez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,17 @@ ifdef DEBUG
 endif
 
 FILES = src/philo.c \
-		src/checkArgsStart.c \
-		src/treatMemory.c \
+		src/check_args_start.c \
+		src/treat_memory.c \
 		src/routine.c \
-		src/utilsThreads.c \
-		src/createThreads.c \
+		src/utils_threads.c \
+		src/create_threads.c \
 		src/utils.c \
 		src/utils2.c \
-		src/utilsPrint.c \
-		src/forkTreatment.c \
-		src/itoa_joinLong.c
+		src/utils_print.c \
+		src/fork_treatment.c \
+		src/itoa_join_long.c \
+		src/values_parsing.c
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(FILES:.c=.o)))
 

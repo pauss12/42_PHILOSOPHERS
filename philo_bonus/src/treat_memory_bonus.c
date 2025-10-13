@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/12 14:17:58 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 18:34:25 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	semaphore_initialization(t_data *data)
 
 void	initialize_struct(t_data *data, char *argv[])
 {
-	data->num_philos = ft_atoi(argv[1]);
-	data->philos = ft_calloc(ft_atoi(argv[1]), sizeof(t_philo));
+	data->num_philos = (int)value_parsing(argv[1]);
+	data->philos = ft_calloc(value_parsing(argv[1]), sizeof(t_philo));
 	if (!data->philos)
 		print_and_free(data, RED "ERROR \n" RESET "Malloc failed\n");
-	data->time_to_die = ft_atoi(argv[2]);
-	data->time_to_eat = ft_atoi(argv[3]);
-	data->time_to_sleep = ft_atoi(argv[4]);
+	data->time_to_die = value_parsing(argv[2]);
+	data->time_to_eat = value_parsing(argv[3]);
+	data->time_to_sleep = value_parsing(argv[4]);
 	if (argv[5] != NULL)
-		data->times_each_philosopher_must_eat = ft_atoi(argv[5]);
+		data->must_eat = value_parsing(argv[5]);
 	else
-		data->times_each_philosopher_must_eat = -1;
+		data->must_eat = -1;
 }
 
 void	free_semaphores(t_data *data)

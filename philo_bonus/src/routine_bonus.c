@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:30 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/08 20:01:55 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 19:14:17 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,22 @@ static int	sleeping(t_data *data)
 	return (0);
 }
 
+static int	only_one(t_data *data)
+{
+	long	time;
+
+	if (data->num_philos == 1)
+	{
+		sem_wait(data->sem_eat);
+		time = get_time() - data->start_time;
+		data->time_to_die = data->time_to_die + time;
+		sem_post(data->sem_eat);
+		take_and_release_forks(data, 0);
+		return (1);
+	}
+	return (0);
+}
+
 void	*philo_routine(t_data *data)
 {
 	sem_wait(data->sem_init);
@@ -78,11 +94,8 @@ void	*philo_routine(t_data *data)
 	sem_post(data->sem_init);
 	while (1)
 	{
-		if (data->num_philos == 1)
-		{
-			take_and_release_forks(data, 0);
+		if (only_one(data) == 1)
 			break ;
-		}
 		usleep(20);
 		if (eating(data) == 1)
 			break ;

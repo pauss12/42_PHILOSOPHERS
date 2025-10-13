@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/12 13:51:32 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 18:28:39 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@
 # define IS_EATING           " is eating 🍝"
 # define IS_SLEEPING         " is sleeping 😴"
 # define IS_THINKING         "is thinking 🤔 "
-# define DIED            "is dead 💀"
+# define DIED            "died 💀"
 # define RELEASE_FORKS "has released forks"
 
 typedef struct s_philo
 {
 	int				id_philo;
 	int				nb_philos;
-	unsigned long	start_time;
-	unsigned long	last_meal;
-	unsigned long	time_to_eat;
-	unsigned long	time_to_die;
-	unsigned long	time_to_sleep;
+	long			start_time;
+	long			last_meal;
+	long			time_to_eat;
+	long			time_to_die;
+	long			time_to_sleep;
 	int				*meals;
-	int				times_each_philosopher_must_eat;
+	int				must_eat;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*init;
 	pthread_mutex_t	*dead;
@@ -84,10 +84,9 @@ int				check_args(int argc, char **argv);
 // #############################################################################
 // ############################# UTILS_THREADS.C ###############################
 // #############################################################################
-
-unsigned long	get_time(void);
+long			get_time(void);
 void			print_message_philo(t_philo *philo, char *message);
-int				ft_sleep(t_philo *philo, unsigned long total_sleep);
+int				ft_sleep(t_philo *philo, long total_sleep);
 int				check_if_philo_dead(t_philo *philo);
 
 // #############################################################################
@@ -148,7 +147,16 @@ char			*ft_strjoin(char *s1, char *s2);
 void			take_forks(t_philo *philo);
 void			release_forks(t_philo *philo);
 
-// philo.c
+// #############################################################################
+// ############################# PHILO  ########################################
+// #############################################################################
 void			wait_for_threads(t_data *data);
+void			show_error_good_usage(void);
+
+// #############################################################################
+// ####################### VALUES PARSING  #####################################
+// #############################################################################
+long			ft_atol(char *str);
+long			value_parsing(char *str);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilsThreads.c                                     :+:      :+:    :+:   */
+/*   utils_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:11:45 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/11 21:37:50 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 18:28:33 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	print_message_philo(t_philo *philo, char *message)
 	pthread_mutex_unlock(philo->print);
 }
 
-int	ft_sleep(t_philo *philo, unsigned long total_sleep)
+int	ft_sleep(t_philo *philo, long total_sleep)
 {
-	unsigned long	current_time;
+	long	current_time;
 
 	current_time = get_time();
 	while (get_time() - current_time < total_sleep)
@@ -72,7 +72,7 @@ int	ft_sleep(t_philo *philo, unsigned long total_sleep)
 	return (0);
 }
 
-unsigned long	get_time(void)
+long	get_time(void)
 {
 	struct timeval	time;
 	long			time_returned;

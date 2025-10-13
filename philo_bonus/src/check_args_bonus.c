@@ -6,38 +6,52 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:15:51 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/12 13:45:10 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 18:53:22 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo_bonus.h"
 
-static void	show_error_good_usage(void)
+static int	check_if_null(char *line, int i, char **str)
 {
-	printf(RED "ERROR \n" RESET);
-	printf("Usage: ./philo \n");
-	printf(ORANGE "[number_of_philosophers]" RESET " ==> Number of forks \n");
-	printf(ORANGE "[time_to_die]" RESET " ==> Time until he dies\n");
-	printf(ORANGE "[time_to_eat]" RESET " ==> Time he has to eat\n");
-	printf(ORANGE "[time_to_sleep]" RESET " ==> Time he has to sleep \n");
-	printf(ORANGE "[number_of_times_each_philosopher_must_eat] optional" \
-	RESET "\n\n");
+	int		j;
+
+	j = 0;
+	if (line[0] == '\0')
+	{
+		*str = ft_strjoin("Not a valid value in position ", ft_itoa(i));
+		if (str == NULL)
+			return (1);
+		print_error(*str);
+		free(*str);
+		return (1);
+	}
+	while (line[j] != '\0')
+	{
+		if (line[j] != ' ' && line[j] != '+')
+			break ;
+		j++;
+	}
+	if (j == ft_strlen(line))
+	{
+		print_error("There cannot be a value with only spaces or symbols only");
+		return (1);
+	}
+	return (0);
 }
 
 static int	check_first_character(char *line, int i, char **temp)
 {
 	char	*aux;
-	char	**str;
+	char	*str;
 
-	aux = NULL;
 	str = NULL;
+	if (check_if_null(line, i, &str) == 1)
+		return (1);
 	aux = ft_strtrim(line, " ");
-	if (aux[0] == '\0')
+	if (aux[0] == '-')
 	{
-		*str = ft_strjoin("Valor no válido en posicion ", ft_itoa(i));
-		print_error(*str);
-		free(*str);
-		free(aux);
+		print_error("There cannot be a negative value");
 		return (1);
 	}
 	if (aux[0] == '+')
@@ -60,11 +74,10 @@ static int	check(int argc, int i, int j, char *argv[])
 			return (1);
 		while (temp[j] != '\0')
 		{
-			if (temp[0] == '+')
-				temp = ft_strtrim(temp + 1, " ");
 			if (temp[j] < '0' || temp[j] > '9')
 			{
-				print_error("Arguments must be digits");
+				if (temp[j] != '-')
+					print_error("Arguments must be digits");
 				free(temp);
 				return (1);
 			}

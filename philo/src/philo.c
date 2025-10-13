@@ -6,11 +6,23 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:03:49 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/11 21:36:13 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 19:08:48 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+void	show_error_good_usage(void)
+{
+	printf(RED "ERROR \n" RESET);
+	printf("Usage: ./philo \n");
+	printf(ORANGE "[number_of_philosophers]" RESET " ==> Number of forks \n");
+	printf(ORANGE "[time_to_die]" RESET " ==> Time until he dies\n");
+	printf(ORANGE "[time_to_eat]" RESET " ==> Time he has to eat\n");
+	printf(ORANGE "[time_to_sleep]" RESET " ==> Time he has to sleep \n");
+	printf(ORANGE "[must_eat] optional" \
+	RESET "\n\n");
+}
 
 void	wait_for_threads(t_data *data)
 {
@@ -27,8 +39,14 @@ void	wait_for_threads(t_data *data)
 
 static void	only_one(t_philo *philo)
 {
+	long	time;
+
 	pthread_mutex_lock(philo->fork_left);
+	pthread_mutex_lock(philo->eat);
+	time = get_time() - philo->start_time;
 	print_message_philo(philo, TAKE_FORK);
+	philo->time_to_die = philo->time_to_die + time;
+	pthread_mutex_unlock(philo->eat);
 	ft_sleep(philo, philo->time_to_die);
 	pthread_mutex_unlock(philo->fork_left);
 }

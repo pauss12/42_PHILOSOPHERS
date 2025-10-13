@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:16:09 by pmendez-          #+#    #+#             */
-/*   Updated: 2025/10/11 21:36:44 by pmendez-         ###   ########.fr       */
+/*   Updated: 2025/10/12 18:27:03 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	sleeping(t_philo *philo)
 {
-	unsigned long	start_time;
+	long	start_time;
 
 	print_message_philo(philo, IS_SLEEPING);
 	start_time = get_time();
@@ -43,10 +43,10 @@ int	thinking(t_philo *philo)
 static int	eaten(t_philo *philo)
 {
 	pthread_mutex_lock(philo->eat);
-	if (philo->times_each_philosopher_must_eat != -1)
+	if (philo->must_eat != -1)
 	{
-		philo->times_each_philosopher_must_eat--;
-		if (philo->times_each_philosopher_must_eat == 0)
+		philo->must_eat--;
+		if (philo->must_eat == 0)
 		{
 			*philo->meals += 1;
 			pthread_mutex_unlock(philo->eat);
