@@ -126,8 +126,12 @@ Tiene dos tipologias:
   4. Compilar el proyecto
      Dentro de la carpeta, ejecutar el siguiente comando:
      ```bash
-     make
-     ```
+      make
+      make clean     # Elimina archivos objeto
+      make fclean    # Elimina objetos y binarios
+      make re        # Limpia y recompila todo
+      make norminette # Para lanzar el comando norminette en todos los ficheros que se debe en el programa
+     ``` 
 
 ---
 
